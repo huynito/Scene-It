@@ -1,0 +1,26 @@
+import type { UITheme } from "../_shared/tokens";
+
+export const THEME_AIM: UITheme = {
+  id: "xX_sCeNeIt_Xx",
+  name: "xX_sCeNeIt_Xx",
+  sfBase: "#3A6EA5",
+  sfPrimary: "#ECE9D8",
+  sfRaised: "#FFFFFF",
+  sfBorder: "#7F9DB9",
+  sfBorderSecondary: "#ADB2B5",
+  txPrimary: "#000000",
+  txSecondary: "#333333",
+  txMuted: "#666666",
+  txFaint: "#999999",
+  ac300: "#4A90D9",
+  ac400: "#2266BB",
+  ac500: "#0055CC",
+  ac600: "#003D99",
+  borderRadius: "3px",
+  panelShadow: "0 2px 8px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.08)",
+  glow: "transparent",
+  fontUI: "Tahoma, 'Segoe UI', system-ui, sans-serif",
+  fontMono: "'Courier New', Courier, monospace",
+  scrollThumb: "#7F9DB9",
+  scrollThumbHover: "#5A82A6",
+};

@@ -1,0 +1,26 @@
+import type { UITheme } from "../_shared/tokens";
+
+export const THEME_WIN95: UITheme = {
+  id: "win95",
+  name: "sceneit.exe",
+  sfBase: "#008080",
+  sfPrimary: "#c0c0c0",
+  sfRaised: "#c0c0c0",
+  sfBorder: "#808080",
+  sfBorderSecondary: "#a0a0a0",
+  txPrimary: "#000000",
+  txSecondary: "#222222",
+  txMuted: "#555555",
+  txFaint: "#808080",
+  ac300: "#4040ff",
+  ac400: "#0000ff",
+  ac500: "#000080",
+  ac600: "#000060",
+  borderRadius: "0px",
+  panelShadow: "none",
+  glow: "transparent",
+  fontUI: "Tahoma, 'MS Sans Serif', 'Microsoft Sans Serif', system-ui, sans-serif",
+  fontMono: "'Courier New', Courier, monospace",
+  scrollThumb: "#c0c0c0",
+  scrollThumbHover: "#a0a0a0",
+};

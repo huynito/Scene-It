@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "depth-splatfacto"
+version = "0.2.0"
+description = "Depth-supervised Gaussian Splatting for nerfstudio"
+requires-python = ">=3.10"
+dependencies = ["numpy"]
+
+[project.entry-points."nerfstudio.method_configs"]
+depth-splatfacto = "depth_splatfacto:depth_splatfacto_method"

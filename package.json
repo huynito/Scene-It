@@ -1,0 +1,38 @@
+{
+  "name": "scene-it",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "deploy": "bash deploy.sh",
+    "upload-assets": "bash upload-assets.sh",
+    "test": "PLAYWRIGHT_BROWSERS_PATH=0 playwright test",
+    "test:ui": "PLAYWRIGHT_BROWSERS_PATH=0 playwright test --ui",
+    "test:update": "PLAYWRIGHT_BROWSERS_PATH=0 playwright test --update-snapshots",
+    "test:report": "PLAYWRIGHT_BROWSERS_PATH=0 playwright show-report"
+  },
+  "dependencies": {
+    "gifenc": "^1.0.3",
+    "lucide-react": "^0.344.0",
+    "mediabunny": "^1.35.1",
+    "next": "^14.2.0",
+    "playcanvas": "^2.16.2",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.4.0"
+  }
+}

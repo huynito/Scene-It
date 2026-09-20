@@ -1,0 +1,26 @@
+import type { UITheme } from "../_shared/tokens";
+
+export const THEME_WINAMP: UITheme = {
+  id: "winamp",
+  name: "scene it.mp3",
+  sfBase: "#747987",
+  sfPrimary: "#b3b8c3",
+  sfRaised: "#cdd0d8",
+  sfBorder: "#4a4f58",
+  sfBorderSecondary: "#90939b",
+  txPrimary: "#1a1c22",
+  txSecondary: "#3a3e48",
+  txMuted: "#5a5e68",
+  txFaint: "#7a7e88",
+  ac300: "#9cb4d8",
+  ac400: "#7894c0",
+  ac500: "#5474a0",
+  ac600: "#3e5a84",
+  borderRadius: "2px",
+  panelShadow: "1px 1px 0 rgba(255,255,255,.45) inset, -1px -1px 0 rgba(0,0,0,.55) inset, 2px 2px 0 rgba(255,255,255,.2) inset, -2px -2px 0 rgba(0,0,0,.3) inset, 0 2px 10px rgba(0,0,0,.5)",
+  glow: "transparent",
+  fontUI: "Tahoma, 'Segoe UI', system-ui, sans-serif",
+  fontMono: "'DSEG7Modern', 'Courier New', monospace",
+  scrollThumb: "#8a8e98",
+  scrollThumbHover: "#7a7e88",
+};

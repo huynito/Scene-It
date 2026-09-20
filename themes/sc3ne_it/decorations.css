@@ -1,0 +1,244 @@
+html[data-theme="sc3ne_it"] {
+  --sf-base: 5 4 3;
+  --sf-primary: 8 6 4;
+  --sf-raised: 36 27 18;
+  --sf-border: 210 100 20;
+  --sf-border-secondary: 170 75 10;
+  --tx-primary: 255 245 210;
+  --tx-secondary: 255 200 80;
+  --tx-muted: 200 160 40;
+  --tx-faint: 140 110 30;
+  --ac-300: 255 200 103;
+  --ac-400: 255 149 0;
+  --ac-500: 204 119 0;
+  --ac-600: 153 89 0;
+  --border-radius: 2px;
+  --panel-shadow: 0 0 20px rgba(255,149,0,.08), 0 0 2px rgba(255,149,0,.15);
+  --glow: rgba(255,149,0,.6);
+  --font-ui: 'Share Tech Mono', 'JetBrains Mono', 'Fira Code', monospace;
+  --font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Fira Code', monospace;
+  --scroll-thumb: 74 58 14;
+  --scroll-thumb-hover: 204 119 0;
+}
+
+/* ============================================================
+   CYBERPUNK
+   ============================================================ */
+
+/* Scanline overlay on the entire viewport */
+[data-theme="sc3ne_it"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 149, 0, 0.015) 2px,
+    rgba(255, 149, 0, 0.015) 4px
+  );
+  mix-blend-mode: screen;
+}
+
+/* Thicker structural borders */
+[data-theme="sc3ne_it"] [class*="border-b"][class*="border-surface"] {
+  border-bottom-width: 2px;
+}
+[data-theme="sc3ne_it"] [class*="border-r"][class*="border-surface"] {
+  border-right-width: 2px;
+}
+[data-theme="sc3ne_it"] [class*="border-l"][class*="border-surface"] {
+  border-left-width: 2px;
+}
+[data-theme="sc3ne_it"] [class*="border-t"][class*="border-surface"] {
+  border-top-width: 2px;
+}
+[data-theme="sc3ne_it"] [class*="border-x"][class*="border-surface"] {
+  border-left-width: 2px;
+  border-right-width: 2px;
+}
+[data-theme="sc3ne_it"] [class*="border-y"][class*="border-surface"] {
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+}
+
+/* Accent text glow */
+[data-theme="sc3ne_it"] .text-accent-400,
+[data-theme="sc3ne_it"] .text-accent-300 {
+  text-shadow: 0 0 8px var(--glow), 0 0 2px var(--glow);
+}
+
+/* All-caps labels & headers */
+[data-theme="sc3ne_it"] [class*="tracking-wider"],
+[data-theme="sc3ne_it"] [class*="tracking-wider"] span,
+[data-theme="sc3ne_it"] label,
+[data-theme="sc3ne_it"] .text-sm,
+[data-theme="sc3ne_it"] .text-xs {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+[data-theme="sc3ne_it"] [class*="tracking-wider"],
+[data-theme="sc3ne_it"] [class*="tracking-wider"] span {
+  font-size: 11px;
+}
+
+/* Standalone panel headers (Floorplan, Timeline, Paths) — match section fill + consistent height */
+[data-theme="sc3ne_it"] div[class*="tracking-wider"],
+[data-theme="sc3ne_it"] button[class*="tracking-wider"] {
+  background-color: rgba(255, 149, 0, 0.10);
+  min-height: 31px;
+  box-sizing: border-box;
+}
+[data-theme="sc3ne_it"] .win95-panel-section:has(> div) button[class*="tracking-wider"] {
+  background-color: transparent;
+}
+
+[data-theme="sc3ne_it"] label.text-sm,
+[data-theme="sc3ne_it"] .text-sm.text-content-primary {
+  font-size: 13px;
+}
+
+/* Display font override — combo fonts use --font-display for headers/labels/buttons */
+[data-cp-display] [class*="tracking-wider"],
+[data-cp-display] [class*="tracking-wider"] span,
+[data-cp-display] label,
+[data-cp-display] button {
+  font-family: var(--font-display) !important;
+  font-size: 0.78em !important;
+}
+[data-cp-display] p,
+[data-cp-display] [class*="border-dashed"] p {
+  font-family: var(--font-ui) !important;
+}
+
+/* Body font (Space Mono) size bump +1px in combo mode */
+[data-cp-display] [class*="text-\[9px\]"]:not(button):not(label):not([class*="tracking-wider"]) { font-size: 10px; }
+[data-cp-display] [class*="text-\[10px\]"]:not(button):not(label):not([class*="tracking-wider"]) { font-size: 11px; }
+[data-cp-display] [class*="text-\[11px\]"]:not(button):not(label):not([class*="tracking-wider"]) { font-size: 12px; }
+[data-cp-display] [class*="text-xs"]:not(button):not(label):not([class*="tracking-wider"]) { font-size: 13px; }
+[data-cp-display] [class*="text-sm"]:not(button):not(label):not([class*="tracking-wider"]) { font-size: 15px; }
+
+/* Pixel font size bump — VT323, Silkscreen, Pixelify Sans render small at default sizes */
+[data-cp-pixel] [class*="text-\[8px\]"],
+[data-cp-pixel] [class*="text-\[9px\]"],
+[data-cp-pixel] [class*="text-\[10px\]"] {
+  font-size: 14px !important;
+}
+[data-cp-pixel] [class*="text-\[11px\]"] {
+  font-size: 15px !important;
+}
+[data-cp-pixel] [class*="text-xs"] {
+  font-size: 15px !important;
+}
+[data-cp-pixel] [class*="text-sm"] {
+  font-size: 16px !important;
+}
+
+/* Collapsible sections — horizontal dividers only */
+[data-theme="sc3ne_it"] .win95-panel-section {
+  border: none !important;
+  border-top: 2px solid rgb(var(--sf-border)) !important;
+  background-color: rgba(255, 149, 0, 0.10);
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[data-theme="sc3ne_it"] .win95-panel-section:first-child {
+  border-top: none !important;
+}
+
+[data-theme="sc3ne_it"] .win95-panel-section:last-child {
+  border-bottom: 2px solid rgb(var(--sf-border)) !important;
+}
+
+[data-theme="sc3ne_it"] .win95-panel-section:has(> div) {
+  background-color: rgba(255, 149, 0, 0.08);
+}
+
+/* Embedded layout panels — no border, parent containers provide edges */
+[data-theme="sc3ne_it"] .rounded-theme.win95-window {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Scrollbar */
+[data-theme="sc3ne_it"] .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--scroll-thumb));
+}
+[data-theme="sc3ne_it"] .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--scroll-thumb-hover));
+}
+
+/* Grid background on panels */
+[data-theme="sc3ne_it"] [class*="rounded-theme"] {
+  background-image:
+    linear-gradient(rgba(255,149,0,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,149,0,.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Input/select styling */
+[data-theme="sc3ne_it"] select,
+[data-theme="sc3ne_it"] input[type="number"],
+[data-theme="sc3ne_it"] input[type="text"] {
+  border-color: rgb(var(--sf-border));
+  background-color: rgb(var(--sf-base));
+  color: rgb(var(--tx-primary));
+  font-family: var(--font-ui);
+}
+
+/* Segmented health-bar sliders */
+[data-theme="sc3ne_it"] input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0 !important;
+}
+
+[data-theme="sc3ne_it"] input[type="range"]::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 1px;
+  border: 1px solid rgba(255,149,0,.3);
+  background:
+    linear-gradient(90deg, transparent var(--fill, 50%), rgba(6,3,0,.85) var(--fill, 50%)),
+    repeating-linear-gradient(90deg, rgb(255,149,0) 0px, rgb(255,149,0) 4px, rgba(6,3,0,.9) 4px, rgba(6,3,0,.9) 6px);
+  box-shadow: 0 0 6px rgba(255,149,0,.15), inset 0 0 4px rgba(0,0,0,.5);
+}
+
+[data-theme="sc3ne_it"] input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 3px;
+  height: 14px;
+  margin-top: -3px;
+  background: rgb(255,149,0);
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 0 6px rgba(255,149,0,.6), 0 0 2px rgba(255,149,0,.8);
+  cursor: pointer;
+}
+
+[data-theme="sc3ne_it"] input[type="range"]::-moz-range-track {
+  height: 10px;
+  border-radius: 1px;
+  border: 1px solid rgba(255,149,0,.3);
+  background:
+    linear-gradient(90deg, transparent var(--fill, 50%), rgba(6,3,0,.85) var(--fill, 50%)),
+    repeating-linear-gradient(90deg, rgb(255,149,0) 0px, rgb(255,149,0) 4px, rgba(6,3,0,.9) 4px, rgba(6,3,0,.9) 6px);
+  box-shadow: 0 0 6px rgba(255,149,0,.15), inset 0 0 4px rgba(0,0,0,.5);
+}
+
+[data-theme="sc3ne_it"] input[type="range"]::-moz-range-thumb {
+  width: 3px;
+  height: 14px;
+  background: rgb(255,149,0);
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 0 6px rgba(255,149,0,.6), 0 0 2px rgba(255,149,0,.8);
+  cursor: pointer;
+}
+

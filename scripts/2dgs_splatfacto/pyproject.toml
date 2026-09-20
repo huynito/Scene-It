@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "2dgs-splatfacto"
+version = "0.1.0"
+description = "2D Gaussian Splatting for nerfstudio (planar disc Gaussians via gsplat rasterization_2dgs)"
+requires-python = ">=3.10"
+dependencies = ["numpy"]
+
+[project.entry-points."nerfstudio.method_configs"]
+2dgs-splatfacto = "twodgs_splatfacto:twodgs_splatfacto_method"

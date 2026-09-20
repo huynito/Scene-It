@@ -1,0 +1,11 @@
+/* Aggregator: imports all per-theme decoration files in cascade order.
+   Each per-theme decorations.css carries its own @font-face declarations
+   for any fonts shipped with that bundle. */
+
+@import "./default/decorations.css";
+@import "./sc3ne_it/decorations.css";
+@import "./winamp/decorations.css";
+@import "./win95/decorations.css";
+@import "./scenit/decorations.css";
+@import "./sciin_it/decorations.css";
+@import "./xX_sCeNeIt_Xx/decorations.css";

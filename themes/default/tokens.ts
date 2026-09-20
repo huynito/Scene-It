@@ -1,0 +1,26 @@
+import type { UITheme } from "../_shared/tokens";
+
+export const THEME_DEFAULT: UITheme = {
+  id: "default",
+  name: "Scene It",
+  sfBase: "#09090b",
+  sfPrimary: "#18181b",
+  sfRaised: "#27272a",
+  sfBorder: "#27272a",
+  sfBorderSecondary: "#3f3f46",
+  txPrimary: "#f4f4f5",
+  txSecondary: "#a1a1aa",
+  txMuted: "#71717a",
+  txFaint: "#52525b",
+  ac300: "#5eead4",
+  ac400: "#2dd4bf",
+  ac500: "#14b8a6",
+  ac600: "#0d9488",
+  borderRadius: "8px",
+  panelShadow: "0 20px 25px -5px rgba(0,0,0,.25), 0 8px 10px -6px rgba(0,0,0,.25)",
+  glow: "transparent",
+  fontUI: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+  fontMono: "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace",
+  scrollThumb: "#3f3f46",
+  scrollThumbHover: "#52525b",
+};

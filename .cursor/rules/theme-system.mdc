@@ -1,0 +1,93 @@
+---
+description: Theme system architecture, scalability guide, and new-theme checklist
+globs: themes/**, app/page.tsx, components/ui/ThemeToggle.tsx, components/ui/ThemeEditor.tsx, components/ui/ThemeIcon.tsx
+alwaysApply: false
+---
+
+# Theme System
+
+## Bundle Layout
+
+Each theme is a self-contained bundle under `themes/<id>/`. See [themes/README.md](../../themes/README.md) for the full design-spec writeup. A complete bundle contains some or all of:
+
+| File | Purpose |
+|---|---|
+| `tokens.ts` | The `UITheme` object: surfaces, text, accents, geometry, fonts |
+| `decorations.css` | All `[data-theme="..."]` CSS for this theme |
+| `icons.tsx` | Per-theme icon set (when the theme deviates from Lucide) |
+| `sounds.ts` | Sound-effect hooks (AIM only) |
+| `window-manager.tsx` | Bespoke window manager (Winamp + AIM only) |
+| `shells/` | Theme-specific shell components |
+| `README.md` | Design spec for the theme |
+
+Shared infrastructure lives under `themes/_shared/`: `tokens.ts` (`UITheme` interface, `applyUITheme()`), `capabilities.ts` (`ThemeCapabilities` interface + per-theme map), `hooks/` (`useThemeId`, `useThemeCapabilities`), `anchor-colors.ts`, `fonts.css`, `CASCADE_PITFALLS.md`. Public API is re-exported from [themes/index.ts](../../themes/index.ts).
+
+## Three Layers of Theming
+
+### Layer A: CSS Custom Property Tokens (scales automatically)
+`UITheme` objects in `themes/<id>/tokens.ts` define ~22 design tokens (surfaces, text, accents, geometry, fonts). `applyUITheme()` sets CSS variables on `<html>`. Tailwind maps these via [tailwind.config.ts](../../tailwind.config.ts). Components using `bg-surface-primary`, `text-content-secondary`, `rounded-theme`, `shadow-panel`, `font-sans` adapt to all themes with zero per-theme code.
+
+### Layer B: CSS Decoration Rules (scales per-theme)
+Each theme owns its slice of `[data-theme="..."]` overrides in `themes/<id>/decorations.css`. The aggregator [themes/decorations.css](../../themes/decorations.css) `@imports` every per-theme file. Total ~13K lines of bevels, gradients, forced sizes, scrollbar pseudo-elements, and theme-specific layout adjustments. Build output is the same as a single file.
+
+### Layer C: Capability-Driven Branching (scales per-capability, not per-theme)
+[themes/_shared/capabilities.ts](../../themes/_shared/capabilities.ts) defines the `ThemeCapabilities` interface and a `THEME_CAPABILITIES` map keyed by `ThemeId`. Components call `useThemeCapabilities()` and branch on capability values, not theme IDs:
+
+```tsx
+const cap = useThemeCapabilities();
+if (cap.checkboxStyle === "win95-button") return <Win95Check />;
+if (cap.iconStyle === "ascii") return <span>[X]</span>;
+```
+
+Adding a new theme that diverges visually means defining its capabilities once in `THEME_CAPABILITIES`, not greppping consumer files. The capability surface includes: `layoutShell`, `sectionHeaderStyle`, `iconStyle`, `checkboxStyle`, `sliderStyle`, `anchorPalette`, `canvasColors`, `graphColors`, plus boolean flags (`hasSounds`, `hasMilkdropBackground`, `usesTextControls`, etc.).
+
+## Layout Branches in page.tsx (Intentional)
+
+`app/page.tsx` has separate render branches per `cap.layoutShell` value:
+- **AIM** (`cap.layoutShell === "xp-desktop"`): `<XPDesktopLayout>` — floating windows on an XP desktop
+- **Winamp** (`cap.layoutShell === "winamp-desktop"`): `<WinampDesktop>` — free-floating resizable windows over Milkdrop
+- **Scenit** (`cap.layoutShell === "scenit-grid"`): CSS Grid with floating panels
+- **stacked**: shared flex column layout for default/sc3ne_it/sciin_it/win95 with per-theme decoration insertion
+
+These are intentional — the themes have fundamentally different spatial models (desktop metaphor vs. sidebar layout). A new theme with a novel layout legitimately requires a new branch and a new `layoutShell` value.
+
+## Why decorations.css Is Split Per-Theme but Aggregated
+
+Each theme's CSS lives in its bundle (`themes/<id>/decorations.css`) so it ships with the bundle when lifted elsewhere. The build aggregator [themes/decorations.css](../../themes/decorations.css) imports them all so:
+- Build output is byte-identical to a single combined file
+- The `[data-theme="..."]` cascade behaves the same
+- Per-theme files can be moved standalone
+
+## Canvas/Graph Color Maps Live in Capabilities
+
+`canvasColors` and `graphColors` are routed through `cap.canvasColors` / `cap.graphColors` rather than local lookup tables in MinimapView/GraphEditor:
+- Canvas 2D drawing uses hex strings, not CSS variables
+- Per-theme artistic choices (Win95 checkerboard, sciin_it glow effects) can't be derived from generic surface/accent tokens
+- Defining a new theme without canvas colors falls back to the `default` capability entry
+
+## New Theme Checklist
+
+**Minimum viable** (color/font swap only):
+1. Create `themes/<your-id>/tokens.ts` exporting a `UITheme` object
+2. Add an entry in [themes/_shared/capabilities.ts](../../themes/_shared/capabilities.ts) `THEME_CAPABILITIES` map (pick capability values that match closest existing themes)
+3. Re-export from [themes/index.ts](../../themes/index.ts) and add to `UI_THEMES`
+
+**Custom visual treatment** (CSS):
+4. Add `themes/<your-id>/decorations.css` with `[data-theme="..."]` selectors
+5. Add the `@import` to [themes/decorations.css](../../themes/decorations.css)
+
+**Custom icons**:
+6. Add `themes/<your-id>/icons.tsx` exporting an icon map
+7. Set `cap.iconStyle` to a new value and extend the dispatcher in [components/ui/ThemeIcon.tsx](../../components/ui/ThemeIcon.tsx)
+
+**Custom layout**:
+8. Set `cap.layoutShell` to a new value
+9. Add a render branch in `app/page.tsx` keyed on the new layout shell
+10. Create theme-specific shell components in `themes/<your-id>/shells/`
+
+**Custom interactive behavior**:
+11. If a behavior diverges in a way no existing capability covers, add a new field to `ThemeCapabilities` and route the consumer through it instead of a `themeId === "..."` check
+
+## Lifting a Theme to Another Project
+
+Every theme bundle is intentionally self-contained — see [themes/README.md](../../themes/README.md) for the lift recipe. Per-theme `README.md` files document tightly-coupled vs cleanly extractable components.

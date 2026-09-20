@@ -1,0 +1,778 @@
+/* ═══════════════════════════════════════════════════════════════
+   SCIIN IT THEME — CGA/EGA ASCII roguelike aesthetic
+   ═══════════════════════════════════════════════════════════════ */
+
+html[data-theme="sciin_it"] {
+  --bg-primary: 0, 0, 0;
+  --bg-raised: 0, 0, 0;
+  --sf-primary: 0 0 0;
+  --sf-raised: 0 0 0;
+  --sf-base: 0 0 0;
+  --rl-cyan:    #00FFFF;
+  --rl-green:   #00FF00;
+  --rl-yellow:  #FFFF00;
+  --rl-magenta: #FF00FF;
+  --rl-red:     #FF0000;
+  --rl-blue:    #2A2AFF;
+  --rl-white:   #FFFFFF;
+  --terminal-line-h: 16px;
+  --sciin-scanlines: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0 1px,
+    transparent 1px 8px
+  );
+  --sciin-stipple: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.035) 0 1px,
+    transparent 1.1px
+  );
+  --sciin-room-grid:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  --sciin-panel-sheen: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.035) 0,
+    rgba(255, 255, 255, 0.012) 18px,
+    transparent 18px,
+    transparent calc(100% - 18px),
+    rgba(255, 255, 255, 0.018) calc(100% - 18px),
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  --sciin-vignette: radial-gradient(
+    circle at center,
+    transparent 38%,
+    rgba(0, 0, 0, 0.24) 100%
+  );
+  --sciin-hash-border: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='10' height='10' fill='%23000000'/%3E%3Ctext x='5' y='5' text-anchor='middle' dominant-baseline='central' font-size='9' fill='%23FFFFFF' fill-opacity='0.6' font-family='monospace'%3E%23%3C/text%3E%3C/svg%3E");
+  --sciin-eq-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='10' height='10' fill='%23000000'/%3E%3Ctext x='5' y='5' text-anchor='middle' dominant-baseline='central' font-size='9' fill='%23FFFFFF' font-weight='bold' font-family='monospace'%3E=%3C/text%3E%3C/svg%3E");
+  --sciin-pct-border: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='%23000000'/%3E%3Cg text-anchor='middle' dominant-baseline='central' font-size='13' fill='%23FFFFFF' font-weight='bold' font-family='monospace'%3E%3Ctext x='8' y='8'%3E%25%3C/text%3E%3Ctext x='24' y='8'%3E%25%3C/text%3E%3Ctext x='40' y='8'%3E%25%3C/text%3E%3Ctext x='8' y='24'%3E%25%3C/text%3E%3Ctext x='40' y='24'%3E%25%3C/text%3E%3Ctext x='8' y='40'%3E%25%3C/text%3E%3Ctext x='24' y='40'%3E%25%3C/text%3E%3Ctext x='40' y='40'%3E%25%3C/text%3E%3C/g%3E%3C/svg%3E");
+  --sciin-at-border: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' fill='%23000000'/%3E%3Cg text-anchor='middle' dominant-baseline='central' font-size='13' fill='%23FFFFFF' font-weight='bold' font-family='monospace'%3E%3Ctext x='8' y='8'%3E@%3C/text%3E%3Ctext x='24' y='8'%3E@%3C/text%3E%3Ctext x='40' y='8'%3E@%3C/text%3E%3Ctext x='8' y='24'%3E@%3C/text%3E%3Ctext x='40' y='24'%3E@%3C/text%3E%3Ctext x='8' y='40'%3E@%3C/text%3E%3Ctext x='24' y='40'%3E@%3C/text%3E%3Ctext x='40' y='40'%3E@%3C/text%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Snap container to character grid so borders never partially clip */
+[data-theme="sciin_it"] .sciin-layout-root {
+  height: round(down, 100vh, 16px) !important;
+  width: round(down, 100vw, 10px) !important;
+}
+
+/* Stepped scrolling: disable smooth scroll */
+[data-theme="sciin_it"] * {
+  scroll-behavior: auto !important;
+}
+
+/* ── Panels: strip borders, backgrounds, and blur (pure black canvas) ── */
+[data-theme="sciin_it"] [class*="rounded-theme"] {
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+[data-theme="sciin_it"] [class*="rounded-theme"]:not(.win95-bottom-panel)::before,
+[data-theme="sciin_it"] [class*="rounded-theme"]:not(.win95-bottom-panel)::after {
+  display: none;
+}
+[data-theme="sciin_it"] [class*="shadow-panel"] {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ── Texture utilities: dense ASCII/terminal overlays ── */
+[data-theme="sciin_it"] .sciin-texture-panel,
+[data-theme="sciin_it"] .layout-left-column,
+[data-theme="sciin_it"] .layout-right-column,
+[data-theme="sciin_it"] .layout-timeline,
+[data-theme="sciin_it"] .win95-toolbar,
+[data-theme="sciin_it"] .win95-window,
+[data-theme="sciin_it"] .transport-controls,
+[data-theme="sciin_it"] .sciin-empty-state {
+  background-color: #000000 !important;
+  background-image: none;
+  background-size: auto;
+}
+[data-theme="sciin_it"] .sciin-texture-body {
+  background-image: none;
+  background-size: auto;
+}
+[data-theme="sciin_it"] .sciin-room-grid {
+  background-image: var(--sciin-room-grid);
+  background-size: 26px 26px;
+}
+[data-theme="sciin_it"] .sciin-terminal-band {
+  position: relative;
+}
+[data-theme="sciin_it"] .sciin-terminal-band::before,
+[data-theme="sciin_it"] .sciin-terminal-band::after {
+  display: none !important;
+  opacity: 0.7;
+  pointer-events: none;
+}
+[data-theme="sciin_it"] .sciin-terminal-band::before {
+  top: -16px;
+}
+[data-theme="sciin_it"] .sciin-terminal-band::after {
+  bottom: -16px;
+}
+
+/* ── Section headers: legend text, no underline ── */
+[data-theme="sciin_it"] [class*="tracking-wider"] {
+  background: transparent !important;
+  color: rgb(var(--ac-400)) !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+[data-theme="sciin_it"] [class*="tracking-wider"] span {
+  color: rgb(var(--ac-400)) !important;
+}
+
+/* ── Section header buttons: exempt from generic button border/hover ── */
+[data-theme="sciin_it"] .sciin-section-header,
+[data-theme="sciin_it"] .sciin-section-header button,
+[data-theme="sciin_it"] .sciin-bracket-toggle {
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+[data-theme="sciin_it"] .sciin-section-header:hover,
+[data-theme="sciin_it"] .sciin-section-header button:hover {
+  border: none !important;
+  background: none !important;
+  color: inherit !important;
+  border-color: transparent !important;
+}
+[data-theme="sciin_it"] .sciin-bracket-toggle:hover {
+  border: none !important;
+  background: none !important;
+  border-color: transparent !important;
+  border-image: none !important;
+}
+[data-theme="sciin_it"] .sciin-panel-shell {
+  position: relative;
+}
+[data-theme="sciin_it"] .sciin-section-header {
+  background-image: none;
+  box-shadow: none;
+}
+[data-theme="sciin_it"] .sciin-section-title {
+  padding: 0 4px;
+  background: transparent;
+}
+[data-theme="sciin_it"] .sciin-section-rule {
+  opacity: 0.4 !important;
+}
+[data-theme="sciin_it"] .sciin-section-body {
+  position: relative;
+  padding-top: 0 !important;
+  padding-bottom: 16px !important;
+  box-shadow: none;
+}
+[data-theme="sciin_it"] .sciin-section-body::before {
+  display: none !important;
+  background-size: 16px 16px;
+  background-repeat: repeat-x;
+  opacity: 0.25;
+}
+
+/* ── Buttons: flat terminal style ── */
+[data-theme="sciin_it"] button {
+  background-color: rgb(var(--sf-primary)) !important;
+  background-image: none !important;
+  color: rgb(var(--tx-primary));
+  border: 1px solid transparent !important;
+  border-image: var(--sciin-pct-border) 16 repeat !important;
+  box-shadow: none !important;
+  font-family: var(--font-ui);
+  cursor: pointer;
+}
+[data-theme="sciin_it"] button:hover:not(:disabled) {
+  background: none !important;
+  background-color: transparent !important;
+  color: rgb(var(--ac-400));
+  border-color: transparent !important;
+}
+[data-theme="sciin_it"] button:not(:disabled):active {
+  background: none !important;
+  background-color: transparent !important;
+  color: rgb(var(--ac-300));
+}
+[data-theme="sciin_it"] button:disabled {
+  color: rgb(var(--tx-faint)) !important;
+  border-color: rgb(var(--sf-border-secondary)) !important;
+}
+[data-theme="sciin_it"] button.sciin-plain-link {
+  border: none !important;
+  border-image: none !important;
+  background: none !important;
+}
+
+[data-theme="win95"] button.win95-plain-link {
+  min-height: auto !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  font-size: 10px !important;
+}
+[data-theme="win95"] button.win95-plain-link:hover {
+  color: #000 !important;
+}
+
+/* ── No fill highlights on interactive elements ── */
+[data-theme="sciin_it"] a:hover,
+[data-theme="sciin_it"] label:hover,
+[data-theme="sciin_it"] [role="option"]:hover,
+[data-theme="sciin_it"] [class*="hover\:bg-"]:hover {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* ── Inputs & selects: dark recessed fields ── */
+[data-theme="sciin_it"] input[type="number"],
+[data-theme="sciin_it"] input[type="text"],
+[data-theme="sciin_it"] select {
+  background-color: rgb(var(--sf-base)) !important;
+  color: rgb(var(--tx-primary)) !important;
+  border: 1px solid transparent !important;
+  border-image: var(--sciin-pct-border) 16 repeat !important;
+  box-shadow: none !important;
+  font-family: var(--font-ui);
+}
+
+/* ── ScrubInput fields: transparent boxes, color set per-instance via inline style ── */
+[data-theme="sciin_it"] .cursor-ew-resize {
+  background-color: transparent !important;
+  border: none !important;
+  border-image: none !important;
+}
+
+/* ── Selects: custom ASCII chevron ── */
+[data-theme="sciin_it"] select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Ctext x='1' y='9' font-size='10' fill='%2300FFFF' font-family='monospace'%3E%E2%96%BC%3C/text%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 6px center !important;
+  background-size: 10px !important;
+  padding-right: 20px !important;
+}
+
+/* ── Scrollbars: hidden entirely ── */
+[data-theme="sciin_it"] *,
+[data-theme="sciin_it"] .scrollbar-thin {
+  scrollbar-width: none !important;
+}
+[data-theme="sciin_it"] ::-webkit-scrollbar,
+[data-theme="sciin_it"] .scrollbar-thin::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* ── Global font + size + line-height for terminal-consistent rows ── */
+[data-theme="sciin_it"] * {
+  font-family: 'Courier New', Courier, monospace !important;
+  font-size: 13px !important;
+  line-height: 16px !important;
+  font-weight: bold !important;
+}
+
+[data-theme="sciin_it"] h1 {
+  font-size: 13px !important;
+}
+
+/* HashBorder grid characters: 16px fills the 10×16 cell more squarely than 13px */
+[data-theme="sciin_it"] .hash-border {
+  font-family: 'Courier New', Courier, monospace !important;
+  font-size: 16px !important;
+  letter-spacing: 0.4px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Checkboxes: bracket style [ ] / [X] ── */
+[data-theme="sciin_it"] input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px !important;
+  height: 16px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  position: relative;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+}
+[data-theme="sciin_it"] input[type="checkbox"]::before {
+  content: "[\00a0]";
+  position: absolute;
+  top: 0; left: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 16px;
+  color: rgb(var(--tx-primary));
+  white-space: pre;
+}
+[data-theme="sciin_it"] input[type="checkbox"]:checked::before {
+  content: "[X]";
+  color: var(--rl-cyan);
+}
+[data-theme="sciin_it"] input.sciin-checkbox-blue:checked::before {
+  color: var(--rl-blue) !important;
+}
+
+/* ── Range sliders: dot track + text thumb ── */
+[data-theme="sciin_it"] input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  background: transparent !important;
+  height: 16px !important;
+  cursor: pointer;
+}
+[data-theme="sciin_it"] input[type="range"]::-webkit-slider-runnable-track {
+  height: 16px;
+  background-image: var(--sciin-dots);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 0;
+}
+[data-theme="sciin_it"] input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%2300FFFF' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E");
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 0;
+}
+[data-theme="sciin_it"] input[type="range"]:hover::-webkit-slider-thumb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%23FFFF00' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E");
+}
+/* Per-slider thumb color variants */
+[data-theme="sciin_it"] input.sciin-thumb-green::-webkit-slider-thumb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%2300FF00' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E") !important;
+}
+[data-theme="sciin_it"] input.sciin-thumb-yellow::-webkit-slider-thumb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%23FFFF00' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E") !important;
+}
+[data-theme="sciin_it"] input.sciin-thumb-magenta::-webkit-slider-thumb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%23FF00FF' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E") !important;
+}
+[data-theme="sciin_it"] input.sciin-thumb-red::-webkit-slider-thumb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%23FF0000' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E") !important;
+}
+[data-theme="sciin_it"] input.sciin-thumb-blue::-webkit-slider-thumb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%232A2AFF' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E") !important;
+}
+[data-theme="sciin_it"] input.sciin-thumb-white::-webkit-slider-thumb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%23FFFFFF' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E") !important;
+}
+[data-theme="sciin_it"] input.sciin-thumb-cyan::-webkit-slider-thumb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='1' y='1' width='14' height='14' rx='2' fill='%23000000'/%3E%3Ctext x='8' y='7' text-anchor='middle' dominant-baseline='central' font-size='14' fill='%2300FFFF' font-family='monospace' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E") !important;
+}
+
+/* ── Tooltips & popovers ── */
+[data-theme="sciin_it"] [class*="z-50"],
+[data-theme="sciin_it"] [class*="z-40"],
+[data-theme="sciin_it"] [role="tooltip"] {
+  background-color: rgb(var(--sf-primary)) !important;
+  border: 2px solid transparent !important;
+  border-image: var(--sciin-at-border) 16 repeat !important;
+  box-shadow: none !important;
+  color: rgb(var(--tx-primary)) !important;
+  font-family: var(--font-ui);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+}
+
+/* ── Dividers: suppress all internal divider borders (panels use CGA colored borders) ── */
+[data-theme="sciin_it"] [class*="border-surface-border"] {
+  border-color: transparent !important;
+}
+
+/* ── Dashed-border empty state areas ── */
+[data-theme="sciin_it"] [class*="border-dashed"] {
+  border-color: rgb(var(--sf-border)) !important;
+  background-color: rgb(var(--sf-base)) !important;
+}
+
+/* ── Transport controls: flat grouped buttons, no border ── */
+[data-theme="sciin_it"] .transport-controls {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-image: none !important;
+  padding: 0 !important;
+  gap: 24px !important;
+}
+[data-theme="sciin_it"] .transport-controls button {
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ── Accent-colored buttons ── */
+[data-theme="sciin_it"] button[class*="bg-accent-500"],
+[data-theme="sciin_it"] button[class*="bg-accent-600"] {
+  background-color: rgb(var(--sf-primary)) !important;
+  color: rgb(var(--ac-400)) !important;
+  border-color: rgb(var(--ac-400)) !important;
+}
+
+/* ── Theme editor dropdown: visible border on black background ── */
+[data-theme="sciin_it"] [class*="z-30"] [class*="animate-slide-down"] {
+  border: 1px solid var(--rl-cyan) !important;
+  background-color: #000000 !important;
+}
+
+/* ── Dropdown menus ── */
+[data-theme="sciin_it"] [class*="z-30"][class*="rounded-md"] {
+  border: 2px solid transparent !important;
+  border-image: var(--sciin-at-border) 16 repeat !important;
+  box-shadow: none !important;
+}
+
+
+/* ── Multicolor text coding ── */
+[data-theme="sciin_it"] [class*="text-content-secondary"] {
+  color: var(--rl-cyan) !important;
+}
+[data-theme="sciin_it"] [class*="text-accent-400"] {
+  color: var(--rl-yellow) !important;
+}
+
+/* ── CGA color mapping: danger/error → red ── */
+[data-theme="sciin_it"] [class*="text-red-400"],
+[data-theme="sciin_it"] [class*="text-red-500"],
+[data-theme="sciin_it"] [class*="text-amber-400"],
+[data-theme="sciin_it"] [class*="text-amber-500"] {
+  color: var(--rl-red) !important;
+}
+[data-theme="sciin_it"] [class*="hover\\:text-red-"]:hover {
+  color: var(--rl-red) !important;
+}
+[data-theme="sciin_it"] [class*="bg-red-500"],
+[data-theme="sciin_it"] [class*="bg-amber-500"] {
+  background-color: var(--rl-red) !important;
+}
+
+/* ── CGA: active/toggled → magenta ── */
+[data-theme="sciin_it"] button[class*="bg-accent-500"][class*="text-white"] {
+  background-color: rgb(var(--sf-primary)) !important;
+  color: var(--rl-magenta) !important;
+  border-color: var(--rl-magenta) !important;
+}
+
+/* ── CGA: success/emerald → green ── */
+[data-theme="sciin_it"] [class*="text-emerald-400"],
+[data-theme="sciin_it"] [class*="text-emerald-500"],
+[data-theme="sciin_it"] [class*="text-green-400"],
+[data-theme="sciin_it"] [class*="text-green-500"] {
+  color: var(--rl-green) !important;
+}
+
+/* ── Selected toggle buttons (resolution/quality pickers) ── */
+[data-theme="sciin_it"] button[class*="border-accent-500"][class*="bg-accent-500\\/10"] {
+  background-color: rgba(255, 0, 255, 0.12) !important;
+  color: var(--rl-magenta) !important;
+  border-color: var(--rl-magenta) !important;
+}
+
+
+/* ══════ LAYOUT: panel gaps, spacing, borders ══════ */
+
+/* No padding/gap/tile on outer container — HashBorder components handle borders */
+[data-theme="sciin_it"] .flex.h-screen.w-screen {
+  padding: 0;
+  gap: 0;
+  background: #000000;
+  min-width: 940px;
+}
+[data-theme="sciin_it"] .flex.min-h-0.flex-1:not(.flex-col) {
+  gap: 0;
+}
+[data-theme="sciin_it"] .min-w-0.flex-1.flex-col {
+  gap: 0;
+}
+
+/* Kill all borders inside panel columns -- only the character tile system provides borders */
+[data-theme="sciin_it"] .layout-left-column *,
+[data-theme="sciin_it"] .layout-right-column * {
+  border-width: 0 !important;
+}
+/* Remove single-edge borders that are redundant with panel gaps */
+[data-theme="sciin_it"] .border-r.border-surface-border {
+  border-right: none !important;
+}
+[data-theme="sciin_it"] .border-l.border-surface-border {
+  border-left: none !important;
+}
+[data-theme="sciin_it"] .border-x.border-surface-border:not(.layout-left-column):not(.layout-right-column):not(.win95-toolbar) {
+  border-left: none !important;
+  border-right: none !important;
+}
+[data-theme="sciin_it"] .border-t.border-surface-border:not(.layout-minimap):not(.layout-timeline) {
+  border-top: none !important;
+}
+[data-theme="sciin_it"] .border-b.border-surface-border {
+  border-bottom: none !important;
+}
+
+/* Left panel: no border (outer container gap provides # wall) */
+[data-theme="sciin_it"] .layout-left-column {
+  position: relative;
+}
+/* Right panel: no border, clip overflow */
+[data-theme="sciin_it"] .layout-right-column {
+  position: relative;
+  border-width: 0 !important;
+  overflow: hidden;
+}
+
+/* Left column minimap/floorplan: gap provides # separator (no border needed) */
+[data-theme="sciin_it"] .layout-minimap {
+  border-width: 0 !important;
+  position: relative;
+}
+[data-theme="sciin_it"] .layout-left-column .scrollbar-thin,
+[data-theme="sciin_it"] .layout-right-column .scrollbar-thin {
+  padding-top: 16px;
+}
+/* Suppress inner Panel's cyan border inside left panel (wrapper provides green) */
+[data-theme="sciin_it"] .layout-left-column .win95-window {
+  border: none !important;
+}
+
+/* Section spacing: gaps between sections, no internal borders */
+[data-theme="sciin_it"] .win95-panel-section {
+  border: none !important;
+  margin-bottom: 0;
+}
+/* Force all vertical margins inside sections onto the 16px grid */
+/* Snap all vertical spacing inside panels onto the 16px grid */
+[data-theme="sciin_it"] .layout-left-column .mt-1,
+[data-theme="sciin_it"] .layout-right-column .mt-1 { margin-top: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .mt-2,
+[data-theme="sciin_it"] .layout-right-column .mt-2 { margin-top: 16px !important; }
+[data-theme="sciin_it"] .layout-left-column .mt-3,
+[data-theme="sciin_it"] .layout-right-column .mt-3 { margin-top: 16px !important; }
+[data-theme="sciin_it"] .layout-left-column .mb-1,
+[data-theme="sciin_it"] .layout-right-column .mb-1 { margin-bottom: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .mb-2,
+[data-theme="sciin_it"] .layout-right-column .mb-2 { margin-bottom: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .mb-3,
+[data-theme="sciin_it"] .layout-right-column .mb-3 { margin-bottom: 16px !important; }
+[data-theme="sciin_it"] .layout-left-column .pt-2,
+[data-theme="sciin_it"] .layout-right-column .pt-2 { padding-top: 16px !important; }
+[data-theme="sciin_it"] .layout-left-column .pb-3,
+[data-theme="sciin_it"] .layout-right-column .pb-3 { padding-bottom: 16px !important; }
+[data-theme="sciin_it"] .layout-left-column .py-1,
+[data-theme="sciin_it"] .layout-right-column .py-1 { padding-top: 0 !important; padding-bottom: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .py-1\.5,
+[data-theme="sciin_it"] .layout-right-column .py-1\.5 { padding-top: 0 !important; padding-bottom: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .py-2,
+[data-theme="sciin_it"] .layout-right-column .py-2 { padding-top: 0 !important; padding-bottom: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .pt-0\.5,
+[data-theme="sciin_it"] .layout-right-column .pt-0\.5 { padding-top: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .space-y-1 > :not([hidden]) ~ :not([hidden]),
+[data-theme="sciin_it"] .layout-right-column .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .gap-0\.5,
+[data-theme="sciin_it"] .layout-right-column .gap-0\.5 { gap: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .gap-1,
+[data-theme="sciin_it"] .layout-right-column .gap-1 { gap: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .gap-1\.5,
+[data-theme="sciin_it"] .layout-right-column .gap-1\.5 { gap: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .gap-2,
+[data-theme="sciin_it"] .layout-right-column .gap-2 { gap: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .gap-2\.5,
+[data-theme="sciin_it"] .layout-right-column .gap-2\.5 { gap: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .gap-3,
+[data-theme="sciin_it"] .layout-right-column .gap-3 { gap: 16px !important; }
+[data-theme="sciin_it"] .layout-left-column .p-1,
+[data-theme="sciin_it"] .layout-right-column .p-1 { padding: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .p-3,
+[data-theme="sciin_it"] .layout-right-column .p-3 { padding: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .py-3,
+[data-theme="sciin_it"] .layout-right-column .py-3 { padding-top: 16px !important; padding-bottom: 16px !important; }
+[data-theme="sciin_it"] .layout-left-column .py-0\.5,
+[data-theme="sciin_it"] .layout-right-column .py-0\.5 { padding-top: 0 !important; padding-bottom: 0 !important; }
+[data-theme="sciin_it"] .layout-left-column .py-10,
+[data-theme="sciin_it"] .layout-right-column .py-10 { padding-top: 48px !important; padding-bottom: 48px !important; }
+[data-theme="sciin_it"] .win95-panel-section:last-child {
+  margin-bottom: 0;
+}
+[data-theme="sciin_it"] .win95-panel-section:last-child .sciin-section-divider {
+  display: none;
+}
+
+/* Per-section header accent color cycling */
+[data-theme="sciin_it"] .win95-panel-section { --section-accent: var(--rl-yellow); }
+[data-theme="sciin_it"] .win95-panel-section:nth-child(6n+1) { --section-accent: var(--rl-cyan); }
+[data-theme="sciin_it"] .win95-panel-section:nth-child(6n+2) { --section-accent: var(--rl-green); }
+[data-theme="sciin_it"] .win95-panel-section:nth-child(6n+3) { --section-accent: var(--rl-yellow); }
+[data-theme="sciin_it"] .win95-panel-section:nth-child(6n+4) { --section-accent: var(--rl-magenta); }
+[data-theme="sciin_it"] .win95-panel-section:nth-child(6n+5) { --section-accent: var(--rl-red); }
+[data-theme="sciin_it"] .win95-panel-section:nth-child(6n+6) { --section-accent: #FFFFFF; }
+/* Swap Post Processing (3rd) and Depth Mesh (4th) in right column */
+[data-theme="sciin_it"] .layout-right-column .win95-panel-section:nth-child(3) { --section-accent: var(--rl-magenta); }
+[data-theme="sciin_it"] .layout-right-column .win95-panel-section:nth-child(4) { --section-accent: var(--rl-yellow); }
+/* Center column: no padding, allow internal borders to extend */
+[data-theme="sciin_it"] .layout-center-column {
+  position: relative;
+  padding: 0;
+  min-width: 200px;
+}
+[data-theme="sciin_it"] .layout-viewport-shell {
+  position: relative;
+  padding: 16px 10px;
+}
+[data-theme="sciin_it"] .sciin-viewport-hud {
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.18em;
+  text-shadow: none;
+}
+/* Stage 1: simplify viewport overlays */
+@media (max-width: 1250px) {
+  [data-theme="sciin_it"] .sciin-viewport-hud {
+    align-items: flex-start !important;
+  }
+  [data-theme="sciin_it"] .sciin-keyhint-label {
+    display: none !important;
+  }
+  [data-theme="sciin_it"] .sciin-hud-coords-inline {
+    display: none !important;
+  }
+  [data-theme="sciin_it"] .sciin-hud-coords-stacked {
+    display: flex !important;
+    flex-direction: column;
+  }
+  [data-theme="sciin_it"] .sciin-hud-info-inline {
+    display: none !important;
+  }
+  [data-theme="sciin_it"] .sciin-hud-info-stacked {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+/* Stage 2: hide all viewport overlays */
+@media (max-width: 1000px) {
+  [data-theme="sciin_it"] .sciin-viewport-hud,
+  [data-theme="sciin_it"] .layout-viewport-shell > .absolute {
+    display: none !important;
+  }
+}
+[data-theme="sciin_it"] .layout-viewport-frame {
+  box-shadow: none;
+}
+[data-theme="sciin_it"] .layout-timeline {
+  box-shadow: none;
+  display: flex !important;
+  flex-direction: column;
+}
+[data-theme="sciin_it"] .layout-timeline::before {
+  display: none !important;
+  background-repeat: repeat-x;
+  pointer-events: none;
+}
+
+
+/* Toolbar: no border (outer container gap provides # wall) */
+[data-theme="sciin_it"] .win95-toolbar.win95-toolbar {
+  border: none !important;
+  position: relative;
+  z-index: 5;
+  margin-bottom: 0 !important;
+}
+
+/* Toolbar: one grid row, 1 line below hash border */
+[data-theme="sciin_it"] .win95-toolbar {
+  height: 16px !important;
+  margin-top: 16px !important;
+  padding: 0 10px !important;
+  flex-wrap: wrap;
+  overflow: clip;
+}
+/* Toolbar buttons: no border, no background, no padding (toolbar handles inset) */
+[data-theme="sciin_it"] .sciin-toolbar-btn,
+[data-theme="sciin_it"] .sciin-toolbar-btn:hover:not(:disabled) {
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: inherit;
+}
+/* Window panels: subtle inner border */
+[data-theme="sciin_it"] .win95-window {
+  border: none !important;
+  position: relative;
+}
+/* Timeline / bottom panel: no border */
+[data-theme="sciin_it"] .win95-window.win95-bottom-panel {
+  border: none !important;
+  position: relative;
+  overflow: visible;
+}
+
+/* Suppress all internal divider borders in bottom panel */
+[data-theme="sciin_it"] .win95-bottom-panel .border-b.border-surface-border,
+[data-theme="sciin_it"] .win95-bottom-panel .border-t.border-surface-border {
+  border-color: transparent !important;
+}
+
+/* Columns: opaque fill (outer container's # tile shows through gaps) */
+[data-theme="sciin_it"] .layout-right-column,
+[data-theme="sciin_it"] .layout-center-column {
+  background: #000000 !important;
+}
+/* Left column: opaque fill, clip overflow */
+[data-theme="sciin_it"] .layout-left-column {
+  background: #000000 !important;
+  border-width: 0 !important;
+  gap: 0 !important;
+  overflow: hidden;
+}
+[data-theme="sciin_it"] .layout-minimap {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+}
+[data-theme="sciin_it"] .layout-minimap::before,
+[data-theme="sciin_it"] .layout-minimap::after {
+  display: none !important;
+}
+
+
+/* Minimap inner panel: fill parent, clip canvas */
+[data-theme="sciin_it"] .layout-minimap > .win95-window {
+  overflow: hidden !important;
+  flex: 1;
+  min-height: 0;
+}
+[data-theme="sciin_it"] .sciin-left-stack {
+  gap: 0;
+}
+[data-theme="sciin_it"] .sciin-bottom-shell {
+  background-image: none !important;
+}
+[data-theme="sciin_it"] .sciin-bottom-shell .sciin-section-header {
+  margin-top: 16px !important;
+  margin-bottom: 0 !important;
+}
+[data-theme="sciin_it"] .sciin-timeline-body {
+  box-shadow: none;
+  padding: 0 10px !important;
+}
+[data-theme="sciin_it"] .sciin-timeline-body > div {
+  gap: 16px !important;
+  padding: 0 !important;
+}
+[data-theme="sciin_it"] .sciin-timeline-body input {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}

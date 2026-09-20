@@ -1,0 +1,2400 @@
+/* ── Self-hosted W95FA pixel font (Win95 theme) ── */
+@font-face {
+  font-family: 'W95FA';
+  src: url('/fonts/w95fa/w95fa.woff2') format('woff2'),
+       url('/fonts/w95fa/w95fa.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html[data-theme="win95"] {
+  --sf-base: 0 128 128;
+  --sf-primary: 192 192 192;
+  --sf-raised: 192 192 192;
+  --sf-border: 128 128 128;
+  --sf-border-secondary: 160 160 160;
+  --tx-primary: 0 0 0;
+  --tx-secondary: 34 34 34;
+  --tx-muted: 85 85 85;
+  --tx-faint: 128 128 128;
+  --ac-300: 64 64 255;
+  --ac-400: 0 0 255;
+  --ac-500: 0 0 128;
+  --ac-600: 0 0 96;
+  --border-radius: 0px;
+  --panel-shadow: none;
+  --glow: transparent;
+  --font-ui: 'W95FA', 'MS Sans Serif', 'Microsoft Sans Serif', system-ui, sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+  --scroll-thumb: 192 192 192;
+  --scroll-thumb-hover: 160 160 160;
+}
+
+/* ============================================================
+   WIN95
+   ============================================================ */
+
+[data-theme="win95"] * {
+  overscroll-behavior: none;
+}
+
+/* Pixel-accurate base styles */
+[data-theme="win95"] {
+  font-size: 13px;
+}
+
+[data-theme="win95"],
+[data-theme="win95"] body,
+[data-theme="win95"] * {
+  -webkit-font-smoothing: none !important;
+  -moz-osx-font-smoothing: unset !important;
+  font-smooth: never;
+  text-rendering: optimizeSpeed;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+}
+
+/* Override rounded corners globally */
+[data-theme="win95"] * {
+  border-radius: 0 !important;
+}
+
+/* Force opaque gray on all surface backgrounds — no teal bleed-through */
+[data-theme="win95"] [class*="bg-surface-primary"] {
+  background-color: #c0c0c0 !important;
+}
+[data-theme="win95"] [class*="bg-surface-base"] {
+  background-color: #c0c0c0 !important;
+}
+[data-theme="win95"] [class*="bg-surface-raised"]:not(select):not(input):not([class*="cursor-ew-resize"]):not(.win95-inset) {
+  background-color: #c0c0c0 !important;
+}
+
+/* Classic outset 3D border on panels */
+[data-theme="win95"] [class*="rounded-theme"] {
+  border: none;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -3px -3px 0 #000 inset,
+    3px 3px 0 #fff inset;
+  border-radius: 0;
+}
+
+/* Sunken inset for text and number inputs */
+[data-theme="win95"] input[type="number"],
+[data-theme="win95"] input[type="text"] {
+  border: none;
+  border-radius: 0;
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset;
+  background-color: #fff !important;
+  color: #000 !important;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  padding: 2px 4px;
+}
+
+/* ScrubInput display divs — sunken white field like inputs */
+[data-theme="win95"] [class*="cursor-ew-resize"] {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: none !important;
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset;
+}
+
+/* Win95 <select> -- sunken white field + raised gray chevron button
+   Uses outer box-shadow (not inset) so the embossed chevron background-image
+   is not covered by inset shadow layers. */
+[data-theme="win95"] select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 2px solid !important;
+  border-color: #000 #fff #fff #000 !important;
+  border-radius: 0 !important;
+  background-color: #fff !important;
+  color: #000 !important;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  padding: 2px 24px 2px 4px;
+  box-shadow: 1px 1px 0 #808080 inset, -1px -1px 0 #dfdfdf inset;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='20' fill='none'%3E%3Crect width='19' height='20' fill='%23c0c0c0'/%3E%3Crect x='0' y='0' width='18' height='1' fill='%23fff'/%3E%3Crect x='1' y='1' width='16' height='1' fill='%23fff'/%3E%3Crect x='0' y='0' width='1' height='19' fill='%23fff'/%3E%3Crect x='1' y='1' width='1' height='17' fill='%23fff'/%3E%3Crect x='2' y='2' width='15' height='1' fill='%23dfdfdf'/%3E%3Crect x='2' y='2' width='1' height='15' fill='%23dfdfdf'/%3E%3Crect x='0' y='19' width='19' height='1' fill='%23000'/%3E%3Crect x='1' y='18' width='18' height='1' fill='%23000'/%3E%3Crect x='18' y='0' width='1' height='20' fill='%23000'/%3E%3Crect x='17' y='1' width='1' height='19' fill='%23000'/%3E%3Crect x='2' y='17' width='15' height='1' fill='%23808080'/%3E%3Crect x='16' y='2' width='1' height='16' fill='%23808080'/%3E%3Cpath d='M6 8h7L9.5 12z' fill='%23000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 top 0;
+  background-size: 19px 100%;
+}
+
+/* ── Buttons: raised outset default, debossed on press ── */
+[data-theme="win95"] button {
+  border-radius: 0 !important;
+  background-color: #c0c0c0;
+  color: #000;
+  border: none;
+  min-height: 26px;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #000 inset,
+    2px 2px 0 #fff inset;
+}
+
+/* Disabled buttons: chiseled gray icon with white offset shadow */
+[data-theme="win95"] button:disabled {
+  color: #808080 !important;
+  cursor: default;
+}
+[data-theme="win95"] button:disabled svg {
+  color: #808080 !important;
+  filter: drop-shadow(1px 1px 0 #fff);
+}
+
+/* Override opacity-based dimming for Win95 disabled buttons */
+[data-theme="win95"] button.cursor-not-allowed {
+  opacity: 1 !important;
+}
+
+[data-theme="win95"] button:not(:disabled):active {
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset;
+  padding-top: 2px;
+  padding-left: 2px;
+}
+
+/* Title bar solid blue on header elements */
+[data-theme="win95"] [class*="tracking-wider"] {
+  background: #000080;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 4px 8px !important;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  border: none !important;
+}
+
+/* Win95 header text: slightly bolder than body text */
+[data-theme="win95"] [class*="tracking-wider"],
+[data-theme="win95"] [class*="tracking-wider"] * {
+  font-weight: 600 !important;
+}
+
+/* Inside framed panels, headers are flat (outer frame provides the bevel) */
+[data-theme="win95"] .win95-window [class*="tracking-wider"],
+[data-theme="win95"] .win95-panel-section [class*="tracking-wider"] {
+  box-shadow: none !important;
+}
+
+/* Force white text and consistent size on child spans inside title bars */
+[data-theme="win95"] [class*="tracking-wider"] span:not([class*="tracking-wider"]) {
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: bold;
+}
+
+/* Title-bar child buttons: small Win95 title-bar buttons (like min/max/close) */
+[data-theme="win95"] [class*="tracking-wider"] button:not([class*="tracking-wider"]):not(.win95-titlebar-btn) {
+  min-height: 20px !important;
+  padding: 2px 4px !important;
+  background-color: #c0c0c0 !important;
+}
+[data-theme="win95"] [class*="tracking-wider"] button:not([class*="tracking-wider"]):not(.win95-titlebar-btn) svg {
+  color: #000 !important;
+}
+
+/* Main toolbar: raised bevel frame */
+[data-theme="win95"] .win95-toolbar {
+  background-color: #c0c0c0 !important;
+  border: none !important;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #000 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+/* Keyframe count badge: match header blue with bold white text */
+[data-theme="win95"] .win95-toolbar button .bg-surface-border-secondary {
+  background-color: #000080 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  border-radius: 0 !important;
+}
+
+/* Hide dividers between toolbar buttons and close the gap */
+[data-theme="win95"] .win95-toolbar .bg-surface-border-secondary[class*="w-px"] {
+  display: none !important;
+}
+[data-theme="win95"] .win95-toolbar > div[class*="gap-2"] {
+  gap: 0 !important;
+}
+
+/* Main toolbar icon buttons: raised Win95 buttons matching toolbar height */
+[data-theme="win95"] .transport-group button {
+  background-color: #c0c0c0 !important;
+}
+
+/* Floorplan toolbar buttons: compact raised buttons inside navy title bar */
+[data-theme="win95"] [class*="tracking-wider"] .transport-group button {
+  min-height: 18px !important;
+  max-height: 18px !important;
+  padding: 1px !important;
+  background-color: #c0c0c0 !important;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #000 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset !important;
+}
+[data-theme="win95"] [class*="tracking-wider"] .transport-group button:active {
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset !important;
+}
+[data-theme="win95"] [class*="tracking-wider"] .transport-group button svg {
+  width: 12px !important;
+  height: 12px !important;
+  color: #000 !important;
+}
+[data-theme="win95"] [class*="tracking-wider"] .transport-group button[class*="bg-surface-raised"] {
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset !important;
+}
+
+/* ── Win95 minimize/maximize title-bar buttons ── */
+[data-theme="win95"] button.win95-titlebar-btn,
+[data-theme="win95"] label.win95-titlebar-btn {
+  width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  max-height: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  background-color: #c0c0c0 !important;
+  border: none !important;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #000 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset !important;
+}
+[data-theme="win95"] button.win95-titlebar-btn:active,
+[data-theme="win95"] label.win95-titlebar-btn:active {
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset !important;
+  padding-top: 1px !important;
+  padding-left: 1px !important;
+}
+[data-theme="win95"] button.win95-titlebar-btn svg,
+[data-theme="win95"] label.win95-titlebar-btn svg {
+  width: 12px !important;
+  height: 12px !important;
+  color: #000 !important;
+}
+[data-theme="win95"] button.win95-titlebar-btn svg.win95-close-glyph {
+  width: 10px !important;
+  height: 10px !important;
+}
+[data-theme="win95"] .win95-titlebar-btns {
+  gap: 2px !important;
+  margin-right: -2px;
+}
+
+/* Buttons with tracking-wider (CollapsibleSection headers) already span full width.
+   Make non-button tracking-wider elements (spans in flex rows) stretch to fill. */
+[data-theme="win95"] span[class*="tracking-wider"] {
+  flex: 1;
+  margin: -4px -8px;
+  padding: 4px 8px !important;
+}
+
+/* ── Win95 path list: square beveled action buttons (match Generate button height) ── */
+[data-theme="win95"] .win95-path-action-btn {
+  min-width: 30px;
+  height: 30px !important;
+  min-height: 30px !important;
+  max-height: 30px !important;
+  padding: 0;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  background-color: #c0c0c0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #000 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset !important;
+  cursor: pointer;
+}
+[data-theme="win95"] .win95-path-action-btn:active {
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset !important;
+}
+[data-theme="win95"] .win95-path-action-btn svg {
+  width: 20px !important;
+  height: 20px !important;
+  color: #000 !important;
+}
+
+/* Win95 sub-section toggle: plain raised gray button, no title-bar blue */
+[data-theme="win95"] button.win95-subsection-btn {
+  background-color: #c0c0c0 !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  padding: 4px 8px !important;
+  text-transform: uppercase;
+}
+
+/* Win95 checkboxes keep their own sizing */
+[data-theme="win95"] button.win95-checkbox {
+  min-height: 16px !important;
+}
+
+/* Force icons black on Win95 gray surfaces */
+
+/* Win95 fieldset/legend group box (etched border with inline label) */
+[data-theme="win95"] .win95-fieldset {
+  border-top: 1px solid #808080 !important;
+  border-left: 1px solid #808080 !important;
+  border-bottom: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
+  border-radius: 0 !important;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #808080 !important;
+  margin: 0 !important;
+  padding: 8px 6px 6px !important;
+}
+[data-theme="win95"] .win95-legend {
+  padding: 0 4px !important;
+  margin-left: 6px !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  color: #000 !important;
+  background-color: #c0c0c0 !important;
+}
+
+/* Sunken group-box panel (MS Paint canvas style).
+   Uses asymmetric border-color (dark top-left, light bottom-right) with matching
+   inset highlights — same approach as win95-fieldset — so both sides are
+   structurally symmetric (no external shadow eating into the outer gap). */
+[data-theme="win95"] .win95-group-box {
+  background-color: #c0c0c0 !important;
+  border: 1px solid !important;
+  border-color: #808080 #fff #fff #808080 !important;
+  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #808080 !important;
+  border-radius: 0 !important;
+}
+
+/* Sunken track area — only timeline/progress tracks, not panels */
+[data-theme="win95"] .win95-inset {
+  border: 2px solid !important;
+  border-color: #000 #fff #fff #000 !important;
+  box-shadow: 1px 1px 0 #808080 inset, -1px -1px 0 #dfdfdf inset;
+  background-color: #fff !important;
+}
+
+/* Reset scrollbar-width so ::-webkit-scrollbar rules take effect in modern Chrome */
+[data-theme="win95"],
+[data-theme="win95"] * {
+  scrollbar-width: initial !important;
+  scrollbar-color: initial !important;
+}
+
+/* ── Scrollbars: classic Win95 ── */
+[data-theme="win95"] ::-webkit-scrollbar,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+[data-theme="win95"] ::-webkit-scrollbar-track,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-track {
+  background-color: #c0c0c0 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='1' height='1' fill='%23fff'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23fff'/%3E%3C/svg%3E") !important;
+  background-size: 2px 2px !important;
+  image-rendering: pixelated !important;
+}
+
+[data-theme="win95"] ::-webkit-scrollbar-thumb,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #000 inset,
+    2px 2px 0 #fff inset !important;
+}
+
+[data-theme="win95"] ::-webkit-scrollbar-thumb:hover,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: #c0c0c0 !important;
+}
+
+[data-theme="win95"] ::-webkit-scrollbar-thumb:active,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-thumb:active {
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset !important;
+}
+
+[data-theme="win95"] ::-webkit-scrollbar-button,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-button {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background-color: #c0c0c0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 8px 4px;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #000 inset,
+    2px 2px 0 #fff inset;
+}
+
+[data-theme="win95"] ::-webkit-scrollbar-button:active,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-button:active {
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset;
+}
+
+/* Up arrow */
+[data-theme="win95"] ::-webkit-scrollbar-button:vertical:decrement,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4'%3E%3Cpath d='M0 4h8L4 0z' fill='%23000'/%3E%3C/svg%3E");
+}
+
+/* Down arrow */
+[data-theme="win95"] ::-webkit-scrollbar-button:vertical:increment,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4'%3E%3Cpath d='M0 0h8L4 4z' fill='%23000'/%3E%3C/svg%3E");
+}
+
+/* Left arrow */
+[data-theme="win95"] ::-webkit-scrollbar-button:horizontal:decrement,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-button:horizontal:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='8'%3E%3Cpath d='M4 0v8L0 4z' fill='%23000'/%3E%3C/svg%3E");
+  background-size: 4px 8px;
+}
+
+/* Right arrow */
+[data-theme="win95"] ::-webkit-scrollbar-button:horizontal:increment,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-button:horizontal:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='8'%3E%3Cpath d='M0 0v8l4-4z' fill='%23000'/%3E%3C/svg%3E");
+  background-size: 4px 8px;
+}
+
+[data-theme="win95"] ::-webkit-scrollbar-corner,
+[data-theme="win95"] .scrollbar-thin::-webkit-scrollbar-corner {
+  background-color: #c0c0c0;
+}
+
+/* ── Bottom panel: minimal side padding, no bottom padding so scrollbar sits flush ── */
+[data-theme="win95"] .win95-window.win95-bottom-panel {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  padding-bottom: 0 !important;
+}
+
+/* Bottom panel header keeps its own side padding */
+[data-theme="win95"] .win95-bottom-panel > [class*="tracking-wider"] {
+  padding-left: 12px !important;
+  padding-right: 8px !important;
+}
+
+
+/* ── Range slider: sunken groove track + raised thumb ── */
+[data-theme="win95"] input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none;
+  box-shadow: none;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 0 !important;
+}
+
+[data-theme="win95"] input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #808080;
+  border: none;
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset;
+}
+
+[data-theme="win95"] input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 23px;
+  margin-top: -10px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='23' shape-rendering='crispEdges'%3E%3Cg fill='%23c0c0c0'%3E%3Crect width='13' height='17'/%3E%3Crect x='1' y='17' width='11' height='1'/%3E%3Crect x='2' y='18' width='9' height='1'/%3E%3Crect x='3' y='19' width='7' height='1'/%3E%3Crect x='4' y='20' width='5' height='1'/%3E%3Crect x='5' y='21' width='3' height='1'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Crect width='12' height='1'/%3E%3Crect width='1' height='17'/%3E%3Crect x='1' y='17' width='1' height='1'/%3E%3Crect x='2' y='18' width='1' height='1'/%3E%3Crect x='3' y='19' width='1' height='1'/%3E%3Crect x='4' y='20' width='1' height='1'/%3E%3Crect x='5' y='21' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23dfdfdf'%3E%3Crect x='1' y='1' width='10' height='1'/%3E%3Crect x='1' y='1' width='1' height='16'/%3E%3Crect x='2' y='17' width='1' height='1'/%3E%3Crect x='3' y='18' width='1' height='1'/%3E%3Crect x='4' y='19' width='1' height='1'/%3E%3Crect x='5' y='20' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Crect x='12' width='1' height='17'/%3E%3Crect x='11' y='17' width='1' height='1'/%3E%3Crect x='10' y='18' width='1' height='1'/%3E%3Crect x='9' y='19' width='1' height='1'/%3E%3Crect x='8' y='20' width='1' height='1'/%3E%3Crect x='7' y='21' width='1' height='1'/%3E%3Crect x='6' y='22' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23808080'%3E%3Crect x='11' y='1' width='1' height='16'/%3E%3Crect x='10' y='17' width='1' height='1'/%3E%3Crect x='9' y='18' width='1' height='1'/%3E%3Crect x='8' y='19' width='1' height='1'/%3E%3Crect x='7' y='20' width='1' height='1'/%3E%3Crect x='6' y='21' width='1' height='1'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+[data-theme="win95"] input[type="range"]::-webkit-slider-thumb:active {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='23' shape-rendering='crispEdges'%3E%3Cg fill='%23c0c0c0'%3E%3Crect width='13' height='17'/%3E%3Crect x='1' y='17' width='11' height='1'/%3E%3Crect x='2' y='18' width='9' height='1'/%3E%3Crect x='3' y='19' width='7' height='1'/%3E%3Crect x='4' y='20' width='5' height='1'/%3E%3Crect x='5' y='21' width='3' height='1'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Crect width='12' height='1'/%3E%3Crect width='1' height='17'/%3E%3Crect x='1' y='17' width='1' height='1'/%3E%3Crect x='2' y='18' width='1' height='1'/%3E%3Crect x='3' y='19' width='1' height='1'/%3E%3Crect x='4' y='20' width='1' height='1'/%3E%3Crect x='5' y='21' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23808080'%3E%3Crect x='1' y='1' width='10' height='1'/%3E%3Crect x='1' y='1' width='1' height='16'/%3E%3Crect x='2' y='17' width='1' height='1'/%3E%3Crect x='3' y='18' width='1' height='1'/%3E%3Crect x='4' y='19' width='1' height='1'/%3E%3Crect x='5' y='20' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Crect x='12' width='1' height='17'/%3E%3Crect x='11' y='17' width='1' height='1'/%3E%3Crect x='10' y='18' width='1' height='1'/%3E%3Crect x='9' y='19' width='1' height='1'/%3E%3Crect x='8' y='20' width='1' height='1'/%3E%3Crect x='7' y='21' width='1' height='1'/%3E%3Crect x='6' y='22' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23dfdfdf'%3E%3Crect x='11' y='1' width='1' height='16'/%3E%3Crect x='10' y='17' width='1' height='1'/%3E%3Crect x='9' y='18' width='1' height='1'/%3E%3Crect x='8' y='19' width='1' height='1'/%3E%3Crect x='7' y='20' width='1' height='1'/%3E%3Crect x='6' y='21' width='1' height='1'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+  box-shadow: none;
+}
+
+[data-theme="win95"] input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: #808080;
+  border: none;
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset;
+}
+
+[data-theme="win95"] input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 23px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='23' shape-rendering='crispEdges'%3E%3Cg fill='%23c0c0c0'%3E%3Crect width='13' height='17'/%3E%3Crect x='1' y='17' width='11' height='1'/%3E%3Crect x='2' y='18' width='9' height='1'/%3E%3Crect x='3' y='19' width='7' height='1'/%3E%3Crect x='4' y='20' width='5' height='1'/%3E%3Crect x='5' y='21' width='3' height='1'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Crect width='12' height='1'/%3E%3Crect width='1' height='17'/%3E%3Crect x='1' y='17' width='1' height='1'/%3E%3Crect x='2' y='18' width='1' height='1'/%3E%3Crect x='3' y='19' width='1' height='1'/%3E%3Crect x='4' y='20' width='1' height='1'/%3E%3Crect x='5' y='21' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23dfdfdf'%3E%3Crect x='1' y='1' width='10' height='1'/%3E%3Crect x='1' y='1' width='1' height='16'/%3E%3Crect x='2' y='17' width='1' height='1'/%3E%3Crect x='3' y='18' width='1' height='1'/%3E%3Crect x='4' y='19' width='1' height='1'/%3E%3Crect x='5' y='20' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Crect x='12' width='1' height='17'/%3E%3Crect x='11' y='17' width='1' height='1'/%3E%3Crect x='10' y='18' width='1' height='1'/%3E%3Crect x='9' y='19' width='1' height='1'/%3E%3Crect x='8' y='20' width='1' height='1'/%3E%3Crect x='7' y='21' width='1' height='1'/%3E%3Crect x='6' y='22' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23808080'%3E%3Crect x='11' y='1' width='1' height='16'/%3E%3Crect x='10' y='17' width='1' height='1'/%3E%3Crect x='9' y='18' width='1' height='1'/%3E%3Crect x='8' y='19' width='1' height='1'/%3E%3Crect x='7' y='20' width='1' height='1'/%3E%3Crect x='6' y='21' width='1' height='1'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+[data-theme="win95"] input[type="range"]::-moz-range-thumb:active {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='23' shape-rendering='crispEdges'%3E%3Cg fill='%23c0c0c0'%3E%3Crect width='13' height='17'/%3E%3Crect x='1' y='17' width='11' height='1'/%3E%3Crect x='2' y='18' width='9' height='1'/%3E%3Crect x='3' y='19' width='7' height='1'/%3E%3Crect x='4' y='20' width='5' height='1'/%3E%3Crect x='5' y='21' width='3' height='1'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Crect width='12' height='1'/%3E%3Crect width='1' height='17'/%3E%3Crect x='1' y='17' width='1' height='1'/%3E%3Crect x='2' y='18' width='1' height='1'/%3E%3Crect x='3' y='19' width='1' height='1'/%3E%3Crect x='4' y='20' width='1' height='1'/%3E%3Crect x='5' y='21' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23808080'%3E%3Crect x='1' y='1' width='10' height='1'/%3E%3Crect x='1' y='1' width='1' height='16'/%3E%3Crect x='2' y='17' width='1' height='1'/%3E%3Crect x='3' y='18' width='1' height='1'/%3E%3Crect x='4' y='19' width='1' height='1'/%3E%3Crect x='5' y='20' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Crect x='12' width='1' height='17'/%3E%3Crect x='11' y='17' width='1' height='1'/%3E%3Crect x='10' y='18' width='1' height='1'/%3E%3Crect x='9' y='19' width='1' height='1'/%3E%3Crect x='8' y='20' width='1' height='1'/%3E%3Crect x='7' y='21' width='1' height='1'/%3E%3Crect x='6' y='22' width='1' height='1'/%3E%3C/g%3E%3Cg fill='%23dfdfdf'%3E%3Crect x='11' y='1' width='1' height='16'/%3E%3Crect x='10' y='17' width='1' height='1'/%3E%3Crect x='9' y='18' width='1' height='1'/%3E%3Crect x='8' y='19' width='1' height='1'/%3E%3Crect x='7' y='20' width='1' height='1'/%3E%3Crect x='6' y='21' width='1' height='1'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+  box-shadow: none;
+}
+
+/* Win95 native checkbox — sunken square with pixel checkmark */
+[data-theme="win95"] input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  background: #fff;
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 0;
+  vertical-align: middle;
+}
+
+[data-theme="win95"] input[type="checkbox"]:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' shape-rendering='crispEdges'%3E%3Crect x='8' y='1' width='2' height='1' fill='%23000'/%3E%3Crect x='7' y='2' width='2' height='1' fill='%23000'/%3E%3Crect x='6' y='3' width='2' height='1' fill='%23000'/%3E%3Crect x='5' y='4' width='2' height='1' fill='%23000'/%3E%3Crect x='0' y='5' width='2' height='1' fill='%23000'/%3E%3Crect x='4' y='5' width='2' height='1' fill='%23000'/%3E%3Crect x='1' y='6' width='4' height='1' fill='%23000'/%3E%3Crect x='2' y='7' width='2' height='1' fill='%23000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 10px;
+  image-rendering: pixelated;
+}
+
+/* Win95 native radio — sunken circle */
+[data-theme="win95"] input[type="radio"] {
+  accent-color: #000080;
+}
+
+/* ── Force all SVG icons to 16x16 and black for Win95 ── */
+/* WARNING: This targets ALL <svg> elements. Non-icon SVGs (charts, canvases,
+   overlays) must carry an opt-out class — see exemption rule below.
+   Exempt classes: .win95-svg-exempt, .w-full, .pointer-events-none,
+   or be inside .win95-inset. */
+[data-theme="win95"] svg {
+  width: 16px !important;
+  height: 16px !important;
+  color: #000 !important;
+}
+
+/* White icons inside blue title bar headers */
+[data-theme="win95"] [class*="tracking-wider"] svg {
+  color: #fff !important;
+}
+
+/* Multi-color header icons: preserve hardcoded fills */
+[data-theme="win95"] [class*="tracking-wider"] svg.win95-icon-multi {
+  color: inherit !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Allow intentionally small icons to opt out */
+[data-theme="win95"] svg.win95-icon-sm {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* Win95 checkbox (used by ThemeToggle) — debossed/sunken, override button outset */
+[data-theme="win95"] button.win95-checkbox {
+  width: 16px;
+  height: 16px;
+  background: #fff !important;
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: none !important;
+  padding: 0 !important;
+}
+
+[data-theme="win95"] .win95-checkbox svg {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+/* Disabled checkboxes inside pointer-events-none containers */
+[data-theme="win95"] .pointer-events-none .win95-checkbox,
+[data-theme="win95"] .pointer-events-none input[type="checkbox"] {
+  background: #c0c0c0 !important;
+  opacity: 1;
+}
+
+/* Override opacity-based dimming for Win95 disabled containers */
+[data-theme="win95"] .pointer-events-none {
+  opacity: 0.65 !important;
+}
+
+/* ── Load file label inside toolbar: match beveled button style ── */
+[data-theme="win95"] .win95-toolbar-btn {
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #000 inset,
+    2px 2px 0 #fff inset;
+  background-color: #c0c0c0;
+  border-radius: 0 !important;
+}
+
+/* ── Bump small text sizes to be legible in Win95 ── */
+[data-theme="win95"] [class*="text-\[9px\]"],
+[data-theme="win95"] [class*="text-\[10px\]"] {
+  font-size: 12px !important;
+}
+
+[data-theme="win95"] [class*="text-\[11px\]"] {
+  font-size: 13px !important;
+}
+
+[data-theme="win95"] [class*="text-xs"] {
+  font-size: 13px !important;
+}
+
+/* ── Bigger Keyframe & Export toolbar buttons ── */
+[data-theme="win95"] [class*="gap-1.5"][class*="px-2.5"] {
+  padding: 6px 8px !important;
+}
+
+/* ── Playhead: beveled pentagon markers spanning full track ── */
+[data-theme="win95"] .playhead-marker {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='14'%3E%3Cpath d='M0 0h11v7l-5.5 6L0 7z' fill='%23c0c0c0'/%3E%3Cpath d='M5.5 13L0 7V0h10' stroke='%23fff' fill='none'/%3E%3Cpath d='M5.5 11L1 6V1h8' stroke='%23dfdfdf' fill='none'/%3E%3Cpath d='M10 0v7l-4.5 6' stroke='%23000' fill='none'/%3E%3Cpath d='M9 1v5l-3.5 5' stroke='%23808080' fill='none'/%3E%3C/svg%3E") no-repeat center / contain !important;
+  clip-path: none !important;
+  filter: none !important;
+  border-radius: 0 !important;
+  width: 11px !important;
+  height: 14px !important;
+  top: -4px !important;
+  box-shadow: none !important;
+}
+[data-theme="win95"] .playhead-line {
+  display: block !important;
+  width: 1px !important;
+  background: #000 !important;
+}
+
+/* Bottom chevron via parent pseudo-element */
+[data-theme="win95"] .cursor-col-resize::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='14'%3E%3Cpath d='M5.5 0L11 6v8H0V6z' fill='%23c0c0c0'/%3E%3Cpath d='M5.5 0L0 6v7' stroke='%23fff' fill='none'/%3E%3Cpath d='M5.5 2L1 7v5' stroke='%23dfdfdf' fill='none'/%3E%3Cpath d='M1 13h9V6L5.5 0' stroke='%23000' fill='none'/%3E%3Cpath d='M2 12h7V7L5.5 2' stroke='%23808080' fill='none'/%3E%3C/svg%3E") no-repeat center / contain;
+  pointer-events: none;
+}
+
+/* ── Transport button groups: tightly packed ── */
+[data-theme="win95"] .transport-group {
+  display: flex;
+  align-items: center;
+  gap: 0 !important;
+}
+
+/* ── Time display: sunken inset field ── */
+[data-theme="win95"] .time-display {
+  background-color: #c0c0c0 !important;
+  color: #000 !important;
+  padding: 2px 6px;
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset;
+}
+[data-theme="win95"] .time-display span,
+[data-theme="win95"] .time-display button {
+  color: #000 !important;
+  box-shadow: none !important;
+  background: none !important;
+  min-height: auto !important;
+  padding: 0 !important;
+}
+
+/* ── Panel sections: raised emboss on each CollapsibleSection ── */
+[data-theme="win95"] .win95-panel-section {
+  border: none !important;
+  margin: 0;
+  padding: 5px 6px 5px 5px;
+  background-color: #c0c0c0 !important;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #000 inset,
+    2px 2px 0 #fff inset !important;
+}
+
+/* Snap content-body padding to whole pixels (Tailwind px-3 = 0.75rem = 9.75px
+   at the Win95 13px root, which causes sub-pixel rounding asymmetry). */
+[data-theme="win95"] .win95-panel-section > div:not([class*="tracking-wider"]) {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Transport-group buttons in direct-child headers: pull right to match titlebar-btns */
+[data-theme="win95"] .win95-window > [class*="tracking-wider"] > .transport-group {
+  margin-right: -2px !important;
+}
+
+/* ── Win95 window frame: raised bevel with visible gray border ── */
+[data-theme="win95"] .win95-window {
+  padding: 5px 6px 5px 5px !important;
+  gap: 2px;
+  background-color: #c0c0c0 !important;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #000 inset,
+    2px 2px 0 #fff inset !important;
+}
+
+/* ── Floorplan canvas: sunken inset border ── */
+[data-theme="win95"] .win95-canvas-border {
+  border: none !important;
+  padding: 2px !important;
+  box-shadow:
+    1px 1px 0 #808080 inset,
+    -1px -1px 0 #dfdfdf inset,
+    2px 2px 0 #000 inset,
+    -2px -2px 0 #fff inset !important;
+  overflow: hidden;
+}
+
+/* Extra 2px gray stroke inside the sunken bevel (MS Paint scrollable frame style) */
+[data-theme="win95"] .win95-canvas-border.win95-canvas-scrollframe {
+  position: relative;
+  z-index: 2;
+  padding: 4px 2px 2px 4px !important;
+  background-color: #808080 !important;
+  background-image: linear-gradient(#fff, #fff) !important;
+  background-size: 3px 3px !important;
+  background-position: top left !important;
+  background-repeat: no-repeat !important;
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    2px 2px 0 #000 inset,
+    -2px -2px 0 #fff inset !important;
+}
+
+/* ── Tone mapping dropdown trigger: white field + sunken bevel ── */
+[data-theme="win95"] button.win95-dropdown-trigger {
+  background-color: #fff !important;
+  color: #000 !important;
+  padding: 1px 24px 1px 4px !important;
+  min-height: 22px !important;
+  border: 2px solid !important;
+  border-color: #000 #fff #fff #000 !important;
+  box-shadow: 1px 1px 0 #808080 inset, -1px -1px 0 #dfdfdf inset !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='20' fill='none'%3E%3Crect width='19' height='20' fill='%23c0c0c0'/%3E%3Crect x='0' y='0' width='18' height='1' fill='%23fff'/%3E%3Crect x='1' y='1' width='16' height='1' fill='%23fff'/%3E%3Crect x='0' y='0' width='1' height='19' fill='%23fff'/%3E%3Crect x='1' y='1' width='1' height='17' fill='%23fff'/%3E%3Crect x='2' y='2' width='15' height='1' fill='%23dfdfdf'/%3E%3Crect x='2' y='2' width='1' height='15' fill='%23dfdfdf'/%3E%3Crect x='0' y='19' width='19' height='1' fill='%23000'/%3E%3Crect x='1' y='18' width='18' height='1' fill='%23000'/%3E%3Crect x='18' y='0' width='1' height='20' fill='%23000'/%3E%3Crect x='17' y='1' width='1' height='19' fill='%23000'/%3E%3Crect x='2' y='17' width='15' height='1' fill='%23808080'/%3E%3Crect x='16' y='2' width='1' height='16' fill='%23808080'/%3E%3Cpath d='M6 8h7L9.5 12z' fill='%23000'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0 top 0 !important;
+  background-size: 19px 100% !important;
+}
+[data-theme="win95"] button.win95-dropdown-trigger svg {
+  display: none !important;
+}
+
+/* ── Full-width buttons inside panels: match bevel to titlebar/action buttons,
+   extend slightly to align with anchor group-box borders ── */
+[data-theme="win95"] .win95-panel-section button.w-full:not([class*="border-dashed"]):not(.win95-dropdown-trigger) {
+  padding: 4px 12px 4px 8px !important;
+  border: none !important;
+  margin-right: -1px;
+  width: calc(100% + 1px) !important;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #000 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset !important;
+}
+[data-theme="win95"] .win95-panel-section button.w-full:not([class*="border-dashed"]):not(.win95-dropdown-trigger):not(:disabled):active {
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset !important;
+}
+
+/* ── Small square icon buttons (anchor target/delete) ── */
+[data-theme="win95"] .win95-icon-btn-sm {
+  min-height: 24px !important;
+  max-height: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px !important;
+}
+
+/* ── Anchor color swatches: MS Paint debossed style ── */
+[data-theme="win95"] .win95-color-swatch {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 0 !important;
+  box-shadow:
+    1px 1px 0 #808080 inset,
+    -1px -1px 0 #dfdfdf inset,
+    2px 2px 0 #000 inset,
+    -2px -2px 0 #fff inset;
+}
+
+/* ── Restore padding on empty state "No media yet" buttons ── */
+[data-theme="win95"] button[class*="border-dashed"] {
+  padding: 4rem 1rem !important;
+  min-height: auto !important;
+  box-shadow: 1px 1px 0 #fff, 1px 1px 0 #fff inset !important;
+  background-color: #c0c0c0 !important;
+  border: 1px solid #808080 !important;
+  border-radius: 0 !important;
+}
+[data-theme="win95"] [class*="border-dashed"]:not(button) {
+  box-shadow: 1px 1px 0 #fff, 1px 1px 0 #fff inset !important;
+  background-color: #c0c0c0 !important;
+  border: 1px solid #808080 !important;
+  border-radius: 0 !important;
+}
+
+/* ── Camera track label: select-style dropdown ── */
+[data-theme="win95"] button.win95-plain-label {
+  background-color: #fff !important;
+  color: #000 !important;
+  min-height: auto !important;
+  padding: 1px 24px 1px 4px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  border: 2px solid !important;
+  border-color: #000 #fff #fff #000 !important;
+  box-shadow: 1px 1px 0 #808080 inset, -1px -1px 0 #dfdfdf inset;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='20' fill='none'%3E%3Crect width='19' height='20' fill='%23c0c0c0'/%3E%3Crect x='0' y='0' width='18' height='1' fill='%23fff'/%3E%3Crect x='1' y='1' width='16' height='1' fill='%23fff'/%3E%3Crect x='0' y='0' width='1' height='19' fill='%23fff'/%3E%3Crect x='1' y='1' width='1' height='17' fill='%23fff'/%3E%3Crect x='2' y='2' width='15' height='1' fill='%23dfdfdf'/%3E%3Crect x='2' y='2' width='1' height='15' fill='%23dfdfdf'/%3E%3Crect x='0' y='19' width='19' height='1' fill='%23000'/%3E%3Crect x='1' y='18' width='18' height='1' fill='%23000'/%3E%3Crect x='18' y='0' width='1' height='20' fill='%23000'/%3E%3Crect x='17' y='1' width='1' height='19' fill='%23000'/%3E%3Crect x='2' y='17' width='15' height='1' fill='%23808080'/%3E%3Crect x='16' y='2' width='1' height='16' fill='%23808080'/%3E%3Cpath d='M6 8h7L9.5 12z' fill='%23000'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0 top 0 !important;
+  background-size: 19px 100% !important;
+}
+[data-theme="win95"] button.win95-plain-label svg {
+  display: none !important;
+}
+
+/* ── Timeline track: thinner under Win95 ── */
+[data-theme="win95"] .win95-track {
+  height: 22px !important;
+}
+
+/* ── Keyframe diamonds: smaller under Win95 ── */
+[data-theme="win95"] [data-kf-diamond] > div:first-child {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+/* ── Dropdown/popover menus: Win95 outset bevel ── */
+[data-theme="win95"] [class*="z-\[9999\]"],
+[data-theme="win95"] [class*="z-\[999\]"][class*="rounded-md"],
+[data-theme="win95"] [class*="z-30"][class*="rounded-md"] {
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 4px !important;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #000 inset,
+    2px 2px 0 #fff inset !important;
+  background-color: #c0c0c0 !important;
+}
+
+/* ── Dropdown menu items: flat surface, no individual bevels ── */
+[data-theme="win95"] [class*="z-\[9999\]"] button,
+[data-theme="win95"] [class*="z-\[999\]"][class*="rounded-md"] button,
+[data-theme="win95"] [class*="z-30"][class*="rounded-md"] button {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: #000 !important;
+}
+
+/* ── Dropdown dividers: hidden ── */
+[data-theme="win95"] [class*="z-\[9999\]"] [class*="border-t"],
+[data-theme="win95"] [class*="z-\[999\]"][class*="rounded-md"] [class*="border-t"],
+[data-theme="win95"] [class*="z-30"][class*="rounded-md"] [class*="border-t"] {
+  border-color: transparent !important;
+  margin: 0 !important;
+}
+
+/* ── Dropdown menu items: navy highlight on hover (Start Menu style) ── */
+[data-theme="win95"] [class*="z-\[9999\]"] button:hover,
+[data-theme="win95"] [class*="z-\[999\]"][class*="rounded-md"] button:hover,
+[data-theme="win95"] [class*="z-30"][class*="rounded-md"] button:hover {
+  background-color: #000080 !important;
+  color: #fff !important;
+}
+[data-theme="win95"] [class*="z-\[9999\]"] button:hover svg,
+[data-theme="win95"] [class*="z-\[999\]"][class*="rounded-md"] button:hover svg,
+[data-theme="win95"] [class*="z-30"][class*="rounded-md"] button:hover svg {
+  color: #fff !important;
+}
+
+/* ── Primary action buttons: gray with black text on Win95 ── */
+[data-theme="win95"] button[class*="bg-accent-500"],
+[data-theme="win95"] button[class*="bg-accent-600"] {
+  background-color: #c0c0c0 !important;
+  color: #000 !important;
+}
+
+/* ── Selected toggle buttons (resolution/quality): dotted focus rect ── */
+[data-theme="win95"] button[class*="border-accent-500"][class*="bg-accent-500\/10"] {
+  background-color: #000080 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+}
+
+/* ── Key hint caps: Win95 raised bevel instead of modern shadow ── */
+[data-theme="win95"] .win95-key-cap {
+  background-color: #c0c0c0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #dfdfdf inset,
+    -2px -2px 0 #000 inset,
+    2px 2px 0 #fff inset !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+}
+[data-theme="win95"] .win95-key-cap-active {
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #000 inset !important;
+  padding-top: 2px;
+  padding-left: 2px;
+}
+
+/* ── Winamp key caps: chrome gradient + bevel ── */
+[data-theme="winamp"] .win95-key-cap {
+  background-color: rgb(var(--sf-raised)) !important;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.25) 15%,
+    rgba(255, 255, 255, 0.06) 35%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.10) 65%,
+    rgba(0, 0, 0, 0.22) 85%,
+    rgba(0, 0, 0, 0.30) 100%
+  ) !important;
+  border: none !important;
+  border-radius: 2px !important;
+  color: rgba(30, 34, 44, 0.8) !important;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.80) inset,
+    -1px -1px 0 rgba(0, 0, 20, 0.50) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.45),
+    0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="winamp"] .win95-key-cap-active {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.06) 30%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.04) 70%,
+    rgba(255, 255, 255, 0.10) 100%
+  ) !important;
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.40) inset,
+    1px 1px 0 rgba(0, 0, 20, 0.45) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.45),
+    0 1px 1px rgba(0, 0, 0, 0.2) !important;
+  padding-top: 1px !important;
+  padding-left: 1px !important;
+  color: #3366cc !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+
+/* ── Export modal: suppress backdrop blur ── */
+[data-theme="win95"] .win95-modal-backdrop {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ── ExportModal window: ensure navy title bar works ── */
+[data-theme="win95"] .win95-window > div:first-child {
+  box-shadow: none !important;
+}
+
+/* ── Progress bar fill: navy blue on Win95 ── */
+[data-theme="win95"] .win95-inset > div[class*="bg-accent-500"] {
+  background-color: #000080 !important;
+}
+
+/* ── Functional status colors: Win95 system palette ── */
+[data-theme="win95"] [class*="text-red-400"],
+[data-theme="win95"] [class*="text-red-500"] {
+  color: #ff0000 !important;
+}
+[data-theme="win95"] [class*="bg-red-500"] {
+  background-color: #ff0000 !important;
+}
+[data-theme="win95"] [class*="text-amber-400"],
+[data-theme="win95"] [class*="text-amber-500"] {
+  color: #808000 !important;
+}
+[data-theme="win95"] [class*="bg-amber-500"] {
+  background-color: #808000 !important;
+}
+[data-theme="win95"] [class*="text-emerald-500"],
+[data-theme="win95"] [class*="text-emerald-400"] {
+  color: #008000 !important;
+}
+[data-theme="win95"] [class*="border-emerald-500"] {
+  border-color: #008000 !important;
+}
+[data-theme="win95"] [class*="bg-emerald-600"] {
+  background-color: #008000 !important;
+}
+[data-theme="win95"] [class*="text-orange-400"] {
+  color: #ff8000 !important;
+}
+
+/* ── Win95 raised button ── */
+[data-theme="win95"] .win95-btn {
+  background-color: #c0c0c0 !important;
+  color: #000 !important;
+  border: none !important;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #000 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset !important;
+  cursor: pointer;
+}
+[data-theme="win95"] .win95-btn:active {
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset !important;
+}
+
+/* ── Graph Editor channel selector: Winamp styling ── */
+[data-theme="winamp"] .graph-editor-channels {
+  border-right: none !important;
+}
+
+[data-theme="winamp"] .winamp-channel-label {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 2px 0 2px 6px !important;
+}
+
+[data-theme="winamp"] .winamp-channel-label:hover {
+  background: none !important;
+}
+
+[data-theme="winamp"] .winamp-channel-label input[type="checkbox"] {
+  box-shadow:
+    0 1px 2px rgba(40, 80, 210, 0.55),
+    0 -0.5px 0 rgba(255, 255, 255, 0.25) inset,
+    0 0.5px 0 rgba(255, 255, 255, 0.40),
+    0 1.5px 1px rgba(255, 255, 255, 0.18),
+    0 0 4px 1px rgba(98, 162, 255, 0.80),
+    0 0 0 3px rgba(0, 0, 0, 0.08),
+    0 0 0 4px rgba(0, 0, 0, 0.04),
+    0 -1px 0 3px rgba(0, 0, 0, 0.12),
+    0 -2px 1px 3px rgba(0, 0, 0, 0.06),
+    0 1px 0 3px rgba(255, 255, 255, 0.35),
+    0 2px 1px 3px rgba(255, 255, 255, 0.15),
+    1px 1px 0 3px rgba(255, 255, 255, 0.18),
+    -1px 1px 0 3px rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="winamp"] .winamp-channel-label input[type="checkbox"]:checked {
+  box-shadow:
+    0 1px 2px rgba(210, 100, 15, 0.50),
+    0 -0.5px 0 rgba(255, 255, 255, 0.35) inset,
+    0 0.5px 0 rgba(255, 255, 255, 0.45),
+    0 1.5px 1px rgba(255, 255, 255, 0.20),
+    0 0 4px 1px rgba(255, 150, 30, 0.80),
+    0 0 0 3px rgba(0, 0, 0, 0.08),
+    0 0 0 4px rgba(0, 0, 0, 0.04),
+    0 -1px 0 3px rgba(0, 0, 0, 0.12),
+    0 -2px 1px 3px rgba(0, 0, 0, 0.06),
+    0 1px 0 3px rgba(255, 255, 255, 0.35),
+    0 2px 1px 3px rgba(255, 255, 255, 0.15),
+    1px 1px 0 3px rgba(255, 255, 255, 0.18),
+    -1px 1px 0 3px rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="winamp"] .winamp-channel-label span {
+  display: inline-block;
+  background-color: rgba(0, 0, 20, 0.25);
+  color: #dde0e8 !important;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+/* ── Graph Editor channel selector: Win95 styling ── */
+[data-theme="win95"] .graph-editor-channels {
+  background-color: #c0c0c0 !important;
+  gap: 0 !important;
+}
+
+[data-theme="win95"] .win95-channel-list {
+  background-color: #c0c0c0 !important;
+  margin: 0 !important;
+  margin-top: 4px !important;
+  padding: 2px !important;
+  box-shadow: none !important;
+}
+
+[data-theme="win95"] .graph-editor-channels label {
+  border-radius: 0 !important;
+  padding: 2px 4px !important;
+  color: #000 !important;
+}
+
+[data-theme="win95"] .graph-editor-channels label:has(input:checked) {
+  outline: 1px dotted #000;
+  outline-offset: -1px;
+}
+
+/* ── Win95 Viewport Chrome ── */
+
+[data-theme="win95"] .win95-viewport-titlebar {
+  background-color: #000080;
+  color: #fff !important;
+  font-size: 10px !important;
+}
+[data-theme="win95"] .win95-viewport-titlebar span {
+  color: #fff !important;
+}
+[data-theme="win95"] .win95-viewport-titlebar .win95-titlebar-btns {
+  gap: 2px;
+}
+
+/* Menu bar: gray bar with text menu items */
+[data-theme="win95"] .win95-menu-bar {
+  border-bottom: none;
+  padding: 1px 2px;
+}
+[data-theme="win95"] .win95-menu-item {
+  background: transparent !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+  border: none !important;
+  padding: 2px 6px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+[data-theme="win95"] .win95-menu-item * {
+  font-weight: 500 !important;
+  font-size: inherit !important;
+  color: inherit !important;
+}
+[data-theme="win95"] .win95-menu-item .underline {
+  text-decoration: none !important;
+  border-bottom: 1px solid currentColor !important;
+  line-height: 1 !important;
+}
+[data-theme="win95"] .win95-menu-item:hover {
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #808080 inset !important;
+}
+[data-theme="win95"] .win95-menu-item:active {
+  box-shadow:
+    -1px -1px 0 #fff inset,
+    1px 1px 0 #808080 inset !important;
+  padding: 3px 5px 1px 7px !important;
+}
+
+/* Debossed divider between menu bar and toolbar */
+[data-theme="win95"] .win95-menu-divider {
+  height: 2px;
+  background: #c0c0c0;
+  box-shadow:
+    0 0 0 1px #808080 inset,
+    0 1px 0 #fff;
+  margin: 1px 2px;
+}
+
+/* Viewport toolbar row */
+[data-theme="win95"] .win95-viewport-toolbar {
+  padding: 2px 2px;
+  gap: 0 !important;
+}
+[data-theme="win95"] .win95-viewport-toolbar button {
+  min-height: 24px !important;
+  min-width: 24px !important;
+  padding: 2px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+/* ── Win95 Taskbar ── */
+[data-theme="win95"] .win95-taskbar {
+  background-color: #c0c0c0 !important;
+  min-height: 30px;
+  padding: 2px 2px !important;
+  box-shadow:
+    0 -1px 0 #808080,
+    0 -2px 0 #fff inset;
+  border: none !important;
+}
+
+/* Start button: raised bevel, bold */
+[data-theme="win95"] .win95-start-btn {
+  background-color: #c0c0c0 !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  font-size: 12px !important;
+  min-height: 26px !important;
+  padding: 2px 6px !important;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #000 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset !important;
+}
+[data-theme="win95"] .win95-start-btn:active {
+  box-shadow:
+    -1px -1px 0 #fff inset,
+    1px 1px 0 #000 inset,
+    -2px -2px 0 #dfdfdf inset,
+    2px 2px 0 #808080 inset !important;
+  padding: 3px 5px 1px 7px !important;
+}
+
+/* Taskbar divider: vertical sunken line */
+[data-theme="win95"] .win95-taskbar-divider {
+  width: 2px;
+  align-self: stretch;
+  margin: 2px 2px;
+  box-shadow:
+    -1px 0 0 #808080,
+    1px 0 0 #fff;
+}
+
+/* Taskbar clock: sunken well on the right */
+[data-theme="win95"] .win95-taskbar-clock {
+  color: #000 !important;
+  font-size: 11px !important;
+  min-height: 24px;
+  padding: 2px 8px !important;
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset !important;
+  background: transparent !important;
+}
+
+/* Taskbar items: sunken depressed style */
+[data-theme="win95"] .win95-taskbar-item {
+  background-color: #c0c0c0 !important;
+  color: #000 !important;
+  min-height: 24px !important;
+  font-size: 11px !important;
+  max-width: 140px;
+  box-shadow:
+    -1px -1px 0 #fff inset,
+    1px 1px 0 #000 inset,
+    -2px -2px 0 #dfdfdf inset,
+    2px 2px 0 #808080 inset !important;
+}
+
+/* ── Win95 MS Paint floating window ── */
+[data-theme="win95"] .win95-paint-window {
+  background-color: #c0c0c0;
+  border: 1px solid #000;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #808080 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #404040 inset,
+    4px 4px 10px rgba(0, 0, 0, 0.4);
+  padding: 4px 5px 5px 4px;
+  width: 280px;
+  font-size: 13px;
+}
+[data-theme="win95"] .win95-paint-titlebar {
+  background-color: #000080;
+  color: #fff;
+  cursor: grab;
+  min-height: 22px;
+}
+[data-theme="win95"] .win95-paint-titlebar:active {
+  cursor: grabbing;
+}
+[data-theme="win95"] .win95-paint-menubar {
+  border-bottom: 1px solid #808080;
+  box-shadow: 0 1px 0 #fff;
+}
+
+/* Vertical tool strip */
+[data-theme="win95"] .win95-paint-toolbar {
+  border-right: 1px solid #808080;
+  box-shadow: 1px 0 0 #fff;
+  padding: 2px;
+}
+[data-theme="win95"] .win95-paint-tool-btn {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background-color: #c0c0c0 !important;
+  border: none !important;
+  box-shadow:
+    1px 1px 0 #fff inset,
+    -1px -1px 0 #000 inset,
+    2px 2px 0 #dfdfdf inset,
+    -2px -2px 0 #808080 inset !important;
+  cursor: pointer;
+}
+[data-theme="win95"] .win95-paint-tool-btn:active,
+[data-theme="win95"] .win95-paint-tool-active {
+  box-shadow:
+    1px 1px 0 #000 inset,
+    -1px -1px 0 #fff inset,
+    2px 2px 0 #808080 inset,
+    -2px -2px 0 #dfdfdf inset !important;
+  padding-top: 1px !important;
+  padding-left: 1px !important;
+}
+[data-theme="win95"] .win95-paint-tool-btn img {
+  width: 16px !important;
+  height: 16px !important;
+  image-rendering: pixelated;
+}
+[data-theme="win95"] .win95-paint-tool-btn img[src*="paint-curve"],
+[data-theme="win95"] .win95-paint-tool-btn img[src*="paint-bucket"] {
+  transform: translateY(-1px);
+}
+
+/* Color palette strip */
+[data-theme="win95"] .win95-paint-palette {
+  position: relative;
+  z-index: 0;
+  border-top: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px 4px 5px 8px !important;
+}
+[data-theme="win95"] .win95-paint-palette::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background:
+    linear-gradient(
+      to bottom,
+      #808080 0,
+      #808080 1px,
+      #fff 1px,
+      #fff 2px
+    );
+  z-index: 0;
+  pointer-events: none;
+}
+[data-theme="win95"] .win95-paint-palette::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 30px;
+  right: 0;
+  height: 2px;
+  background-color: #c0c0c0;
+  z-index: 0;
+  pointer-events: none;
+}
+[data-theme="win95"] .win95-paint-palette-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+}
+[data-theme="win95"] .win95-paint-color-preview {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  margin-right: 3px;
+  flex-shrink: 0;
+  background-color: #c0c0c0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='1' height='1' fill='%23fff'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23fff'/%3E%3C/svg%3E");
+  background-size: 2px 2px;
+  image-rendering: pixelated;
+  box-shadow:
+    -1px -1px 0 #dfdfdf inset,
+    1px 1px 0 #808080 inset,
+    -2px -2px 0 #fff inset,
+    2px 2px 0 #404040 inset;
+}
+[data-theme="win95"] .win95-paint-fg {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 18px;
+  height: 18px;
+  background-color: #c0c0c0;
+  border: none;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #404040;
+  z-index: 1;
+}
+[data-theme="win95"] .win95-paint-fg::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background-color: var(--win95-paint-fg-color, #000);
+  border: 1px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+}
+[data-theme="win95"] .win95-paint-bg {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--win95-paint-bg-color, #fff);
+  border: 1px solid;
+  border-color: #808080 #cfcfcf #cfcfcf #808080;
+  box-shadow:
+    inset 1px 1px 0 #404040,
+    inset -1px -1px 0 #fff;
+}
+[data-theme="win95"] .win95-paint-colors {
+  display: grid;
+  grid-template-columns: repeat(10, auto);
+  grid-template-rows: repeat(2, auto);
+  gap: 1px;
+  background-color: #c0c0c0;
+}
+[data-theme="win95"] .win95-paint-color-swatch {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: none;
+  background-clip: padding-box;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+  flex: 0 0 16px;
+  width: 16px;
+  min-width: 16px;
+  max-width: 16px;
+  height: 16px;
+  min-height: 16px;
+  max-height: 16px;
+  line-height: 0;
+  vertical-align: top;
+  cursor: pointer;
+  border: 1px solid;
+  border-color: #808080 #fff #fff #808080;
+  box-shadow:
+    inset 1px 1px 0 #404040,
+    inset -1px -1px 0 #dfdfdf;
+}
+[data-theme="win95"] .win95-paint-color-swatch.is-active {
+  box-shadow:
+    inset 1px 1px 0 #000,
+    inset -1px -1px 0 #fff,
+    0 0 0 1px #000;
+}
+
+/* ── Win95 Explorer-style media browser ── */
+[data-theme="win95"] .win95-explorer-area {
+  background-color: #fff !important;
+  min-height: 80px;
+  max-height: 290px;
+  overflow-y: auto !important;
+  overscroll-behavior: auto !important;
+}
+
+
+[data-theme="win95"] .win95-explorer-empty-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 80px;
+}
+[data-theme="win95"] .win95-explorer-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 6px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+  cursor: default;
+}
+[data-theme="win95"] .win95-explorer-empty:active {
+  box-shadow: none !important;
+  padding: 8px 6px !important;
+}
+[data-theme="win95"] .win95-explorer-empty.selected .win95-explorer-label {
+  color: #fff !important;
+  background-color: #000080;
+  padding: 0 2px;
+}
+[data-theme="win95"] .win95-explorer-empty.selected .win95-explorer-icon-wrap {
+  background-color: #000080;
+}
+
+[data-theme="win95"] .win95-explorer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  align-content: flex-start;
+  gap: 2px;
+  padding: 6px;
+}
+
+[data-theme="win95"] .win95-explorer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 2px;
+  cursor: default;
+  gap: 2px;
+}
+
+[data-theme="win95"] .win95-explorer-item.selected .win95-explorer-label {
+  background-color: #000080;
+  color: #fff !important;
+}
+[data-theme="win95"] .win95-explorer-item.selected .win95-explorer-icon-wrap {
+  filter: brightness(0.85) saturate(1.5);
+}
+
+[data-theme="win95"] .win95-explorer-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+[data-theme="win95"] .win95-explorer-icon-wrap svg {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+[data-theme="win95"] .win95-explorer-badge {
+  position: absolute;
+  bottom: -1px;
+  right: -4px;
+  font-size: 10px;
+  line-height: 1;
+  color: #000;
+}
+
+[data-theme="win95"] .win95-explorer-label {
+  text-align: center;
+  font-size: 11px !important;
+  line-height: 1.2;
+  color: #000 !important;
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 2px;
+}
+[data-theme="win95"] .win95-explorer-empty-label {
+  max-width: none;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+[data-theme="win95"] .win95-explorer-footer {
+  background-color: #c0c0c0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 2px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+[data-theme="win95"] .win95-explorer-statusbar {
+  font-size: 11px !important;
+  color: #000 !important;
+  padding: 2px 4px;
+  flex: 1;
+  border: 1px solid;
+  border-color: #808080 #fff #fff #808080;
+}
+
+[data-theme="win95"] .win95-explorer-actions {
+  display: flex;
+  gap: 2px;
+}
+
+/* ── Win95 Properties dialog ── */
+[data-theme="win95"] .win95-properties-dialog {
+  width: 280px;
+  max-width: 90vw;
+}
+
+[data-theme="win95"] .win95-props-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #000080;
+  color: #fff;
+  padding: 2px 3px 2px 4px;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="win95"] .win95-props-titlebar span {
+  color: #fff !important;
+}
+
+[data-theme="win95"] .win95-titlebar-close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 14px;
+  background-color: #c0c0c0;
+  border: none;
+  box-shadow:
+    -1px -1px 0 #808080 inset,
+    1px 1px 0 #fff inset;
+  padding: 0;
+}
+[data-theme="win95"] .win95-titlebar-close:active {
+  box-shadow:
+    1px 1px 0 #808080 inset,
+    -1px -1px 0 #fff inset;
+}
+[data-theme="win95"] .win95-titlebar-close svg {
+  width: 10px !important;
+  height: 10px !important;
+  color: #000 !important;
+}
+
+[data-theme="win95"] .win95-props-body {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  align-items: flex-start;
+}
+
+[data-theme="win95"] .win95-props-preview {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+  box-shadow: 1px 1px 0 #dfdfdf inset, -1px -1px 0 #000 inset;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="win95"] .win95-props-thumb {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+[data-theme="win95"] .win95-props-audio-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+[data-theme="win95"] .win95-props-audio-icon svg {
+  width: 32px !important;
+  height: 32px !important;
+  color: #000 !important;
+}
+
+[data-theme="win95"] .win95-props-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+[data-theme="win95"] .win95-props-row {
+  display: flex;
+  gap: 6px;
+  font-size: 11px !important;
+  line-height: 1.4;
+}
+
+[data-theme="win95"] .win95-props-label {
+  flex-shrink: 0;
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="win95"] .win95-props-value {
+  color: #000 !important;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-theme="win95"] .win95-props-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 0 10px 10px;
+}
+
+/* ── Winamp floating desktop ── */
+[data-theme="winamp"] .winamp-desktop {
+  position: relative;
+  background: #0a0e18;
+}
+
+[data-theme="winamp"] .winamp-floating-window {
+  border-radius: 10px;
+  border: 1.5px solid #000000;
+  background:
+    linear-gradient(180deg, #BFC6D2 0%, #C5CAD5 14%, #CFD1DB 75%, #D0D2DB 88%, #D0D2DB 94%, #CED0DA 100%);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.75) inset,
+    0 3px 0 rgba(255, 255, 255, 0.45) inset,
+    2px 0 0 rgba(255, 255, 255, 0.55) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.40) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.48) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.15) inset;
+  overflow: hidden;
+  will-change: left, top;
+}
+
+[data-theme="winamp"] .winamp-floating-window[data-window-id="player"] {
+  background:
+    linear-gradient(180deg, #DCDDE6 0%, #B0B7C4 50%, #AAB1BF 63%, #A1A8B6 70%, #8C95A3 78%, #646D7C 87%, #57606E 94%, #666D7D 100%);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.75) inset,
+    0 3px 0 rgba(255, 255, 255, 0.45) inset,
+    2px 0 1px rgba(255, 255, 255, 0.40) inset,
+    -2px 0 1px rgba(255, 255, 255, 0.30) inset,
+    0 -1px 0 rgba(255, 255, 255, 0.07) inset,
+    0 -2px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -3px 0 rgba(255, 255, 255, 0.05) inset,
+    0 -4px 0 rgba(255, 255, 255, 0.04) inset,
+    0 -5px 1px rgba(255, 255, 255, 0.02) inset,
+    0 -6px 1px rgba(255, 255, 255, 0.01) inset;
+  overflow: hidden;
+  will-change: left, top;
+}
+
+[data-theme="winamp"] .winamp-floating-bare {
+  cursor: grab;
+  will-change: left, top;
+  border: 1.5px solid #000000;
+  border-radius: 10px;
+}
+
+[data-theme="winamp"] .winamp-floating-bare:active {
+  cursor: grabbing;
+}
+
+[data-theme="winamp"] .winamp-floating-titlebar {
+  cursor: grab;
+  user-select: none;
+  border-bottom: 1.5px solid #000000 !important;
+}
+
+[data-theme="winamp"] .winamp-floating-titlebar:active {
+  cursor: grabbing;
+}
+
+[data-theme="winamp"] .winamp-floating-content {
+  padding: 2px 6px 4px;
+  overflow: auto;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.90);
+}
+
+
+[data-theme="winamp"] .winamp-floating-window[data-window-id="camera"] .winamp-floating-content {
+  padding: 4px 12px 6px;
+}
+
+[data-theme="winamp"] .winamp-floating-window[data-window-id="ar-overlay"] .winamp-floating-content {
+  padding: 12px 12px 6px;
+}
+
+[data-theme="winamp"] .winamp-floating-window[data-window-id="player"] .winamp-floating-content {
+  overflow: visible;
+}
+
+/*
+ * Camera window bottom chrome gradient
+ * ─────────────────────────────────────
+ * Darker gradient chrome zone enclosing the FOV/Speed sliders at the bottom
+ * of the Camera floating window. Mirrors the media-library bottom chrome
+ * technique (see ~L2055) but uses a more robust element-based approach.
+ *
+ * Construction technique:
+ *   Instead of applying a calc(100% - Npx) gradient on .winamp-floating-content
+ *   (which couples the gradient position to the total content height and can
+ *   misalign the divider line), the gradient is applied directly to the
+ *   .winamp-camera-sliders div that wraps the FOV + Speed sliders.
+ *
+ *   Negative margins (0 -12px -6px) pull the slider container flush with the
+ *   edges and bottom of .winamp-floating-content, canceling its padding
+ *   (4px 12px 6px). The slider container then applies its own matching padding
+ *   to restore the content inset: 4px top (breathing room above labels),
+ *   12px sides (matches content alignment), 6px bottom (space below ticks).
+ *
+ *   This guarantees the gradient, inset bevels, and divider line are always
+ *   perfectly aligned to the slider content regardless of how much content
+ *   sits above (Position, Rotation fields, etc.).
+ *
+ * Layers (bottom to top):
+ *   1. background  – stepped linear-gradient darkening from #9EA5B1 → #858E9C
+ *   2. box-shadow   – 6 inset layers: left/right side highlights + bottom rim
+ *   3. border-radius – 9px bottom corners to nest inside the 10px window frame
+ *   4. ::before      – full-width 1px groove line at top edge (dark line +
+ *                      white shadow = beveled separator between content above
+ *                      and the chrome zone)
+ */
+[data-theme="winamp"] .winamp-floating-window[data-window-id="camera"] .winamp-camera-sliders {
+  position: relative;
+  margin: 0 -12px -6px;
+  padding: 6px 12px 14px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg,
+      #9EA5B1 0%,
+      #9CA3AF 40%,
+      #969DAA 60%,
+      #9097A4 78%,
+      #8A919E 90%,
+      #858E9C 100%
+    );
+  box-shadow:
+    2px 0 0 rgba(255, 255, 255, 0.18) inset,
+    3px 0 2px rgba(255, 255, 255, 0.08) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.12) inset,
+    -3px 0 2px rgba(255, 255, 255, 0.06) inset,
+    0 -2px 0 rgba(255, 255, 255, 0.12) inset,
+    0 -3px 2px rgba(255, 255, 255, 0.06) inset;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+[data-theme="winamp"] .winamp-floating-window[data-window-id="camera"] .winamp-camera-sliders::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.40);
+  z-index: 5;
+}
+
+/* ── Camera DOF section: inline sliders ── */
+[data-theme="winamp"] .winamp-dof-section {
+  margin-top: 10px;
+}
+
+[data-theme="winamp"] .winamp-dof-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+[data-theme="winamp"] .winamp-dof-header > .winamp-label {
+  flex: 1;
+  min-width: 0;
+}
+
+[data-theme="winamp"] .winamp-dof-sliders {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Inline label + slider layout (matches AR overlay BG Dim / BG Blur) */
+[data-theme="winamp"] .winamp-dof-sliders div.flex.flex-col:has(> .slider-track-wrapper) {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+[data-theme="winamp"] .winamp-dof-sliders div.flex.flex-col:has(> .slider-track-wrapper) > .slider-track-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+[data-theme="winamp"] .winamp-dof-sliders div.flex.flex-col:has(> .slider-track-wrapper) > .flex.items-center {
+  flex-shrink: 0;
+  width: 68px;
+  margin-top: 1px;
+}
+
+[data-theme="winamp"] .winamp-dof-sliders div.flex.flex-col:has(> .slider-track-wrapper) > .flex.items-center .winamp-label {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* Recessed capsule slider tracks (same as AR overlay) —
+   must reset inherited .winamp-camera-sliders properties */
+[data-theme="winamp"] .winamp-dof-sliders .slider-track-wrapper {
+  padding: 1px 10px;
+  margin-bottom: 10px;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 9999px;
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.18) 50%, transparent 100%) no-repeat center top / 100% 3px,
+    linear-gradient(
+      180deg,
+      #535A68 0%,
+      #6E7787 12%,
+      #979EAC 50%,
+      #C1C7D3 75%,
+      #CFD3DD 87%,
+      #E9E9F0 100%
+    );
+  box-shadow:
+    0 -1px 1px rgba(255, 255, 255, 0.06) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.12),
+    0 1px 0 0.5px rgba(255, 255, 255, 0.70);
+}
+
+[data-theme="winamp"] .winamp-dof-sliders input[type="range"] {
+  width: 100% !important;
+  margin-left: 0;
+}
+
+[data-theme="winamp"] .winamp-dof-sliders .slider-track-wrapper::before {
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  border-radius: 2px;
+  box-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 -1px 1px rgba(0, 0, 0, 0.10),
+    0 1px 1px rgba(0, 0, 0, 0.45) inset,
+    0 1px 3px rgba(0, 0, 0, 0.20) inset,
+    0 -1px 1px rgba(255, 255, 255, 0.15) inset,
+    0 1px 0 0.5px rgba(255, 255, 255, 0.50),
+    0 1.5px 1px rgba(255, 255, 255, 0.18);
+}
+
+/* Reset inherited .winamp-camera-sliders ::after and use AR overlay's
+   dense 9px tick pattern (same SVG, repeat-x to fill any width) */
+[data-theme="winamp"] .winamp-dof-sliders .slider-track-wrapper::after {
+  top: calc(100% + 3px);
+  left: 10px;
+  right: 10px;
+  width: auto;
+  height: 9px;
+  transform: none;
+  overflow: hidden;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='173' height='9' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='2' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='5' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='7' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='10' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='12' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='15' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='17' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='20' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='22' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='25' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='27' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='30' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='32' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='35' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='37' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='40' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='42' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='45' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='47' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='50' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='52' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='55' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='57' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='60' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='62' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='65' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='67' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='70' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='72' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='75' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='77' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='80' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='82' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='85' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='87' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='90' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='92' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='95' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='97' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='100' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='102' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='105' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='107' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='110' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='112' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='115' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='117' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='120' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='122' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='125' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='127' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='130' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='132' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='135' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='137' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='140' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='142' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='145' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='147' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='150' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='152' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='155' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='157' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='160' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='162' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='165' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='167' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='170' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='172' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3C/svg%3E");
+  background-size: 173px 9px;
+  background-repeat: repeat-x;
+  background-position: center top;
+  image-rendering: pixelated;
+  -webkit-image-rendering: pixelated;
+}
+
+/* Remove extra bottom margin on last DOF slider */
+[data-theme="winamp"] .winamp-dof-sliders > div:last-child .slider-track-wrapper {
+  margin-bottom: 4px;
+}
+
+[data-theme="winamp"] .winamp-floating-window[data-window-id="timeline"] .winamp-floating-content {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── Winamp viewport header chrome ── */
+[data-theme="winamp"] .winamp-viewport-header-chrome {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ── Winamp viewport menu bar (File, Play, Options, View, Help) ── */
+[data-theme="winamp"] .winamp-viewport-menubar {
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  background:
+    linear-gradient(180deg,
+      #E8E9ED 0%,
+      #E7E8EC 4%,
+      #D9D9DF 9%,
+      #D6D7E1 25%,
+      #E0DFE6 42%,
+      #F1F1F3 71%,
+      #EEEFF5 95%,
+      #C5C5D0 98%
+    );
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.45) inset,
+    2px 0 1px rgba(255, 255, 255, 0.5) inset,
+    -2px 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+
+[data-theme="winamp"] .winamp-viewport-menu-item {
+  padding: 3px 10px;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #1a1a2e;
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: default;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+[data-theme="winamp"] .winamp-viewport-menu-item:hover {
+  background: rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Reduce outer recess thickness (75%) on viewport toolbar buttons */
+[data-theme="winamp"] .winamp-viewport-toolbar-row .winamp-btn-label {
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.70) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.20) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.55) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.22) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    0 -0.75px 0 0.75px rgba(0, 0, 0, 0.55),
+    0 -1.5px 0.75px 0.75px rgba(0, 0, 0, 0.40),
+    -0.75px 0 0 0.75px rgba(0, 0, 0, 0.45),
+    -0.75px -0.75px 0.75px 0.75px rgba(0, 0, 0, 0.30),
+    0 -2.25px 0.75px 0.75px rgba(80, 80, 90, 0.25),
+    -1.5px -0.75px 1.5px 0.75px rgba(80, 80, 90, 0.18),
+    -2.25px -2.25px 0.75px 0.75px rgba(255, 255, 255, 0.18),
+    2.25px -2.25px 0.75px 0.75px rgba(255, 255, 255, 0.14),
+    -1.5px 0 0.75px 0.75px rgba(255, 255, 255, 0.12),
+    0 0.75px 0 0.75px rgba(255, 255, 255, 0.55),
+    0 1.5px 0 0.75px rgba(255, 255, 255, 0.30),
+    0 2.25px 0.75px 0.75px rgba(255, 255, 255, 0.15),
+    0.75px 0 0 0.75px rgba(255, 255, 255, 0.28),
+    1.5px 0 0.75px 0.75px rgba(255, 255, 255, 0.12),
+    -0.75px 0.75px 0 0.75px rgba(255, 255, 255, 0.20),
+    0.75px 0.75px 0.75px 0.75px rgba(255, 255, 255, 0.12),
+    0 3px 0.75px 0.75px rgba(0, 0, 0, 0.04),
+    2.25px 2.25px 0.75px 0.75px rgba(0, 0, 0, 0.03),
+    -2.25px 2.25px 0.75px 0.75px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* ── Winamp viewport toolbar row (buttons below menu bar) ── */
+[data-theme="winamp"] .winamp-viewport-toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 6px 4px;
+  gap: 6px;
+  position: relative;
+  background:
+    linear-gradient(180deg,
+      #72747E 0%,
+      #8C929F 5%,
+      #B8BBC8 24%,
+      #CACAD6 61%,
+      #C9CAD4 100%
+    );
+  box-shadow:
+    2px 0 0 rgba(255, 255, 255, 0.55) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.40) inset,
+    4px 0 3px rgba(255, 255, 255, 0.25) inset,
+    -4px 0 3px rgba(255, 255, 255, 0.20) inset;
+}
+
+[data-theme="winamp"] .winamp-viewport-toolbar-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.12) 40%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Active toggle state for pill buttons */
+[data-theme="winamp"] .winamp-tool-active.winamp-btn-label {
+  background-image: none !important;
+  background-color: #a0a8b6 !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.5) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.2) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="winamp"] .winamp-viewport-inner {
+  position: relative;
+  width: auto;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 0;
+  background: #000000;
+  margin: 4px 5px 15px;
+  border: 1.5px solid #000000;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.4) inset,
+    3px 3px 0 rgba(0, 0, 0, 0.15) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.1) inset,
+    -2px -2px 0 rgba(255, 255, 255, 0.04) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+/* Viewport floating-content override — no padding, clip canvas */
+[data-theme="winamp"] .winamp-viewport-content {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Viewport content wrapper — flex column keeps header chrome above canvas */
+[data-theme="winamp"] .winamp-viewport-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: #c8cdd6;
+  position: relative;
+  box-shadow:
+    2px 0 0 rgba(255, 255, 255, 0.55) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.40) inset,
+    4px 0 3px rgba(255, 255, 255, 0.25) inset,
+    -4px 0 3px rgba(255, 255, 255, 0.20) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.35) inset,
+    0 -2px 1px rgba(0, 0, 0, 0.25) inset,
+    0 -3px 2px rgba(0, 0, 0, 0.15) inset,
+    0 -4px 3px rgba(0, 0, 0, 0.06) inset;
+}
+
+
+[data-theme="winamp"] .winamp-resize-grip {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 16px;
+  height: 16px;
+  cursor: move;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+[data-theme="winamp"] .winamp-floating-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+[data-theme="winamp"] .winamp-floating-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-theme="winamp"] .winamp-floating-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 3px;
+}
+
+[data-theme="winamp"] .winamp-minimized-tray {
+  position: fixed;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 9999;
+}
+
+[data-theme="winamp"] .winamp-minimized-tab {
+  padding: 2px 10px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background:
+    linear-gradient(180deg, #cdd3dc 0%, #a4acb8 50%, #c7ccd5 100%);
+  color: rgb(var(--tx-muted));
+  border: none;
+  cursor: pointer;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.55) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.35) inset,
+    0 2px 6px rgba(0, 0, 0, 0.30);
+}
+
+[data-theme="winamp"] .winamp-minimized-tab:hover {
+  color: rgb(var(--tx-primary));
+}
+
+/* ── Exempt non-icon SVGs from the 16x16 override ── */
+/* Add .win95-svg-exempt to any new non-icon SVG (charts, overlays, canvases) */
+[data-theme="win95"] .win95-inset svg,
+[data-theme="win95"] svg.w-full,
+[data-theme="win95"] svg.pointer-events-none,
+[data-theme="win95"] svg.win95-svg-exempt {
+  width: auto !important;
+  height: auto !important;
+  color: inherit !important;
+}
+

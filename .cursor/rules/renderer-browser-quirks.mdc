@@ -1,0 +1,37 @@
+---
+description: Browser-specific workarounds in the renderer that must NOT be cleaned up — they look like hacks but are required
+globs: lib/renderers/playcanvas.ts
+alwaysApply: false
+---
+
+# Renderer Browser Quirks — Do Not Remove
+
+These workarounds address real browser bugs or engine limitations. They may look like unnecessary complexity, but removing them will break functionality.
+
+## Chrome 120+ GIF Frame Throttling
+**Location**: `addAnchor()` — GIF container setup (~line 1638-1644)
+**Symptom**: GIF anchors freeze or skip frames when the container is hidden with `display:none`, `opacity:0`, or `z-index:-1`.
+**Cause**: Chrome 120+ throttles or stops advancing GIF frames for elements it considers "fully invisible."
+**Workaround**: The GIF container uses `clip-path: polygon(0 0, 0 0, 0 0)` instead of standard hiding techniques. This makes it visually invisible while keeping it in the active render tree so Chrome continues animating frames.
+**Do not**: Replace with `display:none`, `visibility:hidden`, `opacity:0`, or any CSS that makes the browser consider the element invisible.
+
+## WebGPU Video-to-Canvas Intermediary
+**Location**: `addAnchor()` — video texture upload (~line 1614-1624)
+**Symptom**: Anchor videos show as blank or throw GPU errors.
+**Cause**: WebGPU's `copyExternalImageToTexture` can reject `HTMLVideoElement` sources that lack a GPU back-resource (detached elements, first-frame races, some codec states).
+**Workaround**: All video frames are routed through a 2D canvas intermediary (`document.createElement("canvas")`) before being uploaded as a texture source. The canvas is drawn to with `drawImage(video, ...)` each frame.
+**Do not**: Remove the canvas intermediary and pass HTMLVideoElement directly to the texture upload.
+
+## PlayCanvas Shader Auto-Transpiler Limitation
+**Location**: FOV mask and blur shader definitions (~line 1154)
+**Symptom**: Shaders compile but produce incorrect output (no blur, no FOV masking).
+**Cause**: PlayCanvas's built-in GLSL-to-WGSL transpiler silently fails on texture sampling inside loops. The blur kernel loop (`for i in 0..N { texture(uSceneColorMap, ...) }`) transpiles to WGSL code that doesn't sample correctly.
+**Workaround**: Both GLSL and WGSL shader variants are manually authored and provided to `ShaderMaterial`. The engine uses whichever matches the active backend.
+**Do not**: Remove the WGSL variant assuming the transpiler will handle it. Do not remove the GLSL variant either — both are needed for cross-backend compatibility.
+
+## Canvas CSS `!important` Overrides
+**Location**: `init()` — canvas style setup (~line 143-150)
+**Symptom**: Canvas shrinks, grows, or detaches from the viewport container during resize.
+**Cause**: PlayCanvas updates the canvas element's inline `width` and `height` style properties during its internal resize handling, overriding the layout-driven sizing.
+**Workaround**: `canvas.style.setProperty("width", "100%", "important")` and same for `height`. The `!important` flag ensures our layout wins over PlayCanvas's inline style writes.
+**Do not**: Remove the `!important` flags or switch to non-important style setting. PlayCanvas will override them on the next resize tick.

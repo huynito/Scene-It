@@ -1,0 +1,26 @@
+import type { UITheme } from "../_shared/tokens";
+
+export const THEME_SCIIN_IT: UITheme = {
+  id: "sciin_it",
+  name: "(SCII)n_it",
+  sfBase: "#0a0a12",
+  sfPrimary: "#10101a",
+  sfRaised: "#16161e",
+  sfBorder: "#c8c8dc",
+  sfBorderSecondary: "#8c8ca0",
+  txPrimary: "#e8e8e8",
+  txSecondary: "#d8d8d8",
+  txMuted: "#c8c8c8",
+  txFaint: "#b0b0b0",
+  ac300: "#FFFF55",
+  ac400: "#FFFF00",
+  ac500: "#cccc00",
+  ac600: "#FFFF00",
+  borderRadius: "0px",
+  panelShadow: "none",
+  glow: "transparent",
+  fontUI: "'Courier New', Courier, monospace",
+  fontMono: "'Courier New', Courier, monospace",
+  scrollThumb: "#505064",
+  scrollThumbHover: "#78788c",
+};

@@ -1,0 +1,34 @@
+/* ============================================================
+   TOKEN OVERRIDES
+   Force all semantic CSS variables per-theme via CSS.
+   html[data-theme] specificity (0,1,1) beats :root (0,1,0).
+   ============================================================ */
+
+
+html[data-theme="default"] {
+  --sf-base: 9 9 11;
+  --sf-primary: 24 24 27;
+  --sf-raised: 39 39 42;
+  --sf-border: 39 39 42;
+  --sf-border-secondary: 63 63 70;
+  --tx-primary: 244 244 245;
+  --tx-secondary: 161 161 170;
+  --tx-muted: 113 113 122;
+  --tx-faint: 82 82 91;
+  --ac-300: 94 234 212;
+  --ac-400: 45 212 191;
+  --ac-500: 20 184 166;
+  --ac-600: 13 148 136;
+  --border-radius: 8px;
+  --panel-shadow: 0 20px 25px -5px rgba(0,0,0,.25), 0 8px 10px -6px rgba(0,0,0,.25);
+  --glow: transparent;
+  --font-ui: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --scroll-thumb: 63 63 70;
+  --scroll-thumb-hover: 82 82 91;
+}
+
+/* ── Default theme: text hierarchy consolidation (8 → 10 → 12 → 14) ── */
+[data-theme="default"] [class*="text-\[11px\]"] { font-size: 12px; }
+[data-theme="default"] [class*="text-\[9px\]"]  { font-size: 10px; }
+

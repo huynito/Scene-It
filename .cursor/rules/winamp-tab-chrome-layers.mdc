@@ -1,0 +1,46 @@
+---
+description: Winamp tab chrome panel layer architecture - reference for the SVG frame, backing panel, and all visual layers
+globs: components/viewer/panels/CollapsibleSection.tsx, themes/winamp/decorations.css
+alwaysApply: false
+---
+
+# Winamp Tab Chrome Panel Layers
+
+The tab chrome panel (used by Paths, Post Processing) is built from these layers, bottom to top:
+
+## DOM Structure
+
+```
+div.win95-panel-section          // outer wrapper (border: none, overflow: hidden in bare mode)
+  div.winamp-tab-module          // backing panel (gradient bg, border-radius: 10px, overflow: hidden)
+    svg.winamp-tab-fill          // SVG frame (absolute, z-index: 1)
+    div.winamp-tab-backplate     // header positioning (absolute, pointer-events: none)
+      div.winamp-tab-header-lip  // tab + action buttons container
+        span.winamp-folder-tab   // measured by ResizeObserver -> feeds computeTabPanelFrame()
+        span.winamp-tab-actions  // action buttons (e.g. import)
+    div.winamp-tab-panel         // chrome panel body (children rendered here)
+  ::before                       // top shadow gradient (hidden in bare mode)
+  ::after                        // rim highlight box-shadows (z-index: 6)
+```
+
+## SVG Frame Layers (inside svg.winamp-tab-fill)
+
+Rendered in this order (painter's algorithm):
+
+1. **Shadow group** (`wtf-shadow-group`): 8 concentric strokes around `frame.outline` (strokeWidth 2-7). Clipped by `wtfShadowClipA` (even-odd against `frame.panelRect`) so shadows only paint outside the panel body. Masked by `wtfSideFade` to fade at left/right edges.
+2. **Tab fill** (`wtf-tab-fill`): gradient fill for the tab trapezoid above the panel body. Uses `frame.tabFill` path which extends 2px wider than the outline on each side for seamless overlap.
+3. **Panel fill** (`wtf-panel-fill`): gradient fill for the panel body rectangle (`frame.panelRect`).
+4. **Highlight stroke**: inset white stroke along `frame.highlightPath`, masked by `wtfHighlightFade`.
+5. **Outline stroke**: 1px dark border tracing `frame.outline` (the unified tab+panel shape).
+
+## Key Geometry (computeTabPanelFrame)
+
+- Tab width is MEASURED from the `.winamp-folder-tab` DOM element via `getBoundingClientRect()`
+- CSS padding on `.winamp-folder-tab` directly controls tab width; SVG adapts automatically
+- `TAB_SVG_EXTEND` (6px) widens the SVG tab shape beyond the measured DOM element
+- `FLAT_HALF_RATIO` (34/60) controls how much of the tab top is flat vs angled
+- **CSS changes require a full page reload** -- the ResizeObserver watches the module, not the tab, so CSS-only HMR doesn't retrigger measurement
+
+## Critical: clipPath uses panelRect, NOT outline
+
+The shadow group clipPath (`wtfShadowClipA`) must use `frame.panelRect` (not `frame.outline`). Using `outline` creates a tab-shaped shadow cutout on the backing panel. The tab fill covers any shadow bleed into the tab area.

@@ -1,0 +1,60 @@
+---
+description: Core architectural decisions and patterns in Scene It — why things are built the way they are
+alwaysApply: true
+---
+
+# Architecture Decisions
+
+## Three-Layer Design
+
+- **State Layer** (`lib/scene-context.tsx`) — single React Context with all scene state, ~95 actions, ~35 refs
+- **Renderer** (`lib/renderers/playcanvas.ts`) — PlayCanvas WebGPU, implements `SplatRenderer` interface (fully renderer-agnostic)
+- **Bridge** (`components/PlyCanvas.tsx`) — connects React state to renderer via refs and per-property `useEffect` hooks
+
+## God Context (Intentional)
+
+`SceneContextValue` exposes ~75 properties in a single un-memoized object. Every `useScene()` consumer re-renders on any state change. This is a known trade-off:
+- Splitting into domain-specific contexts (camera, anchors, playback, UI) would fix re-renders but is a large refactor
+- At the current component count, performance is acceptable — no measurable frame drops
+- **Trigger to split**: when React Profiler shows context re-renders causing visible frame drops
+
+The `value` object on lines ~1107-1179 is not wrapped in `useMemo` — this is the root cause. The `actions` object IS memoized via `useMemo`.
+
+## Ref-Bridge Pattern
+
+`SceneRefs` contains ~35 `useRef(null)` slots. `PlyCanvas.tsx` populates these with imperative functions during its initialization effect. UI components call them via `refs.someRef.current?.()`. This avoids coupling React re-renders to per-frame GPU operations. The nullable API means every call site must null-check; there is no compile-time guarantee refs are populated before use.
+
+## settingsRef Sync on Every Render
+
+`settingsRef.current` is reassigned on every render (lines ~534-540) to keep the undo snapshot current. This is a mutation side-effect during render — technically a React anti-pattern, but works because:
+- It's a ref assignment (no state change, no re-render trigger)
+- `pushUndo()` reads `settingsRef.current` to capture the snapshot BEFORE a change
+- Alternative approaches (useEffect, useLayoutEffect) introduce timing gaps where the snapshot could be stale
+
+## loadPreset Empty Dependency Array
+
+`loadPreset` has `[]` as its dependency array but reads ~10 state variables inside. This is intentional:
+- It saves current state to `sceneStateCache` before switching presets
+- The cache write uses `settingsRef.current` (which is always fresh due to the sync above)
+- Re-running `loadPreset` on every state change would be incorrect — it should only run when explicitly called
+- **Invariant**: always save to `sceneStateCache` via `settingsRef.current` before switching
+
+## Undo Cloning via JSON.parse/stringify
+
+`cloneSnapshot()` uses `JSON.parse(JSON.stringify(...))` for deep cloning anchors, paths, and anchorAnimations. This is O(n) and drops undefined/functions/circular refs, but:
+- Current state shapes are all plain objects and arrays — no non-serializable data
+- **Must change if**: anchors or paths ever contain Functions, Dates, typed arrays, or Map/Set
+
+## PlyCanvas useEffect Count (~22 effects)
+
+Each effect syncs one React state property to the renderer (e.g., `showGrid` → `setGridVisible`). This is intentional:
+- Small, focused effects with single-property dependency arrays
+- Alternative (single mega-effect with many deps) would cause unnecessary renderer calls on unrelated state changes
+- This count grows linearly with renderer features — acceptable trade-off
+
+## PlaybackController and ExportController
+
+Both are pure TypeScript classes with no React dependency:
+- `PlaybackController` owns its own RAF loop, emits state via a single listener callback
+- `ExportController` orchestrates frame-by-frame capture with cancellation and state save/restore
+- Both communicate with React only through the ref-bridge pattern

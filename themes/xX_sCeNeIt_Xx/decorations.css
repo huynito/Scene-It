@@ -1,0 +1,3731 @@
+/* ============================================================
+   xX_sCeNeIt_Xx — Windows XP Luna Blue + AOL Instant Messenger
+   ============================================================ */
+
+/* ── Self-hosted Tahoma (authentic AIM/XP font) ── */
+@font-face {
+  font-family: 'Tahoma';
+  src: url('/fonts/aim/tahoma.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tahoma';
+  src: url('/fonts/aim/tahoma-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html[data-theme="xX_sCeNeIt_Xx"] {
+  --sf-base: 58 110 165;
+  --sf-primary: 236 233 216;
+  --sf-raised: 255 255 255;
+  --sf-border: 127 157 185;
+  --sf-border-secondary: 173 178 181;
+  --tx-primary: 0 0 0;
+  --tx-secondary: 51 51 51;
+  --tx-muted: 102 102 102;
+  --tx-faint: 153 153 153;
+  --ac-300: 74 144 217;
+  --ac-400: 34 102 187;
+  --ac-500: 0 85 204;
+  --ac-600: 0 61 153;
+  --border-radius: 3px;
+  --panel-shadow: 0 2px 8px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.08);
+  --glow: transparent;
+  --font-ui: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+  --scroll-thumb: 127 157 185;
+  --scroll-thumb-hover: 90 130 166;
+}
+
+/* ── XP base styles ── */
+[data-theme="xX_sCeNeIt_Xx"] * {
+  overscroll-behavior: none;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] {
+  font-size: 13px;
+}
+
+[data-theme="xX_sCeNeIt_Xx"],
+[data-theme="xX_sCeNeIt_Xx"] body,
+[data-theme="xX_sCeNeIt_Xx"] * {
+  font-weight: 400 !important;
+  font-size: 13px !important;
+}
+
+/* XP Luna rounded corners (3px) */
+[data-theme="xX_sCeNeIt_Xx"] * {
+  border-radius: 3px !important;
+}
+
+/* Force opaque surfaces — no desktop blue bleed-through */
+[data-theme="xX_sCeNeIt_Xx"] [class*="bg-surface-primary"] {
+  background-color: #ECE9D8 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="bg-surface-base"] {
+  background-color: #ECE9D8 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="bg-surface-raised"]:not(select):not(input):not([class*="cursor-ew-resize"]):not(.aim-inset) {
+  background-color: #ECE9D8 !important;
+}
+
+/* ── XP Luna window frame: full blue border wrap ── */
+[data-theme="xX_sCeNeIt_Xx"] [class*="rounded-theme"] {
+  border: 3px solid #0831D9;
+  border-top: none;
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.3), 0 0 0 1px rgba(0,51,153,.35);
+}
+
+/* ── XP Luna title bars: dynamic blue gradient with edge highlights ── */
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] {
+  background:
+    radial-gradient(ellipse 55% 2px at 50% 2px,
+      rgba(30,150,255,.55) 0%,
+      transparent 100%
+    ),
+    radial-gradient(ellipse 60% 7px at 50% 0%,
+      #0098EA 0%,
+      #0088E6 60%,
+      transparent 100%
+    ),
+    radial-gradient(ellipse 55% 2px at 50% 2px,
+      rgba(51,174,255,.45) 0%,
+      transparent 100%
+    ),
+    linear-gradient(90deg,
+      rgba(0,20,100,.45) 0%,
+      rgba(0,30,130,.15) 1.5%,
+      transparent 4%,
+      transparent 96%,
+      rgba(0,30,130,.15) 98.5%,
+      rgba(0,20,100,.45) 100%
+    ),
+    linear-gradient(180deg,
+      #0078E8 0%,
+      #0076E8 1%,
+      #0074E7 2%,
+      #0072E7 3%,
+      #0070E6 4%,
+      #006EE6 5%,
+      #006CE5 6%,
+      #006AE5 7%,
+      #0069E4 8%,
+      #0067E4 9%,
+      #0066E3 10%,
+      #0065E3 12%,
+      #0064E3 14%,
+      #0064E3 16%,
+      #0064E3 30%,
+      #0064E3 48%,
+      #0064E3 50%,
+      #0064E3 52%,
+      #0065E3 54%,
+      #0065E3 56%,
+      #0066E3 58%,
+      #0067E4 60%,
+      #0068E4 62%,
+      #006AE4 64%,
+      #006AE4 68%,
+      #006DE5 71%,
+      #0070E6 74%,
+      #0072E7 78%,
+      #0072E7 84%,
+      #0070E6 86%,
+      #006DE5 88%,
+      #006AE4 90%,
+      #0066E2 92%,
+      #0062E0 94%,
+      #005EDB 96%,
+      #005BD8 98%
+    ) !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 5px 8px !important;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  border: none !important;
+  border-radius: 8px 8px 0 0 !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.5);
+  text-transform: capitalize !important;
+  letter-spacing: 0 !important;
+  box-shadow: 0 2px 3px rgba(0,20,80,.35);
+  position: relative;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"],
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] * {
+  font-weight: 600 !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] span:not([class*="tracking-wider"]) {
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.4);
+  text-transform: capitalize !important;
+  letter-spacing: 0 !important;
+}
+
+/* Inside framed panels, headers flush — keep bottom edge shadow */
+[data-theme="xX_sCeNeIt_Xx"] .aim-window [class*="tracking-wider"],
+[data-theme="xX_sCeNeIt_Xx"] .win95-panel-section [class*="tracking-wider"] {
+  box-shadow: 0 2px 3px rgba(0,20,80,.3) !important;
+}
+
+/* Title-bar child buttons: small action buttons inside headers */
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] button:not([class*="tracking-wider"]):not(.aim-titlebar-btn):not(.aim-titlebar-btn-blue):not(.aim-titlebar-btn-red) {
+  min-height: 20px !important;
+  padding: 2px 4px !important;
+  background: rgba(255,255,255,.15) !important;
+  border: 1px solid rgba(255,255,255,.4) !important;
+  border-radius: 3px !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] button:not([class*="tracking-wider"]):not(.aim-titlebar-btn) svg {
+  color: #fff !important;
+}
+
+/* ── XP buttons: flat beige with blue border ── */
+[data-theme="xX_sCeNeIt_Xx"] button {
+  border-radius: 3px !important;
+  background: #ECE9D8;
+  color: #000;
+  border: 1px solid #003399;
+  min-height: 26px;
+  box-shadow: none;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] button:not(:disabled):hover {
+  background: #E0E8F6;
+  border-color: #0055CC;
+  box-shadow: 0 0 4px rgba(0,85,204,.25);
+}
+
+[data-theme="xX_sCeNeIt_Xx"] button:not(:disabled):active {
+  background: #D0DCF0;
+  border-color: #003D99;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.15) inset;
+}
+
+/* Disabled buttons */
+[data-theme="xX_sCeNeIt_Xx"] button:disabled {
+  color: #808080 !important;
+  cursor: default;
+  opacity: 0.7;
+}
+[data-theme="xX_sCeNeIt_Xx"] button:disabled svg {
+  color: #808080 !important;
+}
+
+/* Override opacity-based dimming for disabled buttons */
+[data-theme="xX_sCeNeIt_Xx"] button.cursor-not-allowed {
+  opacity: 0.7 !important;
+}
+
+/* ── Sunken inset for text and number inputs (XP white field with blue focus) ── */
+[data-theme="xX_sCeNeIt_Xx"] input[type="number"],
+[data-theme="xX_sCeNeIt_Xx"] input[type="text"] {
+  border-top: 1px solid #848484;
+  border-left: 1px solid #848484;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-radius: 0 !important;
+  background-color: #fff !important;
+  color: #000 !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  padding: 2px 4px;
+  box-shadow: inset 1px 1px 0 #C0C0C0;
+  outline-offset: -1px;
+}
+[data-theme="xX_sCeNeIt_Xx"] input[type="number"]:focus,
+[data-theme="xX_sCeNeIt_Xx"] input[type="text"]:focus {
+  outline: 1px dotted #000;
+  outline-offset: -2px;
+  box-shadow: inset 1px 1px 0 #C0C0C0;
+}
+
+/* ScrubInput display divs — sunken white field */
+[data-theme="xX_sCeNeIt_Xx"] [class*="cursor-ew-resize"] {
+  background-color: #fff !important;
+  color: #000 !important;
+  border-top: 1px solid #848484 !important;
+  border-left: 1px solid #848484 !important;
+  border-bottom: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
+  border-radius: 0 !important;
+  box-shadow: inset 1px 1px 0 #C0C0C0;
+}
+
+/* ── XP <select> — white field with sunken 3D border + XP dropdown arrow ── */
+[data-theme="xX_sCeNeIt_Xx"] select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-top: 1px solid #848484 !important;
+  border-left: 1px solid #848484 !important;
+  border-bottom: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
+  border-radius: 0 !important;
+  background-color: #fff !important;
+  color: #000 !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  padding: 2px 22px 2px 4px;
+  outline: none;
+  box-shadow: inset 1px 1px 0 #C0C0C0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='20' fill='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23EBF4FD'/%3E%3Cstop offset='50%25' stop-color='%23D2E2F3'/%3E%3Cstop offset='100%25' stop-color='%23B4CCE9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='.5' y='.5' width='16' height='19' fill='url(%23g)' stroke='%237B9CC0'/%3E%3Cpath d='M5 8l3.5 3.5L12 8' stroke='%231A3761' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  background-size: 17px 100%;
+}
+[data-theme="xX_sCeNeIt_Xx"] select:focus {
+  outline: 1px dotted #000;
+  outline-offset: -2px;
+}
+
+/* ── Main toolbar: XP-style raised bar (flat) ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-toolbar {
+  background: #ECE9D8 !important;
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 0 !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.6) inset;
+}
+
+/* Keyframe count badge: XP blue */
+[data-theme="xX_sCeNeIt_Xx"] .win95-toolbar button .bg-surface-border-secondary {
+  background-color: #0055CC !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  border-radius: 3px !important;
+}
+
+/* Hide dividers between toolbar buttons */
+[data-theme="xX_sCeNeIt_Xx"] .win95-toolbar .bg-surface-border-secondary[class*="w-px"] {
+  display: none !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] .win95-toolbar > div[class*="gap-2"] {
+  gap: 0 !important;
+}
+
+/* Transport toolbar buttons (flat) */
+[data-theme="xX_sCeNeIt_Xx"] .transport-group button {
+  background: #ECE9D8 !important;
+}
+/* WMM monitor buttons override the flat style above */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group button {
+  background: none !important;
+}
+
+/* Floorplan toolbar buttons */
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] .transport-group button {
+  min-height: 18px !important;
+  max-height: 18px !important;
+  padding: 1px !important;
+  background: linear-gradient(180deg, #5FA8F0 0%, #3B7DD8 100%) !important;
+  border: 1px solid #003399 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] .transport-group button:active {
+  background: linear-gradient(180deg, #3B7DD8 0%, #5FA8F0 100%) !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] .transport-group button svg {
+  width: 12px !important;
+  height: 12px !important;
+  color: #fff !important;
+}
+
+/* ── XP Luna title-bar buttons (min/max/close) ── */
+[data-theme="xX_sCeNeIt_Xx"] button.aim-titlebar-btn,
+[data-theme="xX_sCeNeIt_Xx"] label.aim-titlebar-btn {
+  width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.55) !important;
+  border-radius: 4px !important;
+  outline: 1px solid rgba(0,0,0,.25);
+  outline-offset: 0px;
+}
+
+/* Blue variant (minimize, maximize) — concave recessed center */
+[data-theme="xX_sCeNeIt_Xx"] button.aim-titlebar-btn-blue,
+[data-theme="xX_sCeNeIt_Xx"] label.aim-titlebar-btn-blue {
+  background:
+    radial-gradient(ellipse 8px 22% at 0% 3%, rgba(0,15,70,.35) 0%, transparent 100%),
+    radial-gradient(ellipse 10px 28% at 0% 96%, rgba(0,15,70,.6) 0%, transparent 100%),
+    radial-gradient(ellipse 7px 65% at 0% 50%, rgba(160,215,255,.4) 0%, transparent 100%),
+    radial-gradient(ellipse 80% 75% at 30% 35%, rgba(130,200,255,.45) 0%, transparent 100%),
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,20,80,.25) 0%, transparent 100%),
+    linear-gradient(180deg,
+      #4898E8 0%,
+      #2870D0 15%,
+      #1050A8 35%,
+      #0E48A0 50%,
+      #1458B0 65%,
+      #2068C0 80%,
+      #3080D0 95%,
+      #4090D8 100%
+    ) !important;
+  box-shadow:
+    /* outer shadow wrapping all edges (at the very edge) */
+    inset 0 0 1px 0 rgba(0,0,60,.25),
+    /* bottom-right shadow wrapping around toward top-left */
+    inset -2px -2px 3px -1px rgba(0,0,60,.28),
+    /* upper-left highlight, inset from edge */
+    inset 2px 3px 3px -1px rgba(180,225,255,.7),
+    /* left-side highlight with top/bottom falloff */
+    inset 4px 0 4px -2px rgba(160,215,255,.5),
+    /* outer glow */
+    0 0 2px rgba(0,0,0,.2) !important;
+}
+
+/* Red variant (close) — concave recessed center */
+[data-theme="xX_sCeNeIt_Xx"] button.aim-titlebar-btn-red,
+[data-theme="xX_sCeNeIt_Xx"] label.aim-titlebar-btn-red {
+  background:
+    radial-gradient(ellipse 8px 22% at 0% 3%, rgba(70,0,0,.3) 0%, transparent 100%),
+    radial-gradient(ellipse 10px 28% at 0% 96%, rgba(70,0,0,.55) 0%, transparent 100%),
+    radial-gradient(ellipse 7px 65% at 0% 50%, rgba(255,180,150,.35) 0%, transparent 100%),
+    radial-gradient(ellipse 80% 75% at 30% 35%, rgba(255,160,130,.4) 0%, transparent 100%),
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(80,0,0,.2) 0%, transparent 100%),
+    linear-gradient(180deg,
+      #E87050 0%,
+      #D84828 15%,
+      #C03020 35%,
+      #A82010 50%,
+      #B83020 65%,
+      #C84028 80%,
+      #D85030 95%,
+      #E06038 100%
+    ) !important;
+  box-shadow:
+    /* outer shadow wrapping all edges (at the very edge) */
+    inset 0 0 1px 0 rgba(60,0,0,.22),
+    /* bottom-right shadow wrapping around toward top-left */
+    inset -2px -2px 3px -1px rgba(60,0,0,.28),
+    /* upper-left highlight, inset from edge */
+    inset 2px 3px 3px -1px rgba(255,200,170,.7),
+    /* left-side highlight with top/bottom falloff */
+    inset 4px 0 4px -2px rgba(255,180,150,.45),
+    /* outer glow */
+    0 0 2px rgba(0,0,0,.2) !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] button.aim-titlebar-btn:hover {
+  filter: brightness(1.12);
+}
+
+[data-theme="xX_sCeNeIt_Xx"] button.aim-titlebar-btn:active,
+[data-theme="xX_sCeNeIt_Xx"] label.aim-titlebar-btn:active {
+  box-shadow: 1px 1px 3px rgba(0,0,0,.4) inset !important;
+  filter: brightness(0.92);
+}
+
+[data-theme="xX_sCeNeIt_Xx"] button.aim-titlebar-btn svg,
+[data-theme="xX_sCeNeIt_Xx"] label.aim-titlebar-btn svg {
+  width: 12px !important;
+  height: 12px !important;
+  color: #fff !important;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.35));
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .aim-titlebar-btns {
+  gap: 2px !important;
+  margin-right: -2px;
+}
+
+/* ── AIM window frame: full blue border wrap ── */
+[data-theme="xX_sCeNeIt_Xx"] .aim-window,
+[data-theme="xX_sCeNeIt_Xx"] .win95-window {
+  padding: 4px !important;
+  gap: 2px;
+  background-color: #ECE9D8 !important;
+  border: 3px solid #0831D9;
+  border-top: none;
+  border-radius: 8px 8px 4px 4px !important;
+  box-shadow: 0 3px 12px rgba(0,0,0,.35), 0 0 0 1px rgba(0,51,153,.3);
+}
+
+/* ── Panel sections: XP-style grouped ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-panel-section {
+  border: 1px solid #7F9DB9 !important;
+  margin: 2px;
+  padding: 0;
+  background-color: #fff !important;
+  border-radius: 3px !important;
+  box-shadow: none !important;
+}
+
+/* Transport-group buttons in direct-child headers */
+[data-theme="xX_sCeNeIt_Xx"] .win95-window > [class*="tracking-wider"] > .transport-group,
+[data-theme="xX_sCeNeIt_Xx"] .aim-window > [class*="tracking-wider"] > .transport-group {
+  margin-right: -2px !important;
+}
+
+/* ── AIM-style path list action buttons ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-path-action-btn {
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+  max-width: 26px !important;
+  max-height: 26px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #fff 0%, #ECE9D8 100%) !important;
+  border: 1px solid #003399 !important;
+  border-radius: 3px !important;
+  cursor: pointer;
+}
+[data-theme="xX_sCeNeIt_Xx"] .win95-path-action-btn:active {
+  background: linear-gradient(180deg, #B8CCE8 0%, #9CB8D8 100%) !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] .win95-path-action-btn svg {
+  width: 12px !important;
+  height: 12px !important;
+  color: #000 !important;
+}
+
+/* Dropdown menu item buttons */
+[data-theme="xX_sCeNeIt_Xx"] [class*="z-\\[9999\\]"] button,
+[data-theme="xX_sCeNeIt_Xx"] [class*="z-\\[999\\]"] button {
+  min-height: auto;
+}
+
+/* ── AIM checkboxes (used by ThemeToggle) ── */
+[data-theme="xX_sCeNeIt_Xx"] button.aim-checkbox {
+  min-height: 16px !important;
+}
+
+/* ── Sunken inset areas ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-inset,
+[data-theme="xX_sCeNeIt_Xx"] .aim-inset {
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 0 !important;
+  background-color: #fff !important;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.1) inset;
+}
+
+/* ── Scrollbar reset ── */
+[data-theme="xX_sCeNeIt_Xx"],
+[data-theme="xX_sCeNeIt_Xx"] * {
+  scrollbar-width: initial !important;
+  scrollbar-color: initial !important;
+}
+
+/* ── XP Luna scrollbars ── */
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-track,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-track {
+  background: #F1EFE2 !important;
+  border-left: 1px solid #ADB2B5;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-thumb,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #C0D4EC 0%, #9CB8D8 50%, #7FA8CC 100%) !important;
+  border: 1px solid #4A70A0 !important;
+  border-radius: 2px !important;
+  min-height: 30px;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-thumb:hover,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #A8C0E0 0%, #80A8D0 50%, #6090C0 100%) !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-thumb:active,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(90deg, #6090C0 0%, #4A78B0 50%, #3A68A0 100%) !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-button,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-button {
+  display: block;
+  width: 17px;
+  height: 17px;
+  background-color: #ECE9D8;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid #7F9DB9;
+  border-radius: 2px;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-button:hover {
+  background-color: #C0D4EC;
+}
+
+/* Up arrow */
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-button:vertical:decrement,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 5h8L4 0z' fill='%23333'/%3E%3C/svg%3E");
+  background-size: 8px 5px;
+}
+
+/* Down arrow */
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-button:vertical:increment,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0h8L4 5z' fill='%23333'/%3E%3C/svg%3E");
+  background-size: 8px 5px;
+}
+
+/* Left arrow */
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-button:horizontal:decrement,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-button:horizontal:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='8'%3E%3Cpath d='M5 0v8L0 4z' fill='%23333'/%3E%3C/svg%3E");
+  background-size: 5px 8px;
+}
+
+/* Right arrow */
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-button:horizontal:increment,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-button:horizontal:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='8'%3E%3Cpath d='M0 0v8l5-4z' fill='%23333'/%3E%3C/svg%3E");
+  background-size: 5px 8px;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] ::-webkit-scrollbar-corner,
+[data-theme="xX_sCeNeIt_Xx"] .scrollbar-thin::-webkit-scrollbar-corner {
+  background-color: #ECE9D8;
+}
+
+/* ── Bottom panel ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-window.win95-bottom-panel,
+[data-theme="xX_sCeNeIt_Xx"] .aim-window.aim-bottom-panel {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  padding-bottom: 0 !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .win95-bottom-panel > [class*="tracking-wider"],
+[data-theme="xX_sCeNeIt_Xx"] .aim-bottom-panel > [class*="tracking-wider"] {
+  padding-left: 12px !important;
+  padding-right: 8px !important;
+}
+
+/* ── XP Luna range slider ── */
+[data-theme="xX_sCeNeIt_Xx"] input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none;
+  box-shadow: none;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 0 !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: #D8D4CA;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 1px 0 #fff, inset 0 1px 1px rgba(0,0,0,.25);
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 11px;
+  height: 21px;
+  margin-top: -10px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='21'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23fff'/%3E%3Cstop offset='65%25' stop-color='%23F8F6F0'/%3E%3Cstop offset='100%25' stop-color='%23D0C8B8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='url(%23g)'/%3E%3Cpath d='M1 13 L5.5 17.5 L10 13 L9 12 L5.5 16 L2 12 Z' fill='%2356A84A'/%3E%3Cpath d='M1.5 1.5 L9.5 1.5' stroke='%2356A84A' stroke-width='2'/%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='none' stroke='%237F9DB9' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="range"]::-webkit-slider-thumb:hover {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='21'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23fff'/%3E%3Cstop offset='65%25' stop-color='%23FAFAF5'/%3E%3Cstop offset='100%25' stop-color='%23D8D0C4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='url(%23g)'/%3E%3Cpath d='M1 13 L5.5 17.5 L10 13 L9 12 L5.5 16 L2 12 Z' fill='%2368B85C'/%3E%3Cpath d='M1.5 1.5 L9.5 1.5' stroke='%2368B85C' stroke-width='2'/%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='none' stroke='%236890B0' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="range"]::-webkit-slider-thumb:active {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='21'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23E8F0E4'/%3E%3Cstop offset='100%25' stop-color='%23C8D8C0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='url(%23g)'/%3E%3Cpath d='M1 13 L5.5 17.5 L10 13 L9 12 L5.5 16 L2 12 Z' fill='%232D6E24'/%3E%3Cpath d='M1.5 1.5 L9.5 1.5' stroke='%232D6E24' stroke-width='2'/%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='none' stroke='%23607888' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: #D8D4CA;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 1px 0 #fff, inset 0 1px 1px rgba(0,0,0,.25);
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="range"]::-moz-range-thumb {
+  width: 11px;
+  height: 21px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='21'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23fff'/%3E%3Cstop offset='65%25' stop-color='%23F8F6F0'/%3E%3Cstop offset='100%25' stop-color='%23D0C8B8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='url(%23g)'/%3E%3Cpath d='M1 13 L5.5 17.5 L10 13 L9 12 L5.5 16 L2 12 Z' fill='%2356A84A'/%3E%3Cpath d='M1.5 1.5 L9.5 1.5' stroke='%2356A84A' stroke-width='2'/%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='none' stroke='%237F9DB9' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="range"]::-moz-range-thumb:active {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='21'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23E8F0E4'/%3E%3Cstop offset='100%25' stop-color='%23C8D8C0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='url(%23g)'/%3E%3Cpath d='M1 13 L5.5 17.5 L10 13 L9 12 L5.5 16 L2 12 Z' fill='%232D6E24'/%3E%3Cpath d='M1.5 1.5 L9.5 1.5' stroke='%232D6E24' stroke-width='2'/%3E%3Cpath d='M3 0.5 Q1 0.5 1 2.5 L1 13 L5.5 17.5 L10 13 L10 2.5 Q10 0.5 8 0.5 Z' fill='none' stroke='%23607888' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* ── XP checkbox ── */
+[data-theme="xX_sCeNeIt_Xx"] input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px !important;
+  height: 13px !important;
+  min-width: 13px !important;
+  min-height: 13px !important;
+  background: #fff;
+  border-top: 1px solid #848484;
+  border-left: 1px solid #848484;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-radius: 0 !important;
+  box-shadow: inset 1px 1px 0 #C0C0C0;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 0;
+  vertical-align: middle;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="checkbox"]:checked {
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 11 11'%3E%3Cpath d='M2 5l2.5 3L9 3' stroke='%2321A121' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 11px 11px;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] input[type="checkbox"]:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: 2px;
+}
+
+/* XP radio */
+[data-theme="xX_sCeNeIt_Xx"] input[type="radio"] {
+  accent-color: #21A121;
+}
+
+/* ── AIM checkbox (ThemeToggle) — XP style ── */
+[data-theme="xX_sCeNeIt_Xx"] button.aim-checkbox {
+  width: 13px !important;
+  height: 13px !important;
+  min-width: 13px !important;
+  min-height: 13px !important;
+  background: #fff !important;
+  border-top: 1px solid #848484 !important;
+  border-left: 1px solid #848484 !important;
+  border-bottom: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
+  border-radius: 0 !important;
+  box-shadow: inset 1px 1px 0 #C0C0C0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 0 !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .aim-checkbox svg {
+  width: 9px !important;
+  height: 9px !important;
+  color: #21A121 !important;
+}
+
+/* Disabled checkboxes */
+[data-theme="xX_sCeNeIt_Xx"] .pointer-events-none .aim-checkbox,
+[data-theme="xX_sCeNeIt_Xx"] .pointer-events-none input[type="checkbox"] {
+  background: #ECE9D8 !important;
+  opacity: 1;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .pointer-events-none {
+  opacity: 0.65 !important;
+}
+
+/* ── Load file label inside toolbar ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-toolbar-btn {
+  background: linear-gradient(180deg, #fff 0%, #ECE9D8 100%);
+  border: 1px solid #003399;
+  border-radius: 3px !important;
+}
+
+/* ── Bump small text sizes ── */
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-\[9px\]"],
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-\[10px\]"] {
+  font-size: 12px !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-\[11px\]"] {
+  font-size: 13px !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-xs"] {
+  font-size: 13px !important;
+}
+
+/* ── Bigger Keyframe & Export toolbar buttons ── */
+[data-theme="xX_sCeNeIt_Xx"] [class*="gap-1.5"][class*="px-2.5"] {
+  padding: 6px 8px !important;
+}
+
+/* ── Playhead marker: XP-style blue triangle ── */
+[data-theme="xX_sCeNeIt_Xx"] .playhead-marker {
+  clip-path: none !important;
+  filter: none !important;
+  border-radius: 0 !important;
+  width: 11px !important;
+  height: 14px !important;
+  top: -4px !important;
+  box-shadow: none !important;
+  background: linear-gradient(180deg, #4A90D9 0%, #0055CC 100%) !important;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%) !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] .playhead-line {
+  display: block !important;
+  width: 1px !important;
+  background: #0055CC !important;
+}
+
+/* Bottom playhead chevron */
+[data-theme="xX_sCeNeIt_Xx"] .cursor-col-resize::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 14px;
+  background: linear-gradient(180deg, #0055CC 0%, #4A90D9 100%);
+  clip-path: polygon(50% 0, 100% 40%, 100% 100%, 0 100%, 0 40%);
+  pointer-events: none;
+}
+
+/* ── Transport button groups ── */
+[data-theme="xX_sCeNeIt_Xx"] .transport-group {
+  display: flex;
+  align-items: center;
+  gap: 2px !important;
+}
+
+/* ── Time display: sunken XP field (skip inside WMM monitor) ── */
+[data-theme="xX_sCeNeIt_Xx"] .time-display:not(.wmm-monitor .time-display) {
+  background-color: #fff !important;
+  color: #000 !important;
+  padding: 2px 6px;
+  border: 1px solid #7F9DB9;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.1) inset;
+}
+[data-theme="xX_sCeNeIt_Xx"] .time-display:not(.wmm-monitor .time-display) span,
+[data-theme="xX_sCeNeIt_Xx"] .time-display:not(.wmm-monitor .time-display) button {
+  color: #000 !important;
+  box-shadow: none !important;
+  background: none !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* Buttons with tracking-wider (CollapsibleSection headers) stretch to fill */
+[data-theme="xX_sCeNeIt_Xx"] span[class*="tracking-wider"] {
+  flex: 1;
+  margin: -4px -8px;
+  padding: 4px 8px !important;
+}
+
+/* ── Sunken group-box panel (AIM-style chat area) ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-group-box {
+  background-color: #fff !important;
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 3px !important;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.1) inset !important;
+}
+
+/* ── Floorplan canvas: sunken blue border ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-canvas-border {
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 3px !important;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.1) inset;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── Dropdown trigger: XP combo box ── */
+[data-theme="xX_sCeNeIt_Xx"] button.win95-dropdown-trigger {
+  background-color: #fff !important;
+  color: #000 !important;
+  padding: 1px 24px 1px 4px !important;
+  min-height: 22px !important;
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 3px !important;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.1) inset !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='20' fill='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23EBF4FD'/%3E%3Cstop offset='50%25' stop-color='%23D2E2F3'/%3E%3Cstop offset='100%25' stop-color='%23B4CCE9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='.5' y='.5' width='16' height='19' fill='url(%23g)' stroke='%237B9CC0'/%3E%3Cpath d='M5 8l3.5 3.5L12 8' stroke='%231A3761' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0 top 0 !important;
+  background-size: 17px 100% !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] button.win95-dropdown-trigger svg,
+[data-theme="xX_sCeNeIt_Xx"] button.win95-dropdown-trigger .aim-icon-img {
+  display: none !important;
+}
+
+/* ── Full-width buttons inside panels ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-panel-section button.w-full:not([class*="border-dashed"]):not(.win95-dropdown-trigger) {
+  padding: 4px 12px 4px 8px !important;
+  border: 1px solid #003399 !important;
+  margin-right: -1px;
+  width: calc(100% + 1px) !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] .win95-panel-section button.w-full:not([class*="border-dashed"]):not(.win95-dropdown-trigger):not(:disabled):active {
+  background: #D0DCF0 !important;
+}
+
+/* ── Small square icon buttons ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-icon-btn-sm {
+  min-height: 24px !important;
+  max-height: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px !important;
+}
+
+/* ── Anchor color swatches ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-color-swatch {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 3px !important;
+  border: 1px solid #7F9DB9;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.1) inset;
+}
+
+/* ── Empty state buttons ── */
+[data-theme="xX_sCeNeIt_Xx"] button[class*="border-dashed"] {
+  padding: 4rem 1rem !important;
+  min-height: auto !important;
+  background-color: #ECE9D8 !important;
+  border: 1px dashed #7F9DB9 !important;
+  border-radius: 3px !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="border-dashed"]:not(button) {
+  background-color: #ECE9D8 !important;
+  border: 1px dashed #7F9DB9 !important;
+  border-radius: 3px !important;
+}
+
+/* ── Camera track label: combo box style ── */
+[data-theme="xX_sCeNeIt_Xx"] button.win95-plain-label {
+  background-color: #fff !important;
+  color: #000 !important;
+  min-height: auto !important;
+  padding: 1px 24px 1px 4px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 3px !important;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.1) inset;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='20' fill='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23EBF4FD'/%3E%3Cstop offset='50%25' stop-color='%23D2E2F3'/%3E%3Cstop offset='100%25' stop-color='%23B4CCE9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='.5' y='.5' width='16' height='19' fill='url(%23g)' stroke='%237B9CC0'/%3E%3Cpath d='M5 8l3.5 3.5L12 8' stroke='%231A3761' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0 top 0 !important;
+  background-size: 20px 100% !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] button.win95-plain-label svg {
+  display: none !important;
+}
+
+/* ── Timeline track ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-track {
+  height: 22px !important;
+}
+
+/* ── Keyframe diamonds ── */
+[data-theme="xX_sCeNeIt_Xx"] [data-kf-diamond] > div:first-child {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+/* ── Dropdown/popover menus: XP Luna style ── */
+[data-theme="xX_sCeNeIt_Xx"] [class*="z-\[9999\]"],
+[data-theme="xX_sCeNeIt_Xx"] [class*="z-\[999\]"][class*="rounded-md"],
+[data-theme="xX_sCeNeIt_Xx"] [class*="z-30"][class*="rounded-md"] {
+  border: 1px solid #003399 !important;
+  border-radius: 3px !important;
+  padding: 4px !important;
+  box-shadow: 0 3px 12px rgba(0,0,0,.25) !important;
+  background-color: #ECE9D8 !important;
+}
+
+/* ── Primary action buttons: XP blue ── */
+[data-theme="xX_sCeNeIt_Xx"] button[class*="bg-accent-500"],
+[data-theme="xX_sCeNeIt_Xx"] button[class*="bg-accent-600"] {
+  background: linear-gradient(180deg, #4A90D9 0%, #0055CC 100%) !important;
+  color: #fff !important;
+  border: 1px solid #003399 !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.3);
+}
+
+/* ── Selected toggle buttons: XP blue ── */
+[data-theme="xX_sCeNeIt_Xx"] button[class*="border-accent-500"][class*="bg-accent-500\/10"] {
+  background: linear-gradient(180deg, #3B7DD8 0%, #0055CC 100%) !important;
+  color: #fff !important;
+  border-color: #003399 !important;
+}
+
+/* ── Key hint caps: XP flat button style ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-key-cap {
+  background: #ECE9D8 !important;
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 3px !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.6) inset !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] .win95-key-cap-active {
+  background: #D0DCF0 !important;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.2) inset !important;
+}
+
+
+/* ── Export modal ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-modal-backdrop {
+  backdrop-filter: blur(2px) !important;
+  -webkit-backdrop-filter: blur(2px) !important;
+}
+
+/* ── Progress bar fill: XP blue ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-inset > div[class*="bg-accent-500"],
+[data-theme="xX_sCeNeIt_Xx"] .aim-inset > div[class*="bg-accent-500"] {
+  background: linear-gradient(90deg, #4A90D9 0%, #0055CC 100%) !important;
+  border-radius: 2px;
+}
+
+/* ── Functional status colors ── */
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-red-400"],
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-red-500"] {
+  color: #CC0000 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="bg-red-500"] {
+  background-color: #CC0000 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-amber-400"],
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-amber-500"] {
+  color: #CC8800 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="bg-amber-500"] {
+  background-color: #CC8800 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-emerald-500"],
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-emerald-400"] {
+  color: #008800 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="border-emerald-500"] {
+  border-color: #008800 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="bg-emerald-600"] {
+  background-color: #008800 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] [class*="text-orange-400"] {
+  color: #DD6600 !important;
+}
+
+/* ── XP flat button ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-btn {
+  background: #ECE9D8 !important;
+  color: #000 !important;
+  border: 1px solid #003399 !important;
+  border-radius: 3px !important;
+  cursor: pointer;
+}
+[data-theme="xX_sCeNeIt_Xx"] .win95-btn:active {
+  background: #D0DCF0 !important;
+}
+
+/* ── Graph Editor: XP styling ── */
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels,
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels *,
+[data-theme="xX_sCeNeIt_Xx"] .win95-inset,
+[data-theme="xX_sCeNeIt_Xx"] .win95-track,
+[data-theme="xX_sCeNeIt_Xx"] .aim-inset {
+  border-radius: 0 !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels {
+  background-color: #fff !important;
+  padding: 4px !important;
+  gap: 0 !important;
+  border-right: 1px solid #ACA899 !important;
+}
+
+/* Graph editor canvas area in WMM */
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels + div {
+  border-top: 1px solid #848484;
+  border-left: 1px solid #848484;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  box-shadow: inset 1px 1px 0 #C0C0C0;
+}
+
+/* Graph editor container border */
+[data-theme="xX_sCeNeIt_Xx"] .border-t.border-surface-border:has(.graph-editor-channels) {
+  border-top: 1px solid #D0D0D0 !important;
+  background: #fff;
+}
+
+/* Graph editor right padding to align with timeline track */
+[data-theme="xX_sCeNeIt_Xx"] .flex.select-none:has(.graph-editor-channels) {
+  padding-right: 18px !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels [class*="tracking-wider"] {
+  background: none !important;
+  color: #000 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 4px 4px !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .win95-channel-list {
+  background: #fff !important;
+  border: 1px solid #7F9DB9 !important;
+  margin: 0 !important;
+  margin-top: 4px !important;
+  padding: 2px !important;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,.08) !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels select {
+  background: #fff !important;
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 2px !important;
+  color: #000 !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels label {
+  border-radius: 3px !important;
+  padding: 2px 4px !important;
+  color: #000 !important;
+  background-color: #fff !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels label:hover {
+  background-color: #EEF4FF !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .graph-editor-channels label:has(input:checked) {
+  background-color: #D6E8FF !important;
+  outline: 1px solid #0055CC;
+  outline-offset: -1px;
+}
+
+/* ── Force all SVGs to 16x16 and dark for XP/AIM ── */
+[data-theme="xX_sCeNeIt_Xx"] svg {
+  width: 16px !important;
+  height: 16px !important;
+  color: #333 !important;
+}
+
+/* White icons inside blue title bar headers */
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] svg {
+  color: #fff !important;
+}
+
+/* Multi-color header icons: preserve hardcoded fills */
+[data-theme="xX_sCeNeIt_Xx"] [class*="tracking-wider"] svg.aim-icon-multi {
+  color: inherit !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Raster icon visibility on dark backgrounds */
+[data-theme="xX_sCeNeIt_Xx"] .aim-icon-img {
+  filter: drop-shadow(0 0 0.5px rgba(0,0,0,0.6))
+         drop-shadow(0 0 0.5px rgba(0,0,0,0.6));
+}
+
+/* Small icons opt-out */
+[data-theme="xX_sCeNeIt_Xx"] svg.aim-icon-sm {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* ── Exempt non-icon SVGs from the 16x16 override ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-inset svg,
+[data-theme="xX_sCeNeIt_Xx"] .aim-inset svg,
+[data-theme="xX_sCeNeIt_Xx"] svg.w-full,
+[data-theme="xX_sCeNeIt_Xx"] svg.pointer-events-none,
+[data-theme="xX_sCeNeIt_Xx"] svg.aim-svg-exempt,
+[data-theme="xX_sCeNeIt_Xx"] svg.win95-svg-exempt {
+  width: auto !important;
+  height: auto !important;
+  color: inherit !important;
+}
+
+/* ================================================================
+   XP DESKTOP — Floating Window Manager
+   ================================================================ */
+
+/* ── Desktop container with Bliss wallpaper ── */
+.xp-desktop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #3A6EA5 url("/xp-bliss-hires.jpg") center / cover no-repeat;
+}
+
+/* ── Desktop area (above taskbar) ── */
+.xp-desktop-area {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Floating window shell ── */
+.xp-floating-window {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden;
+}
+
+.xp-floating-window.aim-window {
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 8px 8px 4px 4px !important;
+  background:
+    linear-gradient(180deg,
+      #0077DE 0%,
+      #005BD8 30px,
+      #0831D9 60px,
+      #0831D9 calc(100% - 30px),
+      #021E80 100%
+    ) !important;
+  box-shadow:
+    0 0 0 1px rgba(2,48,144,.35),
+    0 3px 12px rgba(0,0,0,.35) !important;
+}
+
+/* Title bar inside floating window: fill to edges */
+.xp-floating-window > .xp-titlebar {
+  border-radius: 8px 8px 0 0 !important;
+}
+
+/* Content area inside floating window: inset for blue frame on sides/bottom */
+.xp-floating-window.aim-window > .xp-window-content {
+  margin: 0 3px 3px 3px;
+  border-radius: 0 0 2px 2px;
+  box-shadow:
+    -1px 0 0 rgba(100,170,255,.5),
+    1px 0 0 rgba(0,8,60,.5),
+    0 -1px 0 rgba(100,170,255,.3),
+    0 1px 0 rgba(0,8,60,.5);
+}
+
+/* ── Window content area fills remaining space ── */
+.xp-window-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background-color: #ECE9D8;
+}
+
+/* ── Title bar is draggable ── */
+.xp-titlebar {
+  cursor: move;
+  user-select: none;
+  -webkit-user-select: none;
+  flex-shrink: 0;
+}
+
+/* ── Resize handles: invisible grab zones ── */
+.xp-resize-handle {
+  background: transparent;
+  z-index: 999;
+}
+
+/* ── Taskbar ── */
+.xp-taskbar {
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 6px 0 0;
+  background: linear-gradient(180deg,
+    #2878F4 0%,
+    #4C9CFF 4%,
+    #3080F0 8%,
+    #1C68E5 12%,
+    #1060F0 20%,
+    #1060F0 85%,
+    #2D5DC5 95%,
+    #4078E4 100%
+  );
+  border-top: 1px solid #1C48A3;
+  border-radius: 0 9px 9px 0 / 0 50% 50% 0;
+  z-index: 9999;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ── Start button ── */
+.xp-taskbar .xp-start-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  height: 100% !important;
+  align-self: stretch !important;
+  padding: 0 22px 0 10px !important;
+  border-radius: 0 9px 9px 0 / 0 50% 50% 0 !important;
+  border: none !important;
+  background:
+    /* highlight: starts top-left, extends ~2/3 across, fades before right edge */
+    radial-gradient(ellipse 60% 6px at 30% 0%,
+      rgba(180,240,170,.45) 0%,
+      rgba(140,210,120,.2) 65%,
+      transparent 100%),
+    /* lower-right darkening: bottom highlight fades out in right half */
+    radial-gradient(ellipse 50% 40% at 82% 85%,
+      rgba(0,45,0,.35) 0%,
+      rgba(0,40,0,.15) 50%,
+      transparent 100%),
+    /* kill remaining highlight in last 10% of bottom area */
+    radial-gradient(ellipse 16% 35% at 96% 82%,
+      rgba(0,45,0,.25) 0%,
+      rgba(0,40,0,.1) 60%,
+      transparent 100%),
+    /* left-edge shadow for 3D depth */
+    linear-gradient(90deg,
+      rgba(0,50,0,.22) 0%,
+      rgba(0,50,0,.1) 2px,
+      transparent 6px),
+    /* main body gradient */
+    linear-gradient(180deg,
+      #348122 0%,
+      #3f8c2d 2%,
+      #57a447 4%,
+      #8bc17c 8%,
+      #86bf79 12%,
+      #70b562 16%,
+      #4ea835 22%,
+      #439d2c 30%,
+      #409027 35%,
+      #3d9428 42%,
+      #3a9026 50%,
+      #3c9228 58%,
+      #409628 65%,
+      #44972f 71%,
+      #46a82f 77%,
+      #4eb834 81%,
+      #4fb935 84%,
+      #49a92f 88%,
+      #3f992a 92%,
+      #378724 96%,
+      #2d711e 100%
+    ) !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+  font-style: italic !important;
+  letter-spacing: 0.3px !important;
+  text-transform: none !important;
+  text-shadow: 1px 1px 2px rgba(0,40,0,.6) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  box-shadow:
+    /* upper highlight along top, slight wrap */
+    inset 1px 2px 2px -1px rgba(160,235,140,.45),
+    /* bottom/right shadow at outer edge, wrapping up the curve */
+    inset -4px -3px 4px -2px rgba(0,40,0,.55),
+    /* outer junction bevel */
+    3px 0 3px -1px rgba(0,0,0,.2),
+    2px 0 0 0 rgba(80,160,220,.35) !important;
+  min-height: 0 !important;
+}
+
+.xp-taskbar .xp-start-btn::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 0 !important;
+  right: 5px !important;
+  height: 10px !important;
+  border-radius: 0 5px 5px 0 / 0 50% 50% 0 !important;
+  border: none !important;
+  border-top: 2px solid rgba(160,235,140,.35) !important;
+  border-right: 2px solid rgba(140,220,120,.25) !important;
+  filter: blur(1.5px) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.xp-taskbar .xp-start-btn:hover {
+  filter: brightness(1.08) !important;
+}
+
+.xp-taskbar .xp-start-btn:active {
+  filter: brightness(0.92) !important;
+  box-shadow: 1px 1px 3px rgba(0,40,0,.35) inset !important;
+}
+
+.xp-taskbar .xp-start-btn img {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── Window buttons on taskbar ── */
+.xp-taskbar-windows {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  overflow-x: auto;
+  padding: 0 4px;
+}
+
+.xp-taskbar-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  min-width: 188px !important;
+  max-width: 188px !important;
+  padding: 0 16px 0 8px !important;
+  border-radius: 4px !important;
+  border: none !important;
+  outline: none !important;
+  background:
+    radial-gradient(ellipse 50% 1px at 50% 1px,
+      rgba(100,190,255,.35) 0%,
+      transparent 100%),
+    radial-gradient(ellipse 55% 4px at 50% 0%,
+      #40B8FF 0%,
+      #30A8FF 50%,
+      transparent 100%),
+    linear-gradient(90deg,
+      rgba(255,255,255,.3) 0%,
+      rgba(255,255,255,.12) 2%,
+      rgba(255,255,255,.03) 4%,
+      transparent 8%,
+      transparent 88%,
+      rgba(0,60,180,.08) 94%,
+      rgba(0,50,160,.25) 98%,
+      rgba(0,30,120,.5) 100%),
+    linear-gradient(180deg,
+      #30A0FF 0%,
+      #2E9EFF 1%,
+      #2C9CFF 2%,
+      #2A9AFF 3%,
+      #2898FF 4%,
+      #2696FE 5%,
+      #2494FE 6%,
+      #2292FE 7%,
+      #2191FD 8%,
+      #1F8FFD 9%,
+      #1E8EFC 10%,
+      #1D8DFC 12%,
+      #1C8CFC 14%,
+      #1C8CFC 16%,
+      #1C8CFC 30%,
+      #1C8CFC 48%,
+      #1C8CFC 50%,
+      #1C8CFC 52%,
+      #1D8DFC 54%,
+      #1D8DFC 56%,
+      #1E8EFC 58%,
+      #1F8FFD 60%,
+      #2090FD 62%,
+      #2292FD 64%,
+      #2292FD 68%,
+      #2595FE 71%,
+      #2898FF 74%,
+      #2A9AFF 78%,
+      #2A9AFF 84%,
+      #2898FF 86%,
+      #2595FE 88%,
+      #2292FD 90%,
+      #1E8EFB 92%,
+      #1A8AF9 94%,
+      #1686F4 96%,
+      #1383F1 98%
+    ) !important;
+  color: #fff !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.4) !important;
+  cursor: pointer !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.25),
+    inset -1px -1px 1px rgba(0,0,40,.2) !important;
+}
+
+.xp-taskbar-btn:hover {
+  filter: brightness(1.06) !important;
+}
+
+.xp-taskbar-btn.active {
+  background:
+    radial-gradient(ellipse 50% 1px at 50% 1px,
+      rgba(0,20,100,.25) 0%,
+      transparent 100%),
+    radial-gradient(ellipse 55% 4px at 50% 0%,
+      #0848A0 0%,
+      #0A50B0 50%,
+      transparent 100%),
+    linear-gradient(90deg,
+      rgba(0,16,80,.45) 0%,
+      rgba(0,24,100,.2) 2%,
+      rgba(0,32,120,.06) 4%,
+      transparent 8%,
+      transparent 92%,
+      rgba(0,32,120,.06) 96%,
+      rgba(0,24,100,.2) 98%,
+      rgba(0,16,80,.45) 100%),
+    linear-gradient(180deg,
+      #1850A8 0%,
+      #1A56B8 4%,
+      #1E5CC8 8%,
+      #2060CC 16%,
+      #2262CE 30%,
+      #2262CE 50%,
+      #2060CC 60%,
+      #1E5CC8 68%,
+      #1A56B8 78%,
+      #1850A8 86%,
+      #164CA0 92%,
+      #144898 100%
+    ) !important;
+  border-color: rgba(0,0,0,.35) !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(0,0,40,.4),
+    inset -1px -1px 1px rgba(255,255,255,.06) !important;
+}
+
+.xp-taskbar-btn.focused {
+  box-shadow:
+    inset 1px 1px 3px rgba(0,0,40,.5),
+    inset -1px -1px 1px rgba(255,255,255,.1) !important;
+}
+
+.xp-taskbar-btn.minimized {
+  opacity: 0.8;
+}
+
+.xp-taskbar-btn-icon {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.xp-titlebar-icon {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+  pointer-events: none;
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,.3));
+}
+
+.xp-taskbar-btn-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+/* ── System tray ── */
+.xp-system-tray {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  min-height: 0;
+  padding: 0 16px 0 13px;
+  margin-left: 2px;
+  margin-right: -6px;
+  position: relative;
+  border-radius: 0 !important;
+  border-left: 1px solid #0E3660;
+  background:
+    linear-gradient(90deg,
+      rgba(120,200,255,.72) 0px,
+      rgba(80,175,240,.45) 2px,
+      rgba(50,145,220,.18) 4px,
+      rgba(0,0,0,0) 6px,
+      rgba(0,0,0,0) 100%),
+    linear-gradient(180deg,
+      #1C67C6 0%,
+      #359FE5 2%,
+      #3AAAE9 4%,
+      #2D89DA 10%,
+      #257BD6 17%,
+      #247BD7 63%,
+      #2A8AE4 79%,
+      #2D93E8 90%,
+      #2B8AE0 95%,
+      #2064AE 100%);
+  box-shadow:
+    -2px 0 2px rgba(0,20,60,.22),
+    inset 0 -1px 0 rgba(18,96,184,.28),
+    inset -1px -1px 0 rgba(10,78,154,.34);
+}
+
+.xp-system-tray::before {
+  content: none;
+}
+
+.xp-system-tray::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 6px;
+  border-radius: 0 !important;
+  background: transparent;
+  pointer-events: none;
+}
+
+.xp-taskbar-clock {
+  position: relative;
+  top: -1px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: normal;
+  text-shadow:
+    1px 1px 1px rgba(0,44,108,.65),
+    0 0 1px rgba(255,255,255,.1);
+  white-space: nowrap;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+/* ── Floating window overrides ── */
+/* When inside the desktop, .aim-window styling comes from existing rules,
+   but we need to ensure content fills properly */
+.xp-floating-window .xp-window-content > div {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Toolbar window: no chrome, no border radius on content */
+.xp-floating-window .win95-toolbar {
+  border: none !important;
+  margin: 0 !important;
+}
+
+/* Override borders for desktop — windows already have .aim-window borders */
+.xp-floating-window [class*="border-surface-border"] {
+  border-color: #7F9DB9;
+}
+
+/* Taskbar SVGs should not get the 16x16 override */
+.xp-taskbar svg {
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Exempt desktop start button from aim-window styling */
+.xp-taskbar button:not(.xp-start-btn) {
+  border-radius: 4px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AIM BUDDY LIST STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.aim-buddy-list {
+  background: #fff;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: #000;
+  margin: 0 -4px 0 -4px;
+  border-radius: 0 0 2px 2px;
+  overflow: hidden;
+}
+
+/* ── Menu bar: My AIM / People / Help ── */
+.aim-buddy-menubar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 2px 8px;
+  background: #ECE9D8;
+  border-bottom: 1px solid #ACA899;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: #000;
+  flex-shrink: 0;
+}
+
+/* ── Header: AOL Instant Messenger branding ── */
+.aim-buddy-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: #EEE8D0;
+  flex-shrink: 0;
+}
+
+.aim-buddy-header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: #FFD700;
+  flex-shrink: 0;
+}
+
+.aim-running-man-icon {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.aim-buddy-header-text {
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+  min-width: 0;
+}
+
+.aim-buddy-header-title {
+  font-weight: bold;
+  font-size: 10px;
+  color: #003399;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.aim-buddy-header-tm {
+  font-size: 7px;
+  color: #003399;
+  line-height: 1;
+  align-self: flex-start;
+  margin-top: 1px;
+}
+
+/* ── Banner / ad placeholder ── */
+.aim-buddy-banner-wrap {
+  background: #EEE8D0;
+  padding: 8px 0;
+  border-bottom: 1px solid #C8B590;
+  flex-shrink: 0;
+}
+
+.aim-buddy-banner {
+  width: 170px;
+  height: 135px;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.aim-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Buddy list selector dropdown ── */
+.aim-buddy-selector {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  background: linear-gradient(180deg, #fff 0%, #E8E8E4 50%, #D2D2CC 100%);
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #848484;
+  border-left: none;
+  border-right: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    inset 0 -1px 0 rgba(0,0,0,.08);
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.aim-buddy-selector .aim-icon-img {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+/* ── Category sections ── */
+.aim-buddy-categories {
+  background: #fff;
+  position: relative;
+}
+
+.aim-buddy-categories::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/icons/aim/running-man-watermark.png") no-repeat center 55%;
+  background-size: 220px;
+  opacity: 0.09;
+  pointer-events: none;
+}
+
+.aim-buddy-category {
+  border: none;
+}
+
+.aim-buddy-category-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 2px 6px !important;
+  background: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  text-align: left;
+  color: #000;
+  min-height: auto !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .aim-buddy-category-header,
+[data-theme="xX_sCeNeIt_Xx"] .aim-buddy-category-header * {
+  font-weight: 700 !important;
+  font-size: 13px !important;
+}
+
+.aim-buddy-category-header:hover {
+  background: #F0F0F0 !important;
+}
+
+.aim-buddy-category-header.selected {
+  background: #FFD700 !important;
+  border: 1px solid #C8A200 !important;
+  padding: 1px 5px !important;
+}
+
+.aim-buddy-category-header.selected:hover {
+  background: #FFDD2A !important;
+}
+
+.aim-category-triangle {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #000;
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.aim-buddy-category.collapsed .aim-category-triangle {
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 5px solid #000;
+  border-right: none;
+}
+
+.aim-category-count {
+  font-weight: bold;
+  color: #000;
+  margin-left: 1px;
+}
+
+/* ── Category content ── */
+.aim-buddy-category-content {
+  background: #fff !important;
+}
+
+/* Settings window only: cream bg for form controls */
+.aim-settings-list .aim-buddy-category-content {
+  background: #ECE9D8 !important;
+}
+
+/* ── Buddy items ── */
+.aim-buddy-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 8px 1px 24px !important;
+  cursor: pointer;
+  border: none !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  width: 100%;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: normal !important;
+  text-align: left;
+  color: #000;
+  min-height: 18px !important;
+}
+
+.aim-buddy-item:hover {
+  background: #E8E8FF !important;
+}
+
+.aim-buddy-item.active {
+  background: #0A246A !important;
+  color: #fff;
+}
+
+.aim-buddy-item.offline {
+  color: #808080;
+  font-style: italic;
+}
+
+.aim-buddy-item.offline .aim-buddy-name {
+  color: #808080;
+}
+
+.aim-buddy-item.away {
+  color: #808080;
+  font-style: italic;
+}
+
+.aim-buddy-item.away .aim-buddy-name {
+  color: #808080;
+}
+
+/* Status icon container (replaces old status dot) */
+.aim-buddy-status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.aim-buddy-status-icon svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.aim-buddy-item.active .aim-buddy-status-icon {
+  filter: brightness(2);
+}
+
+/* Small icon next to item name (for empty states) */
+.aim-buddy-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #808080;
+}
+
+.aim-buddy-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aim-buddy-badge {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.aim-buddy-type-badge {
+  font-size: 9px;
+  color: #999;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.aim-buddy-item.active .aim-buddy-type-badge {
+  color: #aaa;
+}
+
+/* ── Bottom toolbar ── */
+.aim-buddy-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #ECE9D8;
+  border-top: 1px solid #ECE9D8;
+  border-bottom: 1px solid #ACA899;
+  box-shadow: inset 0 1px 0 #fff, inset 0 2px 0 #fff;
+}
+
+.aim-buddy-toolbar-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 16px 0 8px;
+}
+
+.aim-buddy-toolbar-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0 8px;
+  transform: translateY(-4px);
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 9px;
+  color: #000 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+  cursor: pointer;
+}
+
+.aim-buddy-toolbar-btn .aim-icon-img {
+  width: 24px !important;
+  height: 24px !important;
+  object-fit: contain;
+}
+
+.aim-buddy-toolbar-btn span {
+  margin-top: -2px;
+}
+
+.aim-buddy-toolbar-btn:hover {
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+
+.aim-buddy-toolbar-btn:active {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AIM CHAT WINDOW (VIEWPORT) STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.aim-chat-window {
+  background: #ECE9D8;
+}
+
+.aim-chat-menubar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 8px;
+  background: #ECE9D8;
+  border-bottom: 1px solid #ACA899;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.aim-chat-menubar span:first-child {
+  letter-spacing: 0.5px;
+}
+
+.aim-chat-menubar-info {
+  color: #666;
+  font-size: 10px;
+}
+
+.aim-chat-menubar-info button {
+  background: none !important;
+  border: none !important;
+  padding: 0 2px !important;
+  min-height: auto !important;
+  font-size: 10px !important;
+  color: #666 !important;
+  cursor: pointer;
+}
+.aim-chat-menubar-info button:hover {
+  color: #c00 !important;
+}
+
+/* ── XP-style dropdown menus ── */
+
+.aim-menubar-items {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.aim-menubar-item {
+  position: relative;
+  padding: 2px 8px !important;
+  cursor: pointer;
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  min-height: auto !important;
+  line-height: 1.4;
+}
+
+.aim-menubar-item:hover,
+.aim-menubar-item.aim-menu-open {
+  background: #0A246A !important;
+  color: #fff !important;
+}
+
+.aim-dropdown {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 1000;
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid #ACA899;
+  box-shadow: 2px 2px 4px rgba(0,0,0,.25);
+  padding: 2px 0;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+}
+
+.aim-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 24px 4px 28px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  min-height: auto !important;
+  cursor: pointer;
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.aim-dropdown-item:hover {
+  background: #0A246A !important;
+  color: #fff !important;
+}
+
+.aim-dropdown-item:disabled {
+  color: #ACA899 !important;
+  cursor: default;
+}
+.aim-dropdown-item:disabled:hover {
+  background: transparent !important;
+  color: #ACA899 !important;
+}
+
+.aim-dropdown-item .aim-dropdown-shortcut {
+  margin-left: auto;
+  color: #666;
+  font-size: 10px;
+}
+
+.aim-dropdown-item:hover .aim-dropdown-shortcut {
+  color: #ccc;
+}
+
+.aim-dropdown-sep {
+  height: 1px;
+  margin: 3px 2px;
+  background: #D6D2C2;
+}
+
+.aim-dropdown-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+/* ── Chat body: buddy icon column + canvas ── */
+
+.aim-chat-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.aim-chat-buddy-icon {
+  width: 62px;
+  min-width: 62px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6px;
+  background: #ECE9D8;
+  border: none !important;
+  border-right: 1px solid #ACA899 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  flex-shrink: 0;
+}
+
+.aim-chat-avatar {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  background: #fff;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.aim-chat-canvas {
+  background: #fff;
+  border-top: 2px solid #848484;
+  border-left: 2px solid #848484;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+  margin: 4px;
+  overflow: hidden;
+  border-radius: 0 !important;
+}
+
+/* ── Chat input area (below canvas) ── */
+
+.aim-chat-window * {
+  border-radius: 0 !important;
+}
+
+.aim-chat-input-area {
+  display: flex;
+  flex-shrink: 0;
+  border-top: 1px solid #ACA899;
+}
+
+.aim-chat-input-area .aim-chat-buddy-icon {
+  background: #ECE9D8;
+  border-top: 1px solid #ACA899;
+}
+
+.aim-chat-input-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.aim-chat-format-bar {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 2px 4px;
+  background: #ECE9D8;
+  border-bottom: 1px solid #ACA899;
+  border-radius: 0 !important;
+  flex-shrink: 0;
+}
+
+.aim-fmt-btn {
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px;
+  padding: 1px 4px !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #000 !important;
+  cursor: pointer;
+  min-height: auto !important;
+  box-shadow: none !important;
+  line-height: 1.2;
+}
+
+.aim-fmt-btn-bold {
+  font-weight: bold !important;
+}
+
+.aim-fmt-btn-lg {
+  font-size: 17px !important;
+}
+
+.aim-fmt-btn:hover {
+  border-color: #0055CC !important;
+  background: #D6E8FF !important;
+}
+
+.aim-fmt-bg {
+  background: #CC0000 !important;
+  color: #fff !important;
+  border: 1px solid #990000 !important;
+  padding: 1px 3px !important;
+}
+
+.aim-fmt-sep {
+  width: 1px;
+  height: 16px;
+  background: #ACA899;
+  margin: 0 3px;
+  flex-shrink: 0;
+}
+
+.aim-chat-textfield b,
+.aim-chat-textfield strong {
+  font-weight: bold !important;
+}
+
+/* ── AIM Emoji Picker ── */
+.aim-emoji-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.aim-emoji-picker {
+  position: absolute;
+  bottom: 100%;
+  left: -60px;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  padding: 4px;
+  background: #ECE9D8;
+  border: 1px solid #ACA899;
+  box-shadow: 2px 2px 4px rgba(0,0,0,.25);
+  margin-bottom: 4px;
+}
+
+.aim-emoji-picker button {
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+  padding: 2px !important;
+  border: 1px solid transparent !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aim-emoji-picker button:hover {
+  background: #D6E8FF !important;
+  border-color: #0055CC !important;
+}
+
+.aim-emoji-picker img {
+  width: 22px !important;
+  height: 22px !important;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.aim-chat-textfield {
+  min-height: 48px;
+  max-height: 64px;
+  background: #fff;
+  border-top: 1px solid #848484;
+  border-left: 1px solid #848484;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  box-shadow: inset 1px 1px 0 #C0C0C0;
+  margin: 3px;
+  padding: 4px 6px;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: #000;
+  overflow-y: auto;
+  outline: none;
+  cursor: text;
+}
+
+/* ── Bottom action bar ── */
+
+.aim-chat-bottom-bar {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  background: #ECE9D8;
+  border-top: 1px solid #ACA899;
+  border-radius: 0 !important;
+  gap: 8px;
+  flex-shrink: 0;
+  overflow: visible !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 10px;
+}
+
+.aim-chat-freeicons {
+  font-size: 9px !important;
+  color: #003399 !important;
+  text-decoration: underline !important;
+  cursor: pointer;
+  line-height: 1.2;
+  flex-shrink: 0;
+  min-width: 48px;
+}
+
+.aim-chat-action-group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.aim-chat-action-group-center {
+  flex: 1;
+  justify-content: center;
+  gap: 10px;
+}
+
+.aim-chat-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0 4px !important;
+  transform: translateY(-4px);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 8px !important;
+  color: #000 !important;
+  min-height: auto !important;
+  box-shadow: none !important;
+  text-decoration: underline;
+}
+
+.aim-chat-action-btn span {
+  margin-top: -4px;
+}
+
+.aim-chat-action-btn:hover {
+  color: #003399 !important;
+}
+
+.aim-chat-action-icon {
+  width: 28px !important;
+  height: 28px !important;
+  object-fit: contain;
+  filter: none !important;
+}
+
+.aim-chat-action-btn-lg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0 8px !important;
+  transform: translateY(-4px);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 9px !important;
+  color: #000 !important;
+  min-height: auto !important;
+  box-shadow: none !important;
+}
+
+.aim-chat-action-btn-lg span {
+  margin-top: -8px;
+}
+
+.aim-chat-action-btn-lg:hover {
+  color: #003399 !important;
+}
+
+.aim-chat-action-icon-lg {
+  width: 36px !important;
+  height: 36px !important;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.aim-chat-action-icon-lg.aim-chat-action-icon-sm {
+  width: 24px !important;
+  height: 24px !important;
+  margin: 6px 0;
+}
+
+.aim-chat-action-icon-palette {
+  width: 36px !important;
+  height: 36px !important;
+  object-fit: contain;
+  filter: none !important;
+}
+
+/* ── Send button ── */
+
+.aim-chat-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  padding: 0 !important;
+  background: #ECE9D8 !important;
+  border: 1px solid #ACA899 !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  min-height: auto !important;
+  box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #848484 inset !important;
+  margin-left: auto;
+  margin-right: 8px;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.aim-chat-send-btn:hover {
+  background: #D6E8FF !important;
+  border-color: #0055CC !important;
+}
+
+.aim-chat-send-btn:active {
+  box-shadow: -1px -1px 0 #fff inset, 1px 1px 0 #848484 inset !important;
+}
+
+.aim-send-man {
+  width: 52px !important;
+  height: 52px !important;
+  object-fit: contain;
+  filter: none !important;
+
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PREFERENCES PANEL — XP DISPLAY PROPERTIES DIALOG
+   ═══════════════════════════════════════════════════════════════ */
+
+.aim-prefs {
+  background: #ECE9D8;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+}
+
+/* ── Horizontal tab bar ── */
+.aim-prefs-tabs {
+  display: flex;
+  align-items: flex-end;
+  padding: 6px 14px 0;
+  background: #ECE9D8;
+  flex-shrink: 0;
+}
+
+.aim-prefs-tab {
+  padding: 2px 10px 3px !important;
+  margin-bottom: -1px;
+  margin-top: 3px;
+  background: linear-gradient(180deg, #fff 0%, #E8E8E4 50%, #D2D2CC 100%) !important;
+  border: 1px solid #ACA899 !important;
+  border-bottom: 1px solid #ACA899 !important;
+  border-top-left-radius: 3px !important;
+  border-top-right-radius: 3px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.4) inset !important;
+  cursor: pointer;
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  min-height: auto !important;
+  line-height: 1.4;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.aim-prefs-tab:hover {
+  background: linear-gradient(180deg, #fff 0%, #EEEEEA 50%, #DCDCD8 100%) !important;
+}
+
+.aim-prefs-tab.active {
+  background: #fff !important;
+  border-top: 2px solid #FF8C00 !important;
+  border-bottom: 2px solid #fff !important;
+  border-top-left-radius: 3px !important;
+  border-top-right-radius: 3px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  box-shadow: none !important;
+  font-weight: bold !important;
+  z-index: 1;
+  margin-top: 0;
+  margin-bottom: -2px;
+  padding: 4px 10px 3px !important;
+}
+
+/* ── Tab panel body ── */
+.aim-prefs-panel {
+  background: linear-gradient(180deg, #F8F8F5 0%, #F0EDE5 100%);
+  border: 1px solid #ACA899;
+  margin: 0 14px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.aim-prefs-content-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 8px 18px;
+  background: transparent;
+}
+
+/* ── Dialog button bar ── */
+.aim-prefs-button-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #ECE9D8;
+  flex-shrink: 0;
+}
+
+.aim-prefs-btn {
+  min-width: 70px;
+  padding: 3px 10px !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  background: linear-gradient(180deg, #fff 0%, #E8E8E4 50%, #D2D2CC 100%) !important;
+  border: 1px solid #003399 !important;
+  border-radius: 3px !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.5) inset !important;
+  min-height: auto !important;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.aim-prefs-btn:hover {
+  background: linear-gradient(180deg, #fff 0%, #EEEEEA 50%, #DCDCD8 100%) !important;
+}
+
+.aim-prefs-btn:active {
+  background: #D6D0C4 !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.2) !important;
+}
+
+/* ── XP portal dropdown menus (global — rendered via createPortal on body) ── */
+[data-theme="xX_sCeNeIt_Xx"] body > .fixed[class*="bg-surface"] {
+  border: 1px solid #868686 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: #fff !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] body > .fixed[class*="bg-surface"] button {
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  background: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 1px 4px !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] body > .fixed[class*="bg-surface"] button:hover {
+  background: #316AC5 !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+/* ── XP group box (fieldset/legend) ── */
+[data-theme="xX_sCeNeIt_Xx"] .xp-group-box {
+  border: 1px solid #ACA899 !important;
+  border-radius: 0 !important;
+  padding: 8px !important;
+  margin: 8px 0 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .xp-group-box-label {
+  color: #1B56CB !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  padding: 0 4px !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+[data-theme="sciin_it"] .sciin-minimap-shell::before,
+[data-theme="sciin_it"] .sciin-minimap-shell::after {
+  display: none !important;
+}
+/* Floorplan section: no ==== dividers, header dropped one line */
+[data-theme="sciin_it"] .layout-minimap .sciin-terminal-band::before,
+[data-theme="sciin_it"] .layout-minimap .sciin-terminal-band::after {
+  display: none !important;
+}
+[data-theme="sciin_it"] .layout-minimap .sciin-section-body::before {
+  display: none !important;
+}
+[data-theme="sciin_it"] .layout-minimap .sciin-section-header {
+  margin-top: 16px;
+  margin-bottom: 0 !important;
+  --section-accent: var(--rl-blue);
+}
+[data-theme="sciin_it"] .layout-minimap .sciin-section-body {
+  padding-top: 0 !important;
+}
+[data-theme="sciin_it"] .sciin-minimap-readout {
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.14em;
+  text-shadow: none;
+}
+[data-theme="sciin_it"] .sciin-minimap-readout-side {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Empty state panels (No media yet, No anchors) ── */
+[data-theme="sciin_it"] .sciin-empty-state {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  position: relative;
+}
+[data-theme="sciin_it"] .sciin-empty-state:hover {
+  background: transparent !important;
+}
+[data-theme="sciin_it"] .sciin-empty-state::before {
+  content: "";
+  position: absolute;
+  top: -13px; left: -14px; right: -14px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 10;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='16'%3E%3Crect width='18' height='16' fill='%23000000'/%3E%3Ctext x='9' y='8' text-anchor='middle' dominant-baseline='central' font-size='11' fill='%23c8c8dc' font-weight='bold' font-family='monospace'%3E%E2%80%BB%3C/text%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='16'%3E%3Crect width='18' height='16' fill='%23000000'/%3E%3Ctext x='9' y='8' text-anchor='middle' dominant-baseline='central' font-size='11' fill='%23c8c8dc' font-weight='bold' font-family='monospace'%3E%E2%80%BB%3C/text%3E%3C/svg%3E");
+  background-position: left center, right center;
+  background-repeat: no-repeat;
+  background-size: 18px 16px;
+}
+[data-theme="sciin_it"] .sciin-empty-state::after {
+  content: "";
+  position: absolute;
+  bottom: -13px; left: -14px; right: -14px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 10;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='16'%3E%3Crect width='18' height='16' fill='%23000000'/%3E%3Ctext x='9' y='8' text-anchor='middle' dominant-baseline='central' font-size='11' fill='%23c8c8dc' font-weight='bold' font-family='monospace'%3E%E2%80%BB%3C/text%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='16'%3E%3Crect width='18' height='16' fill='%23000000'/%3E%3Ctext x='9' y='8' text-anchor='middle' dominant-baseline='central' font-size='11' fill='%23c8c8dc' font-weight='bold' font-family='monospace'%3E%E2%80%BB%3C/text%3E%3C/svg%3E");
+  background-position: left center, right center;
+  background-repeat: no-repeat;
+  background-size: 18px 16px;
+}
+
+/* Form controls inside preferences */
+[data-theme="xX_sCeNeIt_Xx"] .aim-prefs-content-body label {
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .aim-prefs-content-body input:not([type="range"]),
+[data-theme="xX_sCeNeIt_Xx"] .aim-prefs-content-body select,
+[data-theme="xX_sCeNeIt_Xx"] .aim-prefs-content-body button:not(.aim-prefs-btn) {
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FLOORPLAN — MAPQUEST CHROME
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Container ── */
+.mq-container {
+  background: #fff;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+}
+
+/* ── MapQuest Header Bar ── */
+.mq-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: #fff;
+  border-bottom: 1px solid #ACA899;
+  min-height: 28px;
+  gap: 8px;
+}
+
+.mq-header-logo {
+  height: 18px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.mq-header-tools {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+}
+
+.mq-tool-btn {
+  min-width: 44px !important;
+  padding: 2px 8px !important;
+  font-size: 10px !important;
+}
+
+.mq-tool-btn-active {
+  background: #D6D0C4 !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.2) !important;
+  border-color: #003399 !important;
+}
+
+/* ── Map Canvas ── */
+.mq-canvas {
+  border: 2px solid #8CA8C8;
+  margin: 2px;
+  overflow: hidden;
+}
+
+.mq-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── Directional Navigation Pad ── */
+.mq-nav-pad {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: grid;
+  grid-template-areas:
+    ".     north ."
+    "west  ctr   east"
+    ".     south .";
+  grid-template-columns: 22px 22px 22px;
+  grid-template-rows: 22px 22px 22px;
+  gap: 1px;
+  z-index: 10;
+}
+
+.mq-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0 !important;
+  border: 1px solid #8CA8C8 !important;
+  border-radius: 2px !important;
+  background: linear-gradient(180deg, #fff 0%, #E8EEF4 100%) !important;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.8) !important;
+  cursor: pointer;
+  color: #2B5797;
+  min-height: auto !important;
+}
+
+.mq-nav-btn:hover {
+  background: linear-gradient(180deg, #E8F0FF 0%, #C8D8F0 100%) !important;
+  border-color: #5080C0 !important;
+}
+
+.mq-nav-btn:active {
+  background: linear-gradient(180deg, #C0D0E8 0%, #A8B8D0 100%) !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.2) !important;
+}
+
+.mq-nav-n { grid-area: north; }
+.mq-nav-s { grid-area: south; }
+.mq-nav-e { grid-area: east; }
+.mq-nav-w { grid-area: west; }
+.mq-nav-center {
+  grid-area: ctr;
+  border-radius: 50% !important;
+  background: linear-gradient(180deg, #5B9BD5 0%, #2B6CB0 100%) !important;
+  border-color: #1A4A80 !important;
+}
+.mq-nav-center:hover {
+  background: linear-gradient(180deg, #70AAE0 0%, #3B7CC0 100%) !important;
+}
+
+.mq-nav-btn svg {
+  width: 10px;
+  height: 10px;
+}
+
+/* ── Zoom Controls ── */
+.mq-zoom-control {
+  position: absolute;
+  top: 8px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  z-index: 10;
+  transform: translateX(50%);
+}
+
+.mq-zoom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0 !important;
+  border: 1px solid #8CA8C8 !important;
+  border-radius: 2px !important;
+  background: linear-gradient(180deg, #fff 0%, #E8EEF4 100%) !important;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.8) !important;
+  cursor: pointer;
+  color: #2B5797;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  min-height: auto !important;
+}
+
+.mq-zoom-btn:hover {
+  background: linear-gradient(180deg, #E8F0FF 0%, #C8D8F0 100%) !important;
+  border-color: #5080C0 !important;
+}
+
+.mq-zoom-btn:active {
+  background: linear-gradient(180deg, #C0D0E8 0%, #A8B8D0 100%) !important;
+}
+
+.mq-zoom-level {
+  padding: 2px 4px;
+  font-size: 7.5px;
+  color: #2B5797;
+  font-weight: 700;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  text-shadow: 0 1px 0 #fff;
+  background: rgba(255,255,255,.75);
+  border: 1px solid #8CA8C8;
+  border-top: none;
+  border-bottom: none;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* ── MapQuest Status Bar ── */
+.mq-status {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: #ECE9D8;
+  border-top: 1px solid #ACA899;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 10px;
+  color: #444;
+  min-height: 20px;
+  gap: 4px;
+}
+
+.mq-status-sep {
+  width: 1px;
+  height: 12px;
+  background: #ACA899;
+  margin: 0 4px;
+}
+
+.mq-status-copyright {
+  margin-left: auto;
+  color: #999;
+  font-size: 9px;
+}
+
+/* ── Tool button overrides (title bar) ── */
+.aim-floorplan-tool {
+  padding: 2px 4px !important;
+  border: 1px solid transparent !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+  color: #000;
+  cursor: pointer;
+}
+
+.aim-floorplan-tool:hover {
+  border-color: #5080C0 !important;
+  background: rgba(255,255,255,.15) !important;
+}
+
+.aim-floorplan-tool-active {
+  border: 1px solid #5080C0 !important;
+  background: rgba(255,255,255,.2) !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.15) !important;
+  color: #fff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TIMELINE — WINDOWS MOVIE MAKER CHROME
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Container ── */
+.wmm-container {
+  background: #fff;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  border-radius: 0 !important;
+}
+
+/* ── WMM Toolbar (icons + "Show Storyboard") ── */
+.wmm-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 4px;
+  background: #ECE9D8;
+  border-bottom: 1px solid #ACA899;
+  border-radius: 0 !important;
+  min-height: 26px;
+}
+
+.wmm-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.wmm-toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  color: #333;
+  min-height: auto !important;
+}
+
+.wmm-toolbar-btn:hover {
+  border-color: #C1D2EE !important;
+  background: linear-gradient(180deg, #FAFBFD 0%, #D6DFF7 100%) !important;
+  box-shadow: 0 0 0 1px #98B5E2 inset !important;
+}
+
+.wmm-toolbar-btn:active {
+  background: linear-gradient(180deg, #C4D5F1 0%, #A8C0E6 100%) !important;
+  border-color: #6D8FBF !important;
+}
+
+.wmm-toolbar-btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.wmm-toolbar-btn svg,
+.wmm-toolbar-btn img {
+  width: 14px !important;
+  height: 14px !important;
+  color: #333 !important;
+}
+
+.wmm-toolbar-menu-btn {
+  padding: 2px 8px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: #000;
+  cursor: pointer;
+  min-height: auto !important;
+  white-space: nowrap;
+}
+
+.wmm-toolbar-menu-btn:hover {
+  background: #D6DFF7 !important;
+}
+
+.wmm-toolbar-menu-open {
+  background: #C4D5F1 !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.1) !important;
+}
+
+.wmm-toolbar-sep {
+  width: 1px;
+  height: 18px;
+  background: #ACA899;
+  margin: 0 3px;
+}
+
+.wmm-storyboard-toggle {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 3px 10px !important;
+  border: 1px solid #003399 !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, #fff 0%, #E8E8E4 50%, #D2D2CC 100%) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.5) inset !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: #000;
+  cursor: pointer;
+  min-height: auto !important;
+  white-space: nowrap;
+}
+
+.wmm-storyboard-toggle:hover {
+  background: linear-gradient(180deg, #fff 0%, #EEEEEA 50%, #DCDCD8 100%) !important;
+}
+
+.wmm-storyboard-toggle:active {
+  background: #D6D0C4 !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.2) !important;
+}
+
+.wmm-storyboard-active {
+  background: #D6D0C4 !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.2) !important;
+}
+
+/* ── WMM Monitor (transport controls wrapper) ── */
+.wmm-monitor {
+  background:
+    linear-gradient(180deg,
+      #D1D4E3 0%,
+      #B7CBE4 5%,
+      #BCCEE7 10%,
+      #F0F2F8 18%,
+      #FFFFFF 26%,
+      #D3DAF0 42%,
+      #9CAFD3 58%,
+      #9CB6DB 71%,
+      #B9D2EF 82%,
+      #B6C4DA 94%,
+      #8E9EBB 96%
+    ) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 6px 10px !important;
+  gap: 4px !important;
+}
+
+/* Transport group spacing inside monitor */
+.wmm-monitor .transport-group {
+  gap: 6px !important;
+}
+
+/* Override transport group buttons inside monitor to be circular metallic */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group button {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid #5C6A82 !important;
+  outline: 2px solid transparent !important;
+  outline-offset: 1px !important;
+  background:
+    radial-gradient(ellipse 123% 104% at 25% 20%, #FFFFFF 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(ellipse 169% 169% at 35% 33%,
+      #F8FAFF 0%,
+      #DDE0EE 25%,
+      #C2D4EA 45%,
+      #9CAFD3 70%,
+      #8E9EBB 100%
+    ) !important;
+  box-shadow:
+    -1px -1px 1px rgba(0,0,0,.25),
+    2px 2px 1px rgba(255,255,255,.6),
+    3px 3px 3px rgba(0,0,0,.10),
+    inset -1px -1px 1px rgba(0,0,0,.06),
+    inset 1px 1px 0 rgba(255,255,255,1) !important;
+  margin: 1px !important;
+  cursor: pointer;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group button:hover {
+  background:
+    radial-gradient(ellipse 131% 113% at 23% 18%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(ellipse 169% 169% at 35% 33%,
+      #FFFFFF 0%,
+      #D3DAF0 25%,
+      #BCCEE7 45%,
+      #9CB6DB 70%,
+      #8E9EBB 100%
+    ) !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group button:active {
+  background:
+    radial-gradient(ellipse 55% 45% at 60% 65%, rgba(255,255,255,.35) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 90% at 52% 52%,
+      #D1D4E3 0%,
+      #B7CBE4 30%,
+      #9CAFD3 60%,
+      #8E9EBB 100%
+    ) !important;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.18),
+    inset 1px 1px 2px rgba(0,0,0,.12) !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group button:disabled .wmm-icon {
+  opacity: 0.35;
+}
+
+/* WMM transport icon styling (Lucide SVGs with debossed look) */
+.wmm-icon {
+  width: 13px !important;
+  height: 13px !important;
+  stroke-width: 2.5 !important;
+  color: #4A5468 !important;
+  fill: #4A5468 !important;
+  filter: drop-shadow(1px 1px 0 rgba(255,255,255,.55)) !important;
+  display: block !important;
+  margin: auto !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Time display inside WMM monitor */
+.wmm-monitor .time-display {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.wmm-monitor .time-display span,
+.wmm-monitor .time-display button {
+  color: #1A2040 !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+}
+
+.wmm-monitor .time-display button:hover {
+  color: #003399 !important;
+}
+
+/* Speed/FPS dropdown text buttons inside monitor — silvery prefs style */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group div > button {
+  color: #000 !important;
+  background: linear-gradient(180deg, #fff 0%, #E8E8E4 50%, #D2D2CC 100%) !important;
+  border: 1px solid #003399 !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.5) inset !important;
+  width: auto !important;
+  min-width: auto !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  border-radius: 3px !important;
+  padding: 2px 8px !important;
+  margin: 0 !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group div > button:hover {
+  background: linear-gradient(180deg, #fff 0%, #EEEEEA 50%, #DCDCD8 100%) !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group div > button:active {
+  background: #D6D0C4 !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.2) !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group div > button svg {
+  color: #000 !important;
+  width: 9px !important;
+  height: 9px !important;
+  filter: none !important;
+  fill: none !important;
+}
+
+/* Loop button inside monitor */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-monitor .transport-group button[class*="active"] {
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.3),
+    inset 0 0 4px rgba(80,160,255,.5) !important;
+  border-color: #5080C0 !important;
+}
+
+/* ── WMM Tracks area ── */
+.wmm-tracks-area {
+  padding: 0 28px 0 0;
+  background: #fff;
+}
+
+/* Force white backgrounds throughout the timeline + graph editor area */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-container [class*="bg-surface"],
+[data-theme="xX_sCeNeIt_Xx"] .wmm-container ~ div [class*="bg-surface"],
+[data-theme="xX_sCeNeIt_Xx"] .wmm-container ~ div,
+[data-theme="xX_sCeNeIt_Xx"] .flex.select-none:has(.graph-editor-channels),
+[data-theme="xX_sCeNeIt_Xx"] .flex.select-none:has(.graph-editor-channels) [class*="bg-surface"] {
+  background-color: #fff !important;
+}
+
+/* ── WMM Track labels ── */
+.wmm-track-label {
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #000 !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 8px !important;
+  cursor: pointer !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  border-right: 1px solid #C0C8D0 !important;
+}
+
+.wmm-track-label:hover {
+  color: #0055CC !important;
+}
+
+.wmm-track-expand {
+  font-size: 12px;
+  line-height: 1;
+  margin-right: 3px;
+  color: #666;
+}
+
+.wmm-track-label-sub {
+  font-family: "Tahoma", "Segoe UI", sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #333 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 0 8px !important;
+  border-right: 1px solid #C0C8D0 !important;
+}
+
+/* ── WMM Ruler override ── */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .cursor-pointer[style*="height"] {
+  background: #C8D0D8;
+  border-bottom: 1px solid #A0A8B0;
+}
+
+/* Ruler tick marks in WMM */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .cursor-pointer .w-px.bg-content-faint {
+  background-color: #606870 !important;
+}
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .cursor-pointer .w-px[class*="bg-surface-border"] {
+  background-color: #90989E !important;
+}
+
+/* Ruler time labels in WMM */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .cursor-pointer span[class*="text-content-faint"] {
+  color: #333 !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+}
+
+/* ── WMM Track backgrounds ── */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .win95-track,
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .win95-track.bg-surface-raised,
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .win95-inset,
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .win95-inset.bg-surface-raised,
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area div[class*="bg-surface-raised"] {
+  background: #fff !important;
+  background-color: #fff !important;
+  border: 1px solid #B8C8D8 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Track separator dashes between tracks (WMM blue dashes) */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .mt-1 {
+  border-top: 1px dashed #A8C8E8;
+  margin-top: 0 !important;
+  padding-top: 2px;
+}
+
+/* ── WMM Playhead ── */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .playhead-line {
+  background-color: #3366CC !important;
+  width: 1px !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area .playhead-marker {
+  background: #3366CC !important;
+  border-radius: 1px !important;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%) !important;
+  width: 11px !important;
+  height: 12px !important;
+}
+
+/* ── WMM Keyframe diamonds ── */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area [data-kf-diamond] > div {
+  border-radius: 1px !important;
+}
+
+/* ── WMM Curve preview lines ── */
+[data-theme="xX_sCeNeIt_Xx"] .wmm-tracks-area polyline {
+  stroke: #B0C0D0 !important;
+}
+
+/* ── WMM Properties panel (selected keyframe details) ── */
+.wmm-properties {
+  background: #fff;
+  border-top: 1px solid #D0D0D0;
+  padding: 6px 10px !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+}
+
+.wmm-properties span[class*="text-content-muted"] {
+  color: #333 !important;
+  font-size: 11px !important;
+}
+
+.wmm-properties select,
+.wmm-properties input {
+  background: #fff !important;
+  border: 1px solid #7F9DB9 !important;
+  border-radius: 2px !important;
+  color: #000 !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px !important;
+}
+
+/* ── WMM empty state ── */
+.wmm-empty-state {
+  color: #808080 !important;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px !important;
+  padding: 20px 12px !important;
+  background: #fff;
+}
+
+/* ── Bottom panel override for WMM ── */
+[data-theme="xX_sCeNeIt_Xx"] .win95-bottom-panel {
+  border: none !important;
+  background: #fff !important;
+}
+
+/* Time display outside WMM monitor (override original block) */
+[data-theme="xX_sCeNeIt_Xx"] .time-display:not(.wmm-monitor .time-display) {
+  border-top: 1px solid #848484;
+  border-left: 1px solid #848484;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  background: #fff !important;
+  box-shadow: inset 1px 1px 0 #C0C0C0;
+  padding: 2px 8px;
+  border-radius: 0;
+  color: #000 !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .time-display:not(.wmm-monitor .time-display) span,
+[data-theme="xX_sCeNeIt_Xx"] .time-display:not(.wmm-monitor .time-display) button {
+  color: #000 !important;
+  box-shadow: none !important;
+  background: none !important;
+  min-height: auto !important;
+  border: none !important;
+}
+
+[data-theme="xX_sCeNeIt_Xx"] .time-display:not(.wmm-monitor .time-display) button:hover {
+  color: #0055CC !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   XP WINDOW MINIMIZE/RESTORE ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes xp-minimize {
+  0% {
+    transform: translate(0, 0) scale(1, 1);
+    opacity: 1;
+  }
+  100% {
+    transform: var(--xp-anim-transform);
+    opacity: 0;
+  }
+}
+
+@keyframes xp-restore {
+  0% {
+    transform: var(--xp-anim-transform);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) scale(1, 1);
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AIM BUDDY LIST CONTEXT MENU
+   ═══════════════════════════════════════════════════════════════ */
+
+.aim-ctx-menu {
+  background: #fff;
+  border: 1px solid #868686;
+  box-shadow: 2px 2px 4px rgba(0,0,0,.2);
+  padding: 2px 0;
+  min-width: 150px;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+}
+
+.aim-ctx-item {
+  display: block;
+  width: 100%;
+  padding: 4px 12px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: left;
+  color: #000;
+  cursor: pointer;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  min-height: auto !important;
+}
+
+.aim-ctx-item:hover {
+  background: #3169C6 !important;
+  color: #fff !important;
+}
+
+.aim-ctx-item:disabled {
+  color: #999;
+  cursor: default;
+}
+
+.aim-ctx-item:disabled:hover {
+  background: transparent !important;
+  color: #999 !important;
+}
+
+.aim-ctx-danger {
+  color: #C00;
+}
+
+.aim-ctx-danger:hover {
+  background: #C00 !important;
+  color: #fff !important;
+}
+
+.aim-ctx-sep {
+  height: 1px;
+  background: #D0D0D0;
+  margin: 2px 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AIM AWAY MESSAGE EASTER EGG
+   ═══════════════════════════════════════════════════════════════ */
+
+.aim-away-message {
+  margin: 12px 10px;
+  padding: 12px;
+  background: #FFFDE7;
+  border: 1px solid #C8A200;
+  border-radius: 0;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  text-align: center;
+}
+
+.aim-away-icon {
+  margin: 0 auto 8px;
+  display: block;
+}
+
+.aim-away-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.aim-away-body {
+  font-size: 11px;
+  color: #333;
+  background: #fff;
+  border: 1px solid #C8A200;
+  padding: 8px;
+}
+
+.aim-away-body p {
+  margin: 0 0 4px;
+}
+
+.aim-away-timestamp {
+  font-size: 10px;
+  color: #999;
+  font-style: italic;
+  margin-top: 6px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AIM BUDDY INFO POPUP
+   ═══════════════════════════════════════════════════════════════ */
+
+.aim-buddy-info {
+  position: fixed;
+  z-index: 10000;
+  width: 240px;
+  font-family: "Tahoma", "Segoe UI", sans-serif;
+  font-size: 11px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  border: 1px solid #0055CC;
+  border-radius: 0;
+}
+
+.aim-buddy-info-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px 2px 6px;
+  background: linear-gradient(180deg, #0A246A 0%, #3A6EA5 50%, #0A246A 100%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.aim-buddy-info-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.aim-buddy-info-title-icon {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0;
+  filter: none !important;
+}
+
+.aim-buddy-info-close {
+  background: none !important;
+  border: none !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  cursor: pointer;
+  padding: 0 4px !important;
+  min-height: auto !important;
+  line-height: 1;
+  border-radius: 0 !important;
+}
+
+.aim-buddy-info-close:hover {
+  background: rgba(255,255,255,0.2) !important;
+}
+
+.aim-buddy-info-body {
+  background: #ECE9D8;
+  padding: 8px 10px;
+}
+
+.aim-info-row {
+  display: flex;
+  gap: 6px;
+  padding: 1px 0;
+  line-height: 1.4;
+}
+
+.aim-info-label {
+  color: #333;
+  font-weight: bold;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.aim-info-value {
+  color: #000;
+  word-break: break-all;
+}

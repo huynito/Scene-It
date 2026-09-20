@@ -1,0 +1,44 @@
+---
+description: Intentional design decisions that should NOT be flagged as bugs or tech debt during audits
+alwaysApply: true
+---
+
+# Conscious Decisions — Not Bugs
+
+These items have been reviewed in prior audits and confirmed as intentional. Do not flag them as issues.
+
+## PlaylistPanel volume defaults to 0
+The Winamp playlist player starts muted. This is intentional — auto-playing audio on page load is disruptive.
+
+## `headWiggle` ref is kept (not dead code)
+`setHeadWiggle` in SceneRefs is populated and wired. It controls subtle camera motion during playback. It may appear unused because it's called from PlaybackController, not directly from React components.
+
+## `condenseToWorkArea` is dormant (deferred feature)
+The right-click context menu action exists but is not actively surfaced. It's a deferred feature for condensing timeline keyframes to the work area bracket. Do not remove.
+
+## `_targetBlendT` is not reset on stop
+When playback stops, `_targetBlendT` retains its value. This is correct — resetting it would cause a visual snap when resuming playback from the stopped position.
+
+## `fovStrokeVisible` defaults to `true` in the renderer
+This avoids a timing issue where the `useEffect` in `PlyCanvas.tsx` that syncs `showFovStroke` fires before the renderer is initialized, making the initial sync a no-op. The renderer default matches the context default (`showFovStroke: true`).
+
+## Direct+ mode is always-on (no render mode toggle)
+The `renderMode` state and Sharpness slider were intentionally removed. The renderer always uses MSAA 4x, TAA disabled, sharpening disabled, HDR render targets, and dithering. This was a conscious consolidation — the two-mode system added confusion without meaningful visual benefit.
+
+## JSON.parse/stringify for undo snapshot cloning
+`cloneSnapshot()` uses `JSON.parse(JSON.stringify(...))` for deep cloning. This is fragile for non-serializable data but acceptable because current state shapes (anchors, paths, anchorAnimations) are all plain objects and arrays. See architecture.mdc for the trigger condition to change this.
+
+## Canvas/graph color maps are manual lookups
+`CANVAS_COLORS` and `GRAPH_COLORS` are hand-maintained per-theme maps rather than derived from theme tokens. This is intentional — per-theme artistic choices (Win95 checkerboard, sciin_it glow) can't be derived from generic tokens. See theme-system.mdc for details.
+
+## Single monolithic SceneContext (not split)
+The God Context is a known trade-off — see architecture.mdc. Do not propose splitting it unless React Profiler data shows measurable frame drops caused by context re-renders.
+
+## 22 useEffect hooks in PlyCanvas.tsx
+Each effect syncs one state property to the renderer. This is the intentional one-property-per-effect pattern. See architecture.mdc.
+
+## sc3ne_it theme hidden from theme picker
+The cyberpunk theme (`sc3ne_it`) exists in the code but is excluded from the `UI_THEMES` array. It was superseded by the `sciin_it` CGA terminal theme. The code remains in case it's revived.
+
+## Single-threaded export blocks the UI
+The frame-by-frame capture loop runs synchronously in the main thread's RAF. An OffscreenCanvas/worker approach is deferred until users report export durations as a pain point.

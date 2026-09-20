@@ -1,0 +1,49 @@
+# dependencies
+node_modules/
+
+# next.js build
+.next/
+out/
+
+# build info
+tsconfig.tsbuildinfo
+
+# environment
+.env
+.env.*
+
+# scene assets (large binary files — track separately or use LFS)
+public/scenes/**/*.ply
+public/scenes/**/*.glb
+public/scenes/**/*.splat
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+!.vscode/settings.json
+*.swp
+*.swo
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# vercel
+.vercel
+
+# turbopack
+.turbo
+
+# Phase B consolidation output (regenerate via: node scripts/consolidate.mjs)
+_consolidation/
+
+# playwright
+playwright-report/
+test-results/
+/blob-report/
+/playwright/.cache/
+.playwright/

@@ -1,0 +1,1812 @@
+html[data-theme="scenit"] {
+  --sf-base: 0 204 102;
+  --sf-primary: 255 255 255;
+  --sf-raised: 230 255 240;
+  --sf-border: 34 34 34;
+  --sf-border-secondary: 255 0 110;
+  --tx-primary: 26 48 56;
+  --tx-secondary: 45 80 88;
+  --tx-muted: 107 144 152;
+  --tx-faint: 160 188 196;
+  --ac-300: 255 92 158;
+  --ac-400: 255 0 110;
+  --ac-500: 212 0 92;
+  --ac-600: 170 0 74;
+  --border-radius: 10px;
+  --panel-shadow: 4px 4px 0 #222;
+  --glow: transparent;
+  --font-ui: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
+  --scroll-thumb: 0 204 102;
+  --scroll-thumb-hover: 0 180 90;
+  --hl: #FF006E;
+}
+
+/* ── Floating-panel layout: green grid background ── */
+[data-theme="scenit"] .flex.h-screen.w-screen,
+[data-theme="scenit"] .h-screen.w-screen {
+  padding: 16px !important;
+  gap: 16px !important;
+  background-color: #00CC66 !important;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px) !important;
+  background-size: 20px 20px !important;
+}
+
+/* ── CSS Grid for scenit main layout ── */
+.scenit-main-grid {
+  display: grid !important;
+  grid-template-columns: 280px 1fr 288px;
+  gap: 16px;
+  overflow: visible;
+}
+
+/* ── Column containers ── */
+.scenit-panel-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  padding-right: 6px;
+  padding-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+.scenit-panel-column[data-panel="left"],
+.scenit-panel-column[data-panel="right"] {
+  margin-top: -16px;
+  padding-top: 16px;
+  margin-bottom: -16px;
+  padding-bottom: 16px;
+  max-height: 100vh;
+}
+.scenit-panel-column > .scenit-floating-panel {
+  flex-shrink: 0;
+}
+/* Side-column panels: don't scroll individually — the column scrolls */
+.scenit-panel-column[data-panel="left"] > .scenit-panel-scroll,
+.scenit-panel-column[data-panel="right"] > .scenit-panel-scroll {
+  overflow-y: hidden !important;
+  overscroll-behavior: auto !important;
+}
+.scenit-center-zone {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Viewport panel: locked 16:9 ── */
+.scenit-viewport-panel {
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+}
+
+/* ── Floating panel window style ── */
+.scenit-floating-panel {
+  border: 2px solid #222 !important;
+  border-radius: 10px !important;
+  background-color: #fff !important;
+  box-shadow: 4px 4px 0 #222 !important;
+  overflow: hidden !important;
+}
+
+/* ── Scrollable panels ── */
+.scenit-panel-scroll {
+  overflow-y: auto !important;
+  overscroll-behavior: none !important;
+  -webkit-overflow-scrolling: auto;
+  min-height: 0;
+  flex-shrink: 1;
+}
+
+/* ── Sticky section headers inside scrollable panels ── */
+[data-theme="scenit"] [data-section-header] {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10;
+  background-color: #fff !important;
+  border-bottom: 1.5px solid #e5e5e5;
+}
+
+/* ── Viewport browser-style header ── */
+.scenit-viewport-header {
+  padding: 5px 10px;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid #222;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  color: #222;
+}
+.scenit-viewport-header::before {
+  content: "";
+  display: inline-flex;
+  width: 36px;
+  min-width: 36px;
+  height: 10px;
+  background:
+    radial-gradient(circle 4px at 5px 5px,  #FF006E 3px, #222 3px, #222 4px, transparent 4.5px),
+    radial-gradient(circle 4px at 17px 5px, #FFE227 3px, #222 3px, #222 4px, transparent 4.5px),
+    radial-gradient(circle 4px at 29px 5px, #00CC66 3px, #222 3px, #222 4px, transparent 4.5px);
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+.scenit-vh-spacer {
+  flex: 1;
+}
+.scenit-vh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1.5px solid #222;
+  border-radius: 6px;
+  background: #fff;
+  color: #222;
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+  white-space: nowrap;
+}
+.scenit-vh-btn:hover {
+  transform: none;
+  box-shadow: none;
+}
+.scenit-vh-btn:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+.scenit-vh-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.scenit-vh-btn--accent {
+  background: #FF006E;
+  color: #fff;
+  border-color: #222;
+}
+.scenit-vh-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: #7B2FFF !important;
+}
+.scenit-vh-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 999;
+  margin-top: 4px;
+  min-width: 160px;
+  border: 2px solid #222;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 4px 4px 0 #222;
+  padding: 4px 0;
+}
+.scenit-vh-dropdown button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #222;
+  background: transparent;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  transform: none !important;
+}
+.scenit-vh-dropdown button:hover {
+  background: transparent;
+  transform: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: var(--hl, #FF006E);
+}
+
+/* Ensure panels sit above background */
+[data-theme="scenit"] .flex.h-screen.w-screen > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   SCĒNIT  —  Neubrutalist
+   Vibrant color fills, consistent dark (#222) outlines,
+   hard offset shadows, 0px radii.
+   ============================================================ */
+
+/* ── Side panel containers: full 3px black borders on all edges ── */
+/* Panel column zones: no own border (individual floating panels provide it) */
+
+
+/* (Paths panel: no longer overlaid — now in right column as own floating panel) */
+
+/* ── Flush header inside rounded-theme panels (Timeline, Floorplan) ── */
+[data-theme="scenit"] [class*="rounded-theme"] [data-section] > [class*="tracking-wider"] {
+  border: none !important;
+  border-bottom: 2px solid #222 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+[data-theme="scenit"] [class*="rounded-theme"] [data-section] > [class*="tracking-wider"]:hover {
+  transform: none !important;
+  border: none !important;
+  border-bottom: 2px solid #222 !important;
+  box-shadow: none !important;
+}
+
+/* ── Panels: no own border (parent floating-panel provides it) ── */
+[data-theme="scenit"] [class*="rounded-theme"] {
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-image: none;
+  border-radius: 0 !important;
+}
+
+/* Panels nested inside side panels: strip side borders (parent provides them) */
+/* Inner rounded-theme inside floating panels: strip all chrome */
+[data-theme="scenit"] .scenit-floating-panel [class*="rounded-theme"] {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+[data-theme="scenit"] [class*="shadow-panel"] {
+  box-shadow: none !important;
+}
+
+/* ── Buttons: dark outlines + offset shadow ── */
+[data-theme="scenit"] button {
+  font-weight: 600;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+  border-radius: 8px !important;
+}
+
+[data-theme="scenit"] button:not([class*="ghost"]):not([class*="ThemePreviewCard"]) {
+  border: 2px solid #222 !important;
+  box-shadow: 3px 3px 0 #222;
+}
+
+[data-theme="scenit"] button:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--hl) !important;
+  border-color: var(--hl) !important;
+}
+
+[data-theme="scenit"] button:not(:disabled):active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #222 !important;
+}
+
+/* Primary buttons: magenta fill */
+[data-theme="scenit"] button[class*="bg-accent"] {
+  background-color: #FF006E !important;
+  color: #fff !important;
+  border-color: #222 !important;
+  box-shadow: 3px 3px 0 #222;
+}
+[data-theme="scenit"] button[class*="bg-accent"]:hover:not(:disabled) {
+  background-color: #FF3C8E !important;
+  box-shadow: 4px 4px 0 #222 !important;
+}
+
+/* Ghost buttons: no border, no shadow */
+[data-theme="scenit"] button[class*="ghost"],
+[data-theme="scenit"] [class*="ghost"] button {
+  border: none !important;
+  box-shadow: none !important;
+}
+[data-theme="scenit"] button[class*="ghost"]:hover:not(:disabled),
+[data-theme="scenit"] [class*="ghost"] button:hover:not(:disabled) {
+  transform: none;
+  box-shadow: none !important;
+  background-color: #E0FAF6 !important;
+}
+
+/* ── Icon buttons: dark outline ── */
+[data-theme="scenit"] [class*="IconButton"] button,
+[data-theme="scenit"] button[class*="h-6"][class*="w-6"],
+[data-theme="scenit"] button[class*="h-7"][class*="w-7"],
+[data-theme="scenit"] button[class*="h-8"][class*="w-8"] {
+  border: 2px solid #222 !important;
+  box-shadow: 3px 3px 0 #222;
+  background-color: #fff;
+}
+
+/* ── Section headers: bold color-filled title bars ── */
+[data-theme="scenit"] [class*="tracking-wider"] {
+  font-weight: 800 !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background-color: #00CC66 !important;
+  color: #fff !important;
+  border: none !important;
+  border-bottom: 2px solid #222 !important;
+  box-shadow: none !important;
+  padding: 6px 10px !important;
+  margin: 0;
+}
+
+[data-theme="scenit"] [class*="tracking-wider"] span {
+  color: #fff !important;
+}
+
+[data-theme="scenit"] [class*="tracking-wider"] svg {
+  color: #fff !important;
+}
+
+/* ── Headers inside side panels: no real borders, use inset shadows instead ──
+   Side framing comes from the panel container's 3px border.
+   Inset shadows simulate top/bottom borders without layout/alignment issues.
+   Specificity (0,4,0) beats button:not(…):not(…) at (0,3,1). */
+[data-theme="scenit"] [data-panel="left"] [data-section] > [class*="tracking-wider"],
+[data-theme="scenit"] [data-panel="right"] [data-section] > [class*="tracking-wider"] {
+  border: none !important;
+  border-bottom: 2px solid #222 !important;
+  box-shadow: none !important;
+}
+[data-theme="scenit"] [data-panel="left"] [data-section] > [class*="tracking-wider"]:hover,
+[data-theme="scenit"] [data-panel="right"] [data-section] > [class*="tracking-wider"]:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 2px solid #222 !important;
+}
+[data-theme="scenit"] [data-panel="left"] [data-section] > [class*="tracking-wider"]:active,
+[data-theme="scenit"] [data-panel="right"] [data-section] > [class*="tracking-wider"]:active {
+  transform: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 2px solid #222 !important;
+}
+
+/* Floorplan header: match height of other headers, no hover highlight */
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] > [class*="tracking-wider"],
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] > [class*="tracking-wider"]:hover,
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] > [class*="tracking-wider"]:active {
+  display: flex !important;
+  align-items: center !important;
+  padding: 6px 10px !important;
+  border: none !important;
+  border-bottom: 2px solid #222 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+
+/* ── Per-section highlight colors: cross-pairing (adjacency-safe complements) ── */
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="anchors"]          { --hl: #FF006E; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="media-library"]     { --hl: #00CC66; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="camera"]            { --hl: #FF6B35; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="ar-overlay"]        { --hl: #FFE227; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="post-processing"]   { --hl: #00E5FF; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="depth-mesh"]        { --hl: #C77DFF; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="timeline"]          { --hl: #00CC66; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="floorplan"]         { --hl: #00E5FF; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="paths"]             { --hl: #C77DFF; }
+html[data-theme="scenit"][data-hl-mode="cross"] [data-section="font"]              { --hl: #C77DFF; }
+
+/* ── Per-section highlight colors: tonal (palette-derived shades) ── */
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="anchors"]          { --hl: #FFE227; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="media-library"]     { --hl: #C77DFF; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="camera"]            { --hl: #00E5FF; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="ar-overlay"]        { --hl: #FF006E; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="post-processing"]   { --hl: #FF6B35; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="depth-mesh"]        { --hl: #FFE227; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="timeline"]          { --hl: #C77DFF; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="floorplan"]         { --hl: #FF006E; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="paths"]             { --hl: #00CC66; }
+html[data-theme="scenit"][data-hl-mode="tonal"] [data-section="font"]              { --hl: #FF6B35; }
+
+/* ── Per-section header colors (border/shadow inherit #222 from base) ── */
+[data-theme="scenit"] [data-section="anchors"] > [class*="tracking-wider"] {
+  background-color: #FFE227 !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="anchors"] > [class*="tracking-wider"] span,
+[data-theme="scenit"] [data-section="anchors"] > [class*="tracking-wider"] svg {
+  color: #222 !important;
+}
+
+[data-theme="scenit"] [data-section="media-library"] > [class*="tracking-wider"] {
+  background-color: #FF006E !important;
+}
+
+[data-theme="scenit"] [data-section="camera"] > [class*="tracking-wider"] {
+  background-color: #00E5FF !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="camera"] > [class*="tracking-wider"] span,
+[data-theme="scenit"] [data-section="camera"] > [class*="tracking-wider"] svg {
+  color: #222 !important;
+}
+
+[data-theme="scenit"] [data-section="ar-overlay"] > [class*="tracking-wider"] {
+  background-color: #FF6B35 !important;
+}
+
+[data-theme="scenit"] [data-section="post-processing"] > [class*="tracking-wider"] {
+  background-color: #C77DFF !important;
+}
+
+[data-theme="scenit"] [data-section="depth-mesh"] > [class*="tracking-wider"] {
+  background-color: #FFE227 !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="depth-mesh"] > [class*="tracking-wider"] span,
+[data-theme="scenit"] [data-section="depth-mesh"] > [class*="tracking-wider"] svg {
+  color: #222 !important;
+}
+
+[data-theme="scenit"] [data-section="timeline"] > [class*="tracking-wider"] {
+  background-color: #FF006E !important;
+}
+/* Curves toggle in transport row */
+[data-theme="scenit"] .curves-toggle {
+  border: 2px solid #222 !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  padding: 4px 8px !important;
+  font-weight: 700 !important;
+  height: 28px !important;
+  transform: none !important;
+}
+[data-theme="scenit"] .curves-toggle:hover:not(:disabled) {
+  border-color: #00E5FF !important;
+  box-shadow: 3px 3px 0 #00E5FF !important;
+  background-color: #fff !important;
+  color: #00E5FF !important;
+  transform: none !important;
+}
+
+[data-theme="scenit"] [data-section="floorplan"] > [class*="tracking-wider"] {
+  background-color: #FFE227 !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="floorplan"] > [class*="tracking-wider"] span,
+[data-theme="scenit"] [data-section="floorplan"] > [class*="tracking-wider"] svg {
+  color: #222 !important;
+}
+
+[data-theme="scenit"] [data-section="paths"] > [class*="tracking-wider"] {
+  background-color: #00CC66 !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="paths"] > [class*="tracking-wider"] span,
+[data-theme="scenit"] [data-section="paths"] > [class*="tracking-wider"] svg {
+  color: #222 !important;
+}
+/* Sub-headers inside paths panel (Walk Generation, Paths, Presets, Baked Imports): plain text labels */
+[data-theme="scenit"] [data-section="paths"] span[class*="tracking-wider"] {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: #222 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+[data-theme="scenit"] [data-section="paths"] span[class*="tracking-wider"]::before {
+  display: none !important;
+}
+
+/* Sub-headers inside anchors panel: Animation button + Media label */
+/* Animation toggle: neubrutalist button (scoped to nested buttons inside .border-t, NOT the top-level header) */
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > button[class*="tracking-wider"] {
+  background-color: #fff !important;
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  padding: 6px 10px !important;
+  color: #222 !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  margin-bottom: 8px !important;
+  transition: border-color 0.1s, box-shadow 0.1s, color 0.1s;
+}
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > button[class*="tracking-wider"]::before {
+  display: none !important;
+}
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > button[class*="tracking-wider"] span,
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > button[class*="tracking-wider"] svg {
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > button[class*="tracking-wider"]:hover {
+  border-color: var(--hl, #00CC66) !important;
+  box-shadow: 3px 3px 0 var(--hl, #00CC66) !important;
+  color: var(--hl, #00CC66) !important;
+}
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > button[class*="tracking-wider"]:hover span,
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > button[class*="tracking-wider"]:hover svg {
+  color: var(--hl, #00CC66) !important;
+}
+
+/* Keyframe rows: remove tinted background (only inside the scrollable keyframe list) */
+[data-theme="scenit"] [data-section="anchors"] [class*="space-y-1"] > div {
+  background-color: transparent !important;
+}
+/* (Add keyframe button rules moved after .rounded rules for specificity) */
+/* Trash icon button: proper padded button */
+[data-theme="scenit"] [data-section="anchors"] button[class*="text-content-faint"][class*="hover:text-red"]:not([class*="text-left"]) {
+  border: 2px solid #222 !important;
+  border-radius: 6px !important;
+  background-color: #fff !important;
+  padding: 4px !important;
+  box-shadow: 2px 2px 0 #222 !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button[class*="text-content-faint"][class*="hover:text-red"]:not([class*="text-left"]):hover {
+  border-color: #FF006E !important;
+  box-shadow: 2px 2px 0 #FF006E !important;
+  color: #FF006E !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button[class*="text-content-faint"][class*="hover:text-red"]:not([class*="text-left"]):hover svg {
+  color: #FF006E !important;
+}
+
+/* Media label inside anchor cards: plain text (like Walk Generation) */
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > div[class*="tracking-wider"] {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: #222 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+[data-theme="scenit"] [data-section="anchors"] [class*="border-t"] > div[class*="tracking-wider"]::before {
+  display: none !important;
+}
+
+/* Duration row: remove tinted background */
+[data-theme="scenit"] [data-section="paths"] div[class*="bg-surface-raised"] {
+  background-color: transparent !important;
+}
+/* Path rows: black border, no fill, square corners (matches anchor rows) */
+[data-theme="scenit"] [data-section="paths"] div[class*="rounded-md"][class*="cursor-pointer"] {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  background-color: transparent !important;
+  padding: 6px 8px !important;
+}
+[data-theme="scenit"] [data-section="paths"] div[class*="rounded-md"][class*="cursor-pointer"][class*="bg-accent"] {
+  background-color: transparent !important;
+  border-color: var(--hl, #00CC66) !important;
+}
+[data-theme="scenit"] [data-section="paths"] div[class*="rounded-md"][class*="cursor-pointer"][class*="bg-accent"] .truncate {
+  color: var(--hl, #00CC66) !important;
+}
+/* Path dot indicator: use section highlight color */
+[data-theme="scenit"] [data-section="paths"] div[class*="cursor-pointer"] svg[class*="fill-accent"] {
+  fill: var(--hl, #00CC66) !important;
+  color: var(--hl, #00CC66) !important;
+}
+/* Path action buttons: match anchor icon buttons (black border, no shadow, square) */
+[data-theme="scenit"] [data-section="paths"] div[class*="cursor-pointer"] button[class*="rounded"] {
+  border: 2px solid #222 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  padding: 3px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+[data-theme="scenit"] [data-section="paths"] div[class*="cursor-pointer"] button[class*="rounded"]:hover:not(:disabled) {
+  color: var(--hl, #00CC66) !important;
+  border-color: var(--hl, #00CC66) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-theme="scenit"] [data-section="paths"] div[class*="cursor-pointer"] button[class*="rounded"] svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+[data-theme="scenit"] [data-section="font"] > [class*="tracking-wider"] {
+  background-color: #00E5FF !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="font"] > [class*="tracking-wider"] span,
+[data-theme="scenit"] [data-section="font"] > [class*="tracking-wider"] svg {
+  color: #222 !important;
+}
+
+/* ── Floorplan header tool buttons: black icons, white on hover ── */
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] button[data-floorplan-tool],
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] button[data-floorplan-tool]:hover:not(:disabled),
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] button[data-floorplan-tool]:active {
+  background-color: transparent !important;
+  padding: 2px !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] button[data-floorplan-tool] {
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] button[data-floorplan-tool]:hover:not(:disabled) {
+  color: #fff !important;
+}
+[data-theme="scenit"] [data-panel="left"] [data-section="floorplan"] button[data-floorplan-tool] svg {
+  color: inherit !important;
+}
+
+/* ── Anchors section: button drop shadow + empty-state border ── */
+[data-theme="scenit"] [data-section="anchors"] button.rounded-theme {
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 0 #222 !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button.rounded-theme:hover {
+  box-shadow: 4px 4px 0 var(--hl) !important;
+}
+/* Anchor rows: square corners, 2px black border (matches text fields), no accent fill */
+[data-theme="scenit"] [data-section="anchors"] .win95-group-box {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  background-color: transparent !important;
+}
+/* Selected anchor row: use its own anchor color for the border */
+[data-theme="scenit"] [data-section="anchors"] .win95-group-box[class*="border-accent"] {
+  border-color: var(--anchor-hl, #FFE227) !important;
+}
+/* Anchors section: remap accent palette to amber so all Tailwind accent
+   utilities (bg-accent-500, text-accent-400, border-accent-*) match */
+[data-theme="scenit"] [data-section="anchors"] {
+  --hl: #FFE227;
+  --ac-400: 255 190 11;
+  --ac-500: 212 157 0;
+  --ac-600: 170 126 0;
+}
+/* Icon buttons (target/delete): black icons, strip offset shadow */
+[data-theme="scenit"] [data-section="anchors"] .win95-icon-btn-sm {
+  color: #222 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-theme="scenit"] [data-section="anchors"] .win95-icon-btn-sm:hover {
+  color: var(--anchor-hl, #FFE227) !important;
+  border-color: var(--anchor-hl, #FFE227) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-theme="scenit"] [data-section="anchors"] .win95-icon-btn-sm[class*="bg-accent"] {
+  background-color: transparent !important;
+  color: var(--anchor-hl, #FFE227) !important;
+  border-color: var(--anchor-hl, #FFE227) !important;
+}
+/* "target"/"selected" badge text */
+[data-theme="scenit"] [data-section="anchors"] span[class*="text-accent"] {
+  color: var(--anchor-hl, #FFE227) !important;
+}
+/* Toggle buttons: square, no offset shadow, no hover lift */
+[data-theme="scenit"] [data-section="anchors"] button.rounded {
+  box-shadow: none !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button.rounded:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button.rounded:active {
+  transform: none !important;
+  box-shadow: none !important;
+}
+/* Active toggle: anchor-color fill */
+[data-theme="scenit"] [data-section="anchors"] button.rounded[class*="bg-accent"] {
+  background-color: var(--anchor-hl, #FFE227) !important;
+  border-color: #222 !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button.rounded[class*="bg-accent"]:hover:not(:disabled) {
+  background-color: var(--anchor-hl, #FFE227) !important;
+  border-color: var(--anchor-hl, #FFE227) !important;
+  color: #222 !important;
+}
+/* Inactive toggle */
+[data-theme="scenit"] [data-section="anchors"] button.rounded[class*="bg-surface"] {
+  background-color: #fff !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button.rounded[class*="bg-surface"]:hover:not(:disabled) {
+  background-color: #f0f0f0 !important;
+  border-color: var(--anchor-hl, #FFE227) !important;
+}
+/* Add keyframe button: neubrutalist style, no fill on hover (must come after .rounded rules) */
+[data-theme="scenit"] [data-section="anchors"] button.rounded[class*="bg-surface-raised"][class*="px-2"] {
+  background-color: #fff !important;
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  color: #222 !important;
+  font-weight: 600 !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button.rounded[class*="bg-surface-raised"][class*="px-2"]:hover:not(:disabled) {
+  background-color: #fff !important;
+  border-color: var(--hl, #00CC66) !important;
+  box-shadow: 3px 3px 0 var(--hl, #00CC66) !important;
+  color: var(--hl, #00CC66) !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button.rounded[class*="bg-surface-raised"][class*="px-2"]:hover:not(:disabled) svg {
+  color: var(--hl, #00CC66) !important;
+}
+/* Image thumbnail placeholder: bare icon, no border/bg */
+[data-theme="scenit"] [data-section="anchors"] .win95-color-swatch ~ div[class*="border-surface-border"] {
+  border: none !important;
+  background: transparent !important;
+}
+[data-theme="scenit"] [data-section="anchors"] .border-dashed,
+[data-theme="scenit"] [data-section="media-library"] .border-dashed {
+  border-style: solid !important;
+  border-width: 2px !important;
+  border-color: #222 !important;
+  box-shadow: 3px 3px 0 #222;
+  padding: 24px 16px !important;
+  font-weight: 400 !important;
+}
+
+/* ── Anchor assigned-media preview ── */
+/* Media preview row: spacing from MEDIA label, center-align items */
+[data-theme="scenit"] [data-section="anchors"] div[class*="items-start"][class*="gap-2"]:has(> div[class*="h-14"]) {
+  align-items: center !important;
+  margin-top: 8px !important;
+}
+/* Label + Remove: horizontal row, Remove pushed right */
+[data-theme="scenit"] [data-section="anchors"] div[class*="flex-col"][class*="gap-1"][class*="pt-0"] {
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-grow: 1 !important;
+  gap: 6px !important;
+  padding-top: 0 !important;
+}
+/* Thumbnail: squared off, 2px black border, smaller */
+[data-theme="scenit"] [data-section="anchors"] div[class*="h-14"][class*="w-20"] {
+  border: 2px solid #222 !important;
+  height: 2.5rem !important;
+  width: 3.5rem !important;
+}
+/* "Remove" button: neubrutalist bordered button */
+[data-theme="scenit"] [data-section="anchors"] button[class*="text-content-faint"][class*="text-left"] {
+  border: 2px solid #222 !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  padding: 1px 8px !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-theme="scenit"] [data-section="anchors"] button[class*="text-content-faint"][class*="text-left"]:hover:not(:disabled) {
+  color: var(--anchor-hl, #FFE227) !important;
+  border-color: var(--anchor-hl, #FFE227) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+/* Media type label: align with button */
+[data-theme="scenit"] [data-section="anchors"] span[class*="capitalize"][class*="text-content-muted"] {
+  color: #222 !important;
+  font-weight: 600 !important;
+}
+
+/* ── Media library section: default highlight = purple ── */
+[data-theme="scenit"] [data-section="media-library"] {
+  --hl: #C77DFF;
+  --ac-400: 131 56 236;
+  --ac-500: 110 40 200;
+  --ac-600: 90 30 170;
+}
+/* "Clear all" button: black text, purple highlight on hover */
+[data-theme="scenit"] [data-section="media-library"] button[class*="text-content-faint"] {
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="media-library"] button[class*="text-content-faint"]:hover {
+  color: #C77DFF !important;
+}
+/* Media thumbnail cards: 2px border, clip content to match rounded corners */
+[data-theme="scenit"] [data-section="media-library"] .group[class*="overflow-hidden"] {
+  border-width: 2px !important;
+  border-style: solid !important;
+  box-shadow: none !important;
+}
+/* Keep image clipped inside its container */
+[data-theme="scenit"] [data-section="media-library"] .group .aspect-square {
+  overflow: hidden !important;
+}
+/* Unassigned cards: black border */
+[data-theme="scenit"] [data-section="media-library"] .group[class*="border-surface"] {
+  border-color: #222 !important;
+}
+/* Hover (unassigned): entire border takes highlight color */
+[data-theme="scenit"] [data-section="media-library"] .group[class*="border-surface"]:hover {
+  border-color: var(--hl) !important;
+}
+/* Overlay assign button: strip generic button borders/shadows/transform */
+[data-theme="scenit"] [data-section="media-library"] button[class*="inset-0"],
+[data-theme="scenit"] [data-section="media-library"] button[class*="inset-0"]:hover:not(:disabled) {
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+/* Media type badge: black border, square, overlaps card border at top-left */
+[data-theme="scenit"] [data-section="media-library"] .group [class*="left-1"][class*="top-1"] {
+  left: 2px !important;
+  top: 2px !important;
+  border: 2px solid #222 !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  z-index: 2 !important;
+}
+/* Assign overlay hover: white box with black neubrutalist border */
+[data-theme="scenit"] [data-section="media-library"] button[class*="inset-0"] span[class*="rounded"] {
+  background-color: #fff !important;
+  color: #222 !important;
+  border: 2px solid #222 !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  font-weight: 800 !important;
+}
+/* Assign overlay: no background tint on hover */
+[data-theme="scenit"] [data-section="media-library"] .group:hover button[class*="inset-0"],
+[data-theme="scenit"] [data-section="media-library"] button[class*="inset-0"] {
+  background-color: transparent !important;
+}
+/* Trash icon: overlaps card border at top-right, strip generic button chrome */
+[data-theme="scenit"] [data-section="media-library"] .group button[class*="right-1"],
+[data-theme="scenit"] [data-section="media-library"] .group button[class*="right-1"]:hover:not(:disabled) {
+  right: 2px !important;
+  top: 2px !important;
+  box-shadow: none !important;
+  transform: none !important;
+  background-color: #fff !important;
+  border: 2px solid #222 !important;
+  z-index: 2 !important;
+}
+[data-theme="scenit"] [data-section="media-library"] .group button[class*="right-1"] svg {
+  color: #222 !important;
+}
+
+/* ── Toolbar action buttons: filled accents ── */
+[data-theme="scenit"] [data-toolbar-btn="keyframe"] {
+  background-color: #FF006E !important;
+  color: #fff !important;
+  padding: 2px 8px !important;
+  --hl: #00CC66;
+}
+[data-theme="scenit"] [data-toolbar-btn="export"] {
+  background-color: #7B2FFF !important;
+  color: #fff !important;
+  padding: 2px 8px !important;
+  --hl: #00CC66;
+}
+[data-theme="scenit"] [data-toolbar-btn="export"] > svg:first-child {
+  display: none !important;
+}
+[data-theme="scenit"] [data-toolbar-btn] svg {
+  color: #fff !important;
+}
+[data-theme="scenit"] [data-toolbar-btn="keyframe"] span {
+  background-color: transparent !important;
+  color: #fff !important;
+  padding: 0 !important;
+}
+
+/* ── Toolbar: compact height, opaque background, no teal bleed ── */
+[data-theme="scenit"] .win95-toolbar {
+  padding-top: 3px !important;
+  padding-bottom: 6px !important;
+  border: 2px solid #222 !important;
+  border-radius: 10px !important;
+  margin-top: 0 !important;
+  background-color: #fff !important;
+  box-shadow: 4px 4px 0 #222 !important;
+}
+
+/* ── Transport: all buttons uniform height, border, drop shadow ── */
+[data-theme="scenit"] .transport-controls {
+  gap: 16px !important;
+}
+[data-theme="scenit"] .transport-controls .transport-group {
+  gap: 8px !important;
+}
+[data-theme="scenit"] .transport-controls svg {
+  color: #222 !important;
+  fill: #222 !important;
+}
+/* Uniform base for ALL transport buttons (icon, dropdown, time) */
+[data-theme="scenit"] .transport-controls button {
+  border: 2px solid #222 !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  padding: 4px 6px !important;
+  font-weight: 600 !important;
+  transform: none !important;
+  height: 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+/* Group 1 — Playback: individual highlight colors (border + shadow + icon) */
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(1):hover:not(:disabled) { border-color: #FF006E !important; box-shadow: 3px 3px 0 #FF006E !important; color: #FF006E !important; transform: none !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(1):hover:not(:disabled) svg { color: #FF006E !important; fill: #FF006E !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(2):hover:not(:disabled) { border-color: #C77DFF !important; box-shadow: 3px 3px 0 #C77DFF !important; color: #C77DFF !important; transform: none !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(2):hover:not(:disabled) svg { color: #C77DFF !important; fill: #C77DFF !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(3):hover:not(:disabled) { border-color: #00CC66 !important; box-shadow: 3px 3px 0 #00CC66 !important; color: #00CC66 !important; transform: none !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(3):hover:not(:disabled) svg { color: #00CC66 !important; fill: #00CC66 !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(4):hover:not(:disabled) { border-color: #FF6B35 !important; box-shadow: 3px 3px 0 #FF6B35 !important; color: #FF6B35 !important; transform: none !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(4):hover:not(:disabled) svg { color: #FF6B35 !important; fill: #FF6B35 !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(5):hover:not(:disabled) { border-color: #FFE227 !important; box-shadow: 3px 3px 0 #FFE227 !important; color: #FFE227 !important; transform: none !important; }
+[data-theme="scenit"] .transport-group:nth-child(1) > button:nth-child(5):hover:not(:disabled) svg { color: #FFE227 !important; fill: #FFE227 !important; }
+/* Group 2 — Loop: cyan highlight */
+[data-theme="scenit"] .transport-group:nth-child(2) button:hover:not(:disabled) {
+  border-color: #00E5FF !important;
+  box-shadow: 3px 3px 0 #00E5FF !important;
+  color: #00E5FF !important;
+  transform: none !important;
+}
+[data-theme="scenit"] .transport-group:nth-child(2) button:hover:not(:disabled) svg { color: #00E5FF !important; fill: #00E5FF !important; }
+/* Group 3 — Speed/FPS: individual highlight colors */
+[data-theme="scenit"] .transport-group:nth-child(3) > div:nth-child(1) button:hover:not(:disabled) { border-color: #7B2FFF !important; box-shadow: 3px 3px 0 #7B2FFF !important; color: #7B2FFF !important; transform: none !important; }
+[data-theme="scenit"] .transport-group:nth-child(3) > div:nth-child(1) button:hover:not(:disabled) svg { color: #7B2FFF !important; fill: #7B2FFF !important; }
+[data-theme="scenit"] .transport-group:nth-child(3) > div:nth-child(2) button:hover:not(:disabled) { border-color: #FF006E !important; box-shadow: 3px 3px 0 #FF006E !important; color: #FF006E !important; transform: none !important; }
+[data-theme="scenit"] .transport-group:nth-child(3) > div:nth-child(2) button:hover:not(:disabled) svg { color: #FF006E !important; fill: #FF006E !important; }
+/* Time display section — amber highlight (exclude Curves toggle) */
+[data-theme="scenit"] .time-display button:not(.curves-toggle):hover:not(:disabled) {
+  border-color: #FFE227 !important;
+  box-shadow: 3px 3px 0 #FFE227 !important;
+  color: #FFE227 !important;
+  transform: none !important;
+}
+[data-theme="scenit"] .time-display button:not(.curves-toggle):hover:not(:disabled) span {
+  color: #FFE227 !important;
+}
+/* Time display text spans: black, uniform weight */
+[data-theme="scenit"] .time-display span {
+  color: #222 !important;
+  font-weight: 600 !important;
+}
+/* Duration button: same drop shadow treatment */
+[data-theme="scenit"] .time-display button {
+  box-shadow: 3px 3px 0 #222 !important;
+  padding: 4px 8px !important;
+}
+/* Duration input field: match amber highlight */
+[data-theme="scenit"] .time-display input {
+  border: 2px solid #FFE227 !important;
+  box-shadow: 3px 3px 0 #FFE227 !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  font-weight: 600 !important;
+  height: 28px !important;
+}
+
+/* ── Toolbar icon buttons: color fills ── */
+[data-theme="scenit"] .win95-toolbar .transport-group {
+  gap: 8px !important;
+}
+[data-theme="scenit"] [data-toolbar-icon] {
+  padding: 3px !important;
+  border-width: 2px !important;
+  box-shadow: 1px 1px 0 #222 !important;
+}
+[data-theme="scenit"] [data-toolbar-icon]:hover {
+  box-shadow: 1px 1px 0 var(--hl) !important;
+  border-color: var(--hl) !important;
+}
+[data-theme="scenit"] [data-toolbar-icon] svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+[data-theme="scenit"] [data-toolbar-icon="reset"]  { background-color: #00CC66 !important; color: #222 !important; --hl: #FF006E; }
+[data-theme="scenit"] [data-toolbar-icon="grid"]    { background-color: #C77DFF !important; color: #fff !important; --hl: #00CC66; }
+[data-theme="scenit"] [data-toolbar-icon="palette"] { background-color: #FFE227 !important; color: #222 !important; --hl: #FF006E; }
+[data-theme="scenit"] [data-toolbar-icon="upload"]  { background-color: #FF6B35 !important; color: #fff !important; --hl: #C77DFF; }
+[data-theme="scenit"] [data-toolbar-icon="trash"]   { background-color: #00E5FF !important; color: #222 !important; --hl: #FF006E; }
+[data-theme="scenit"] [data-toolbar-icon="close"]   { background-color: #FF006E !important; color: #fff !important; --hl: #FFE227; }
+[data-theme="scenit"] [data-toolbar-icon] svg { color: inherit !important; }
+
+/* ── Inputs & selects ── */
+[data-theme="scenit"] select,
+[data-theme="scenit"] input[type="number"],
+[data-theme="scenit"] input[type="text"] {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  background-color: #fff !important;
+  color: #1A3038 !important;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  padding: 4px 8px;
+}
+[data-theme="scenit"] select {
+  box-shadow: 3px 3px 0 #222 !important;
+  cursor: pointer;
+}
+[data-theme="scenit"] input[type="number"],
+[data-theme="scenit"] input[type="text"] {
+  box-shadow: none !important;
+}
+
+[data-theme="scenit"] select:hover {
+  border-color: var(--hl, #00CC66) !important;
+  box-shadow: 3px 3px 0 var(--hl, #00CC66) !important;
+}
+[data-theme="scenit"] select:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--hl, #00CC66) !important;
+  border-color: var(--hl, #00CC66) !important;
+}
+
+[data-theme="scenit"] select:focus,
+[data-theme="scenit"] input[type="number"]:focus,
+[data-theme="scenit"] input[type="text"]:focus {
+  outline: none !important;
+  border-color: var(--hl) !important;
+}
+
+[data-theme="scenit"] [data-scrub-input] {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  background-color: #fff !important;
+  box-shadow: none !important;
+  font-family: var(--font-mono);
+}
+
+/* ── Range slider: dark track + magenta thumb ── */
+/* ── Range slider: progress bar style ── */
+[data-theme="scenit"] input[type="range"] {
+  --slider-fill: #FF006E;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  background: linear-gradient(to right, var(--slider-fill) var(--fill, 0%), #fff var(--fill, 0%));
+  border: none;
+  border-radius: 9px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 2px #222;
+}
+
+/* Per-section slider fill colors */
+[data-theme="scenit"] [data-section="camera"] input[type="range"]        { --slider-fill: #00E5FF; }
+[data-theme="scenit"] [data-section="post-processing"] input[type="range"] { --slider-fill: #FF6B35; }
+[data-theme="scenit"] [data-section="paths"] input[type="range"]         { --slider-fill: #00CC66; }
+
+[data-theme="scenit"] input[type="range"]::-webkit-slider-runnable-track {
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+[data-theme="scenit"] input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: none;
+  margin-top: -3px;
+}
+
+[data-theme="scenit"] input[type="range"]::-moz-range-track {
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+[data-theme="scenit"] input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+/* ── Scrollbar: hidden ── */
+[data-theme="scenit"] {
+  scrollbar-width: none !important;
+}
+[data-theme="scenit"] * {
+  scrollbar-width: none !important;
+}
+[data-theme="scenit"] ::-webkit-scrollbar,
+[data-theme="scenit"] .scrollbar-thin::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* ── Checkboxes: rounded, 2px black stroke ── */
+[data-theme="scenit"] input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  border: 2px solid #222 !important;
+  border-radius: 5px !important;
+  background-color: #fff !important;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+[data-theme="scenit"] input[type="checkbox"]:checked {
+  background-color: #fff !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%23222' stroke-width='2' fill='none' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-size: 10px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+[data-theme="scenit"] input[type="checkbox"]:hover {
+  border-color: var(--hl) !important;
+}
+
+/* ── Toggle switches ── */
+[data-theme="scenit"] button[role="checkbox"][class*="rounded-full"],
+[data-theme="scenit"] button[role="switch"] {
+  border: 2px solid #222 !important;
+  border-radius: 9999px !important;
+  box-shadow: 1px 1px 0 #222 !important;
+  transform: none !important;
+}
+[data-theme="scenit"] button[role="checkbox"][class*="rounded-full"]:hover,
+[data-theme="scenit"] button[role="switch"]:hover {
+  box-shadow: 1px 1px 0 #222 !important;
+  transform: none !important;
+  border-color: #222 !important;
+}
+[data-theme="scenit"] button[role="checkbox"][class*="rounded-full"]:active,
+[data-theme="scenit"] button[role="switch"]:active {
+  box-shadow: 1px 1px 0 #222 !important;
+  transform: none !important;
+}
+/* Track: white when off */
+[data-theme="scenit"] [role="checkbox"][class*="rounded-full"]:not([aria-checked="true"]) {
+  background-color: #fff !important;
+}
+/* Thumb: white circle, border overlaps track border on all sides */
+[data-theme="scenit"] [role="checkbox"][class*="rounded-full"] > span,
+[data-theme="scenit"] [role="switch"] > span {
+  top: -2px !important;
+  left: 0 !important;
+  width: auto !important;
+  height: calc(100% + 4px) !important;
+  aspect-ratio: 1 !important;
+  border-radius: 9999px !important;
+  background-color: #fff !important;
+  border: 2px solid #222 !important;
+  box-shadow: none !important;
+  transform: translateX(-2px) !important;
+}
+/* sm toggle (h-4 w-7 = 16×28 track, 20×20 thumb): checked = 28-20+2 = 10px */
+[data-theme="scenit"] [role="checkbox"][class*="h-4"][aria-checked="true"] > span {
+  transform: translateX(10px) !important;
+}
+/* md toggle (h-5 w-9 = 20×36 track, 24×24 thumb): checked = 36-24+2 = 14px */
+[data-theme="scenit"] [role="checkbox"][class*="h-5"][aria-checked="true"] > span {
+  transform: translateX(14px) !important;
+}
+
+/* ── Key hint caps: rounded, black borders, per-key color highlight ── */
+[data-theme="scenit"] .win95-key-cap {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  backdrop-filter: none !important;
+  box-shadow: 2px 2px 0 #222 !important;
+  font-weight: 800 !important;
+}
+[data-theme="scenit"] .win95-key-cap + .win95-key-cap {
+  margin-left: 2px !important;
+}
+[data-theme="scenit"] .flex-col > .flex + .flex > .win95-key-cap {
+  margin-top: 2px !important;
+}
+[data-theme="scenit"] .win95-key-cap.win95-key-cap-active {
+  background-color: #fff !important;
+  border-color: var(--key-hl, #FF006E) !important;
+  color: var(--key-hl, #FF006E) !important;
+  box-shadow: none !important;
+  z-index: 1 !important;
+  position: relative !important;
+}
+
+/* ── Font size bump: increase smallest sizes ── */
+[data-theme="scenit"] [class*="text-\[10px\]"] { font-size: 12px !important; }
+[data-theme="scenit"] [class*="text-\[11px\]"] { font-size: 12px !important; }
+[data-theme="scenit"] [class*="text-xs"]        { font-size: 13px !important; }
+
+/* ── Accent text: bold weight ── */
+[data-theme="scenit"] .text-accent-400,
+[data-theme="scenit"] .text-accent-300,
+[data-theme="scenit"] .text-accent-500 {
+  font-weight: 700;
+}
+
+/* ── Dividers ── */
+[data-theme="scenit"] [class*="border-t"] {
+  border-top-width: 2px;
+  border-top-color: #222;
+}
+[data-theme="scenit"] [class*="border-b"] {
+  border-bottom-width: 2px;
+  border-bottom-color: #222;
+}
+
+/* ── Dropdown chevron ── */
+[data-theme="scenit"] select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23222222' stroke-width='2.5' fill='none' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 28px;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* ── Tone mapping dropdown trigger: match select styling ── */
+html[data-theme="scenit"] button.win95-dropdown-trigger:not(._) {
+  border: 2px solid #222 !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+html[data-theme="scenit"] button.win95-dropdown-trigger:not(._):hover:not(:disabled) {
+  border-color: var(--hl) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+html[data-theme="scenit"] button.win95-dropdown-trigger:not(._):not(:disabled):active {
+  border-color: #222 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+/* Tone mapping dropdown menu */
+[data-theme="scenit"] .tone-mapping-menu {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  background-color: #fff !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+html[data-theme="scenit"] .tone-mapping-menu button:not(._),
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):hover:not(:disabled),
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):not(:disabled):active {
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  padding: 8px 12px !important;
+  color: #222 !important;
+  transition: color 0.1s !important;
+}
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):hover:not(:disabled) {
+  background-color: transparent !important;
+}
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):nth-child(1):hover { color: #FF006E !important; }
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):nth-child(2):hover { color: #00CC66 !important; }
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):nth-child(3):hover { color: #C77DFF !important; }
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):nth-child(4):hover { color: #FF6B35 !important; }
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):nth-child(5):hover { color: #FFE227 !important; }
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):nth-child(6):hover { color: #00E5FF !important; }
+html[data-theme="scenit"] .tone-mapping-menu button:not(._):nth-child(7):hover { color: #FF006E !important; }
+
+/* ── Easing dropdown trigger inside anchor panel ── */
+html[data-theme="scenit"] button.easing-dropdown-trigger:not(._) {
+  border: 2px solid #222 !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  box-shadow: 2px 2px 0 #222 !important;
+  transform: none !important;
+  border-radius: 6px !important;
+  font-size: 10px !important;
+  padding: 2px 6px !important;
+}
+html[data-theme="scenit"] button.easing-dropdown-trigger:not(._):hover:not(:disabled) {
+  border-color: var(--anchor-hl, var(--hl, #00CC66)) !important;
+  box-shadow: 2px 2px 0 var(--anchor-hl, var(--hl, #00CC66)) !important;
+  color: var(--anchor-hl, var(--hl, #00CC66)) !important;
+}
+html[data-theme="scenit"] button.easing-dropdown-trigger:not(._):hover:not(:disabled) svg {
+  color: var(--anchor-hl, var(--hl, #00CC66)) !important;
+}
+html[data-theme="scenit"] button.easing-dropdown-trigger:not(._):not(:disabled):active {
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0 var(--anchor-hl, var(--hl, #00CC66)) !important;
+}
+/* Easing dropdown menu items: all use highlight color on hover */
+html[data-theme="scenit"] .easing-dropdown-menu button:not(._):hover:not(:disabled) {
+  color: var(--hl, #00CC66) !important;
+}
+
+/* ── Walk generation custom dropdowns ── */
+html[data-theme="scenit"] button.walk-dropdown-trigger:not(._) {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  padding: 4px 8px !important;
+}
+html[data-theme="scenit"] button.walk-dropdown-trigger:not(._):hover:not(:disabled) {
+  border-color: var(--hl) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+html[data-theme="scenit"] button.walk-dropdown-trigger:not(._):not(:disabled):active {
+  border-color: #222 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-theme="scenit"] .walk-dropdown-menu {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  background-color: #fff !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+html[data-theme="scenit"] .walk-dropdown-menu button:not(._),
+html[data-theme="scenit"] .walk-dropdown-menu button:not(._):hover:not(:disabled),
+html[data-theme="scenit"] .walk-dropdown-menu button:not(._):not(:disabled):active {
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  padding: 8px 12px !important;
+  color: #222 !important;
+  transition: color 0.1s !important;
+}
+html[data-theme="scenit"] .walk-dropdown-menu button:not(._):hover:not(:disabled) {
+  background-color: transparent !important;
+}
+html[data-theme="scenit"] .walk-dropdown-menu button:not(._):nth-child(1):hover { color: #FF006E !important; }
+html[data-theme="scenit"] .walk-dropdown-menu button:not(._):nth-child(2):hover { color: #00CC66 !important; }
+html[data-theme="scenit"] .walk-dropdown-menu button:not(._):nth-child(3):hover { color: #C77DFF !important; }
+
+/* ── FOV Mask group box: square corners ── */
+[data-theme="scenit"] [data-section="ar-overlay"] .win95-group-box {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+}
+
+/* ── Badges / tags ── */
+[data-theme="scenit"] [class*="rounded-full"] {
+  border: 2px solid #222;
+}
+
+/* ── Modal / overlay backdrops: flat, no blur ── */
+[data-theme="scenit"] [class*="backdrop"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ── Loading overlay ── */
+[data-theme="scenit"] .bg-surface-base\/90 {
+  background-color: rgba(0, 229, 204, 0.92) !important;
+}
+
+/* ── Timeline: ruler ── */
+/* Ruler row: white background, transparent border matches track border so ticks align */
+[data-theme="scenit"] [data-section="timeline"] .flex > .relative.cursor-pointer:not(.win95-track):not(.win95-inset) {
+  background-color: #fff !important;
+  border: 2px solid transparent !important;
+}
+/* Ruler tick marks: black */
+[data-theme="scenit"] [data-section="timeline"] .flex > .relative.cursor-pointer:not(.win95-track):not(.win95-inset) > div > .w-px {
+  background-color: #222 !important;
+  opacity: 1 !important;
+}
+[data-theme="scenit"] [data-section="timeline"] .flex > .relative.cursor-pointer:not(.win95-track):not(.win95-inset) > div > .w-px[class*="border-secondary"] {
+  opacity: 0.35 !important;
+}
+/* Ruler frame labels: black */
+[data-theme="scenit"] [data-section="timeline"] .flex > .relative.cursor-pointer:not(.win95-track):not(.win95-inset) span[class*="text-content-faint"] {
+  color: #222 !important;
+}
+
+/* ── Timeline: CAMERA label — hide chevron, center text, orange fill ── */
+[data-theme="scenit"] [data-section="timeline"] .win95-plain-label svg {
+  display: none !important;
+}
+[data-theme="scenit"] [data-section="timeline"] .win95-plain-label {
+  justify-content: center !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  background-color: #FF6B35 !important;
+  border: 2px solid #222 !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  height: 28px !important;
+  transform: translateX(6px);
+}
+[data-theme="scenit"] [data-section="timeline"] .win95-plain-label:hover:not(:disabled) {
+  transform: translateX(6px) translate(-0.5px, -0.5px) !important;
+  border-color: #00E5FF !important;
+  box-shadow: 3px 3px 0 #00E5FF !important;
+}
+[data-theme="scenit"] [data-section="timeline"] .win95-plain-label:not(:disabled):active {
+  transform: translateX(6px) translate(0.5px, 0.5px) !important;
+  box-shadow: 2px 2px 0 #00E5FF !important;
+}
+/* Hide traffic-light dots from Camera label and Channels header */
+[data-theme="scenit"] [data-section="timeline"] .win95-plain-label::before {
+  display: none !important;
+}
+[data-theme="scenit"] .graph-editor-channels [class*="tracking-wider"]::before {
+  display: none !important;
+}
+/* Anchor animation track labels: plain text, no green header bar */
+[data-theme="scenit"] [data-section="timeline"] button[class*="tracking-wider"]:not(.win95-plain-label) {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 4px !important;
+  color: #222 !important;
+  font-weight: 600 !important;
+  font-size: 9px !important;
+  text-transform: none !important;
+  letter-spacing: 0.05em !important;
+}
+[data-theme="scenit"] [data-section="timeline"] button[class*="tracking-wider"]:not(.win95-plain-label) span {
+  color: #222 !important;
+}
+[data-theme="scenit"] [data-section="timeline"] button[class*="tracking-wider"]:not(.win95-plain-label):hover,
+[data-theme="scenit"] [data-section="timeline"] button[class*="tracking-wider"]:not(.win95-plain-label):active {
+  transform: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+[data-theme="scenit"] [data-section="timeline"] button[class*="tracking-wider"]:not(.win95-plain-label)::before {
+  display: none !important;
+}
+
+/* ── Timeline: gap between label and track/ruler ── */
+[data-theme="scenit"] [data-section="timeline"] .win95-plain-label + .win95-track,
+[data-theme="scenit"] [data-section="timeline"] .win95-plain-label + .win95-inset {
+  margin-left: 24px !important;
+}
+/* Ruler: match the same left offset as the track (no button margin to compensate) */
+[data-theme="scenit"] [data-section="timeline"] .flex > .shrink-0 + .relative.cursor-pointer:not(.win95-track):not(.win95-inset) {
+  margin-left: 24px !important;
+}
+
+/* ── Timeline: increase track height to align with Camera button shadow ── */
+[data-theme="scenit"] [data-section="timeline"] .win95-track {
+  height: 31px !important;
+}
+
+/* ── Timeline: camera track ── */
+[data-theme="scenit"] [data-section="timeline"] .win95-track,
+[data-theme="scenit"] [data-section="timeline"] .win95-inset {
+  background-color: #fff !important;
+  border: 2px solid #222 !important;
+  box-shadow: 3px 3px 0 #222 !important;
+  border-radius: 0 !important;
+}
+/* Track subdivision ticks: black at reduced opacity */
+[data-theme="scenit"] [data-section="timeline"] .win95-track > .pointer-events-none.w-px {
+  background-color: rgba(34, 34, 34, 0.25) !important;
+}
+
+/* ── Timeline: keyframe diamonds ── */
+[data-theme="scenit"] [data-section="timeline"] [data-kf-diamond] > div {
+  border: 2px solid #222 !important;
+  background-color: #fff !important;
+}
+[data-theme="scenit"] [data-section="timeline"] [data-kf-diamond] > div[class*="bg-accent"] {
+  background-color: #7B2FFF !important;
+  border-color: #222 !important;
+}
+
+/* ── Timeline: dope sheet sub-rows ── */
+[data-theme="scenit"] [data-section="timeline"] .flex > div[class*="bg-surface-raised\\/30"] {
+  background-color: transparent !important;
+}
+/* Dope sheet diamonds: square corners */
+[data-theme="scenit"] [data-section="timeline"] .flex > div[class*="bg-surface-raised"] .rotate-45 {
+}
+
+/* ── Timeline: playhead ── */
+[data-theme="scenit"] [data-section="timeline"] .playhead-line {
+  background-color: #FF006E !important;
+}
+[data-theme="scenit"] [data-section="timeline"] .playhead-marker {
+  background-color: #FF006E !important;
+}
+/* Dope sheet playhead shadow lines */
+[data-theme="scenit"] [data-section="timeline"] div[class*="bg-accent-400\\/30"] {
+  background-color: rgba(255, 0, 110, 0.3) !important;
+}
+
+/* ── Timeline: anchor animation tracks ── */
+[data-theme="scenit"] [data-section="timeline"] div[class*="bg-surface-raised\\/50"] {
+  background-color: transparent !important;
+}
+/* Anchor animation keyframe diamonds: square, #222 border */
+[data-theme="scenit"] [data-section="timeline"] div[class*="border-emerald"] {
+  border-color: #222 !important;
+  border-width: 2px !important;
+  background-color: #00CC66 !important;
+}
+[data-theme="scenit"] [data-section="timeline"] div[class*="border-emerald"]:hover {
+  border-color: #222 !important;
+  background-color: #00E5CC !important;
+}
+
+/* ── Timeline: anchor visibility bars ── */
+[data-theme="scenit"] [data-section="timeline"] div[class*="rounded-full"][class*="from-emerald"] {
+  border: 2px solid #222 !important;
+}
+
+/* ── Graph editor section wrapper: match Timeline p-3 offset ── */
+[data-theme="scenit"] .scenit-graph-section {
+  border-top: none !important;
+  padding: 12px !important;
+  background-color: #fff !important;
+}
+
+/* ── Graph editor: channels panel ── */
+[data-theme="scenit"] .graph-editor-channels {
+  background-color: #fff !important;
+  border: 2px solid #222 !important;
+  border-right: none !important;
+  box-shadow: 0 3px 0 #222 !important;
+}
+/* Channels header: plain text label, no green bar */
+[data-theme="scenit"] .graph-editor-channels > div:first-child {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 8px 8px 4px !important;
+  color: #222 !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+/* Channel color dots: square */
+[data-theme="scenit"] .graph-editor-channels span[class*="rounded-full"][class*="h-2"] {
+}
+/* Channel labels: black text */
+[data-theme="scenit"] .graph-editor-channels label span:last-child {
+  color: #222 !important;
+}
+/* Channel label hover */
+[data-theme="scenit"] .graph-editor-channels label:hover {
+  background-color: #f0f0f0 !important;
+}
+
+/* ── Graph editor: canvas container ── */
+[data-theme="scenit"] .graph-editor-channels ~ div {
+  border: 2px solid #222 !important;
+  box-shadow: 3px 3px 0 #222 !important;
+}
+
+/* ── Theme editor: plain text labels, neubrutalist panel ── */
+[data-theme="scenit"] .scenit-theme-editor {
+  border: 2px solid #222 !important;
+  border-radius: 10px !important;
+  box-shadow: 4px 4px 0 #222 !important;
+  background-color: #fff !important;
+}
+[data-theme="scenit"] .scenit-theme-editor [class*="tracking-wider"] {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: #222 !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+[data-theme="scenit"] .scenit-theme-editor [class*="tracking-wider"]::before {
+  display: none !important;
+}
+[data-theme="scenit"] .scenit-theme-editor button[class*="border-2"] {
+  border-color: #222 !important;
+  border-radius: 6px !important;
+}
+[data-theme="scenit"] .scenit-theme-editor button[class*="border-accent"] {
+  border-color: var(--hl, #00CC66) !important;
+}
+
+/* ── Tooltips ── */
+[data-theme="scenit"] [class*="tooltip"],
+[data-theme="scenit"] [role="tooltip"] {
+  border: 2px solid #222 !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 0 #222;
+  background-color: #fff !important;
+  color: #1A3038 !important;
+}
+
+/* ── Drag-drop overlay ── */
+[data-theme="scenit"] .border-dashed {
+  border-color: var(--hl) !important;
+  border-width: 2px !important;
+}
+
+
+/* ── Paths panel: inherits scenit-floating-panel styling ── */
+
+/* ── Window chrome: traffic-light dots on section headers ── */
+[data-theme="scenit"] [class*="tracking-wider"]::before {
+  content: "" !important;
+  display: inline-flex !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 10px !important;
+  margin-right: 8px !important;
+  background:
+    radial-gradient(circle 4px at 5px 5px,  #FF006E 3px, #222 3px, #222 4px, transparent 4.5px),
+    radial-gradient(circle 4px at 17px 5px, #FFE227 3px, #222 3px, #222 4px, transparent 4.5px),
+    radial-gradient(circle 4px at 29px 5px, #00CC66 3px, #222 3px, #222 4px, transparent 4.5px);
+  background-repeat: no-repeat;
+  flex-shrink: 0 !important;
+}
+
+/* ── Grid-paper background on panel surfaces ── */
+[data-theme="scenit"] [class*="rounded-theme"] {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px) !important;
+  background-size: 16px 16px !important;
+}
+[data-theme="scenit"] [class*="rounded-theme"] [class*="rounded-theme"] {
+  background-image: none !important;
+}
+
+/* ── Viewport header: per-button highlight colors on icon buttons ── */
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon] {
+  background-color: #fff !important;
+  color: #222 !important;
+  padding: 3px !important;
+  border: 2px solid #222 !important;
+  border-radius: 6px !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon] svg {
+  width: 14px !important;
+  height: 14px !important;
+  color: #222 !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon="reset"]  { --btn-hl: #00CC66; border-color: #00CC66 !important; box-shadow: none !important; }
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon="grid"]   { --btn-hl: #C77DFF; border-color: #C77DFF !important; box-shadow: none !important; }
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon="palette"]{ --btn-hl: #FF6B35; border-color: #FF6B35 !important; box-shadow: none !important; }
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon="upload"] { --btn-hl: #FF6B35; border-color: #FF6B35 !important; box-shadow: none !important; }
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon="trash"]  { --btn-hl: #C77DFF; border-color: #C77DFF !important; box-shadow: none !important; }
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon="close"]  { --btn-hl: #FF006E; border-color: #FF006E !important; box-shadow: none !important; }
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon]:hover:not(:disabled) {
+  transform: none !important;
+  border-color: var(--btn-hl) !important;
+  box-shadow: none !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon]:hover:not(:disabled) svg {
+  color: var(--btn-hl) !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-icon]:not(:disabled):active {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ── Viewport header: per-button highlight colors on text buttons ── */
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="keyframe"] {
+  --btn-hl: #FF006E;
+  border-color: #FF006E !important;
+  box-shadow: none !important;
+  color: #222 !important;
+  background: #fff !important;
+  border-radius: 6px !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="keyframe"] span:not(.scenit-vh-badge),
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="keyframe"] svg {
+  color: #222 !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="keyframe"] .scenit-vh-badge {
+  color: #FF006E !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="keyframe"]:hover {
+  color: #FF006E !important;
+  border-color: #FF006E !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="keyframe"]:hover span,
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="keyframe"]:hover svg {
+  color: #FF006E !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="export"] {
+  --btn-hl: #7B2FFF;
+  border-color: #7B2FFF !important;
+  box-shadow: none !important;
+  color: #222 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="export"] span,
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="export"] svg {
+  color: #222 !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="export"]:hover {
+  color: #7B2FFF !important;
+  border-color: #7B2FFF !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="export"]:hover span,
+[data-theme="scenit"] .scenit-viewport-header button[data-toolbar-btn="export"]:hover svg {
+  color: #7B2FFF !important;
+}
+
+/* ── Scenit decorative shape animations ── */
+
+@keyframes scenit-spin {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(70deg); }
+  50%  { transform: rotate(200deg); }
+  75%  { transform: rotate(290deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes scenit-spin-linear {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scenit-twinkle {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(0.85); }
+  55%  { transform: scale(1.18); }
+  78%  { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes scenit-pulse {
+  0%   { opacity: 1; }
+  40%  { opacity: 0.35; }
+  65%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+

@@ -1,0 +1,91 @@
+---
+description: Comprehensive map of all Winamp theme visual layers for floating windows, tab chrome panels, and the timeline
+globs: components/viewer/panels/*.tsx, components/viewer/Timeline.tsx, themes/winamp/decorations.css
+alwaysApply: false
+---
+
+# Winamp Panel Visual Layers
+
+Every Winamp panel is built from nested visual layers. Each layer adds its own background, gradient, bevels, or shadows. When removing or adjusting depth, you must identify the EXACT class responsible.
+
+## 1. Floating Window (all panels)
+
+```
+div.winamp-floating-window                // outermost chrome frame
+  div.winamp-floating-titlebar            // title bar (dark navy)
+  div.winamp-floating-content             // content area (padding, scrollable)
+    [panel children]
+```
+
+- `winamp-floating-window` (theme-decorations.css ~L4879): gradient bg `#cdd3dc -> #c7ccd5`, 6-layer inset box-shadow bevels, `border: 1px solid #0a0e18`, `border-radius: 10px`
+- `winamp-floating-content` (~L4913): just padding + overflow, no visual treatment
+- Any `.win95-window` inside `.winamp-floating-content` has border/bg/shadow stripped (~L437)
+
+## 2. Tab Chrome Panel (Paths, Post Processing)
+
+Used when `WinampFloatingWindow` has `bare` + child `CollapsibleSection` with `tabStyle`.
+
+```
+div.winamp-floating-bare                  // no titlebar, children rendered directly
+  div.win95-panel-section                 // outer wrapper (border: none, overflow: visible in bare)
+    div.winamp-tab-module                 // backing panel (gradient bg, border-radius: 10px)
+      svg.winamp-tab-fill                 // SVG frame with 5 sub-layers (see tab chrome rule)
+      div.winamp-tab-backplate            // positions tab label + action buttons
+      div.winamp-tab-panel                // chrome panel body
+      ::before                            // top shadow gradient (hidden in bare mode)
+      ::after                             // rim highlight box-shadows (z-index: 6)
+```
+
+- `winamp-tab-module` (~L974): gradient bg `#BFC6D2 -> #CED0DA`, multi-layer inset bevels
+- In bare mode (~L1017): `overflow: hidden`, `box-shadow: none`, `::before` hidden
+- See `winamp-tab-chrome-layers.mdc` for full SVG frame layer breakdown
+
+## 3. Timeline
+
+```
+div.winamp-floating-content
+  div.winamp-bottom-panel-inner           // REMOVED: was gradient overlay on content
+    div.winamp-timeline-shell             // REMOVED: was inner embossed panel
+      div.winamp-transport-shell          // REMOVED: was embossed elongated pill
+        div.transport-group               // button group (transparent, no visual)
+          [playback buttons]
+        div.winamp-transport-rate         // speed/fps section + vertical separator
+        div.winamp-time-tray              // TIME label + display + vertical separator
+      div.winamp-track-shell              // REMOVED: was embossed rectangle around tracks
+        div.winamp-track-ruler            // ruler tick marks (spacing only)
+        div.winamp-graph-inset            // ACTIVE: track row inset (light bg #e4e7ec + inset shadows)
+```
+
+Layers marked REMOVED have had their background/box-shadow/gradient stripped to `none`. Their layout properties (padding, gap, margin) are preserved.
+
+### Currently active visual layers (bottom to top):
+1. `winamp-floating-window` -- outermost chrome with gradient + bevels
+2. `winamp-graph-inset` -- light inset track area for ruler + CAMERA row
+
+### Stripped layers (layout-only, no visual):
+- `winamp-bottom-panel-inner` -- was gradient overlay
+- `winamp-timeline-shell` -- was inner beveled panel (padding/gap preserved)
+- `winamp-transport-shell` -- was embossed pill (padding preserved)
+- `winamp-track-shell` -- was embossed rectangle (padding preserved)
+
+## 4. Post Processing EQ Panel
+
+```
+div.winamp-tab-panel
+  div.winamp-postproc-eq                  // flex row for vertical sliders
+    div.slider-vertical-column            // per-slider column
+      div.slider-vertical                 // sizing container (34x140px)
+        div.slider-track-wrapper          // rotated -90deg horizontal slider
+      span.slider-vertical-label          // label below slider
+```
+
+- `slider-track-wrapper` inside `.winamp-tab-panel` inherits the pill-shaped recess capsule (~L1201)
+- `.slider-vertical .slider-track-wrapper` adds `transform: rotate(-90deg); width: 120px`
+- Accessibility filter buttons are inline in `.winamp-ax-grid` (single-column, 99px height aligned to capsule)
+
+## General Principles
+
+- Each Winamp-only class is conditionally applied in JSX (e.g. `${isWinamp ? " winamp-foo" : ""}`)
+- To remove a visual layer: set `background: none; box-shadow: none;` in CSS, keep layout props
+- To identify layers: inspect the class chain from outermost to innermost, each with `[data-theme="winamp"]` prefix
+- CSS-only changes to tab geometry require a full page reload (ResizeObserver limitation)

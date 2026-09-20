@@ -1,0 +1,134 @@
+---
+description: Player panel notch chrome shapes — architecture, seam artifact solutions, and lessons learned from debugging
+globs: components/viewer/panels/WinampPlayerPanel.tsx, themes/winamp/decorations.css
+alwaysApply: false
+---
+
+# Winamp Player Panel Notch Shapes
+
+Two decorative chrome notch shapes on the player panel reproduce classic Winamp
+panel cutouts. The upper notch is a trapezoid cutting into the LCD's bottom half;
+the lower-right notch is a half-trapezoid in the bottom-right corner.
+
+## DOM Structure
+
+```
+div.winamp-player-chrome                    // position: relative, contains all layers
+  div.winamp-player-lcd                     // blue LCD panel (CSS border, 27-layer box-shadow)
+  div.winamp-player-seek                    // seek bar
+  div.winamp-player-transport               // transport controls
+  div.winamp-player-notch-seam              // seam cover strip (z-index: 6)
+  div.winamp-player-notch-highlight         // CSS clip-path highlight band (z-index: 7)
+  svg.winamp-player-notch-mid               // upper notch SVG (z-index: 5)
+  svg.winamp-player-notch-btm               // lower-right notch SVG (z-index: 5)
+```
+
+## Upper Notch Layer Stack (bottom to top)
+
+### 1. SVG Fill (z-index: 5)
+`svg.winamp-player-notch-mid` at `left: 98px, top: 47px, width: 175px, height: 27px`
+ViewBox: `"-20 -1 175 27"`
+
+The fill path uses **extended diagonals** that continue past the trapezoid base
+(y=24) without any vertex or direction change. This is critical — any vertex at
+y=24 creates an anti-aliased "gray seam" artifact. The diagonals extend to y=195,
+well past the viewBox clip at y=26.
+
+```
+M -13 195 L -13 24 L -7 24 Q -2 24 -1 20 C 2 8 7 0 15 0
+L 120 0 C 128 0 133 8 136 20 Q 137 24 142 24 L 142 195 Z
+```
+
+The left side extends 6px past the tab edge (for opacity fade, see below).
+
+### 2. SVG Inner Highlight (z-index: 5, same SVG)
+White stroke at 35% opacity, 1px inset from the outline, traces the same curve.
+
+### 3. SVG Outline (z-index: 5, same SVG)
+Dark stroke `rgba(0,0,20,0.65)`, 1px, traces the tab curve. The left side
+extends 6px past the tab edge (matching the fill extension).
+
+### 4. Seam Cover Strip (z-index: 6)
+`div.winamp-player-notch-seam` — a 1px tall CSS div at the trapezoid base
+position, color-matched to the chrome surface (`#BAC0CB`). Covers the gray seam
+artifact that the fill path's edge creates.
+
+### 5. CSS Highlight Band (z-index: 7)
+`div.winamp-player-notch-highlight` — a CSS div with `clip-path: path()` that
+traces a 2px curved band just below the outline. White background with 1px blur.
+This replaces SVG strokes for the highlight because SVG strokes also create the
+gray seam artifact (see below).
+
+### 6. Opacity Mask on the SVG
+The notch SVG has a CSS `mask-image` that fades the left edge over 6px and the
+right edge over 3px. This creates a gradual opacity falloff at the junction
+between the tab and the LCD border, hiding any remaining hard cutoff.
+
+## Lower-Right Notch
+
+Same SVG approach (fill + highlight + outline) with a compound bezier curve
+that bows rightward at the bottom. Uses two C curves for the S-shaped sweep.
+Positioned at `right: -6px, bottom: -4px`.
+
+## The Gray Seam Artifact — Root Cause and Solutions
+
+### What It Is
+A ~1px darker gray line at the base of the trapezoid, visible wherever the SVG
+fill path has a boundary edge. It's caused by SVG anti-aliasing creating
+semi-transparent pixels at path edges, which composite against the page
+background (LCD blue or chrome) and produce a visible color shift.
+
+### Why the Tab Chrome Fix Didn't Work Here
+
+The Paths/Post Processing tab chrome panels solved this with:
+1. Tab fill extends 6px INTO the panel body (overlap)
+2. Panel fill paints ON TOP, covering the tab fill's seam
+3. CSS `::before` seam cover gradient on the panel body
+
+This worked because **both fills are in the same SVG** — the tab fill and panel
+fill are sibling paths in one SVG element, composited together before being
+placed on the page.
+
+For the player notch, the "panel" is the LCD — a CSS element with its own
+background, border, and 27-layer box-shadow. The SVG notch and the CSS LCD are
+**separate compositing layers** at different z-indices. The two-fill overlap
+technique doesn't work across this CSS/SVG boundary.
+
+### Attempted Fixes That Failed
+
+| Approach | Why It Failed |
+|---|---|
+| SVG fill extending below y=24 | Gray seam moved to the new bottom edge |
+| SVG `<rect>` seam cover behind fill | Same compositing layer, didn't cover the anti-aliased edge |
+| CSS `::after` seam cover on LCD (z-index 6) | Worked for straight middle, couldn't follow curves |
+| SVG bevel strokes (z-index 7) | SVG strokes ALSO create the gray seam artifact |
+| Solid-color SVG strokes (no transparency) | Still creates the artifact — not caused by alpha blending |
+| `shape-rendering="crispEdges"` | No effect on the gray seam |
+| Extended viewBox | No effect — artifact is not from viewBox clipping |
+| `opacity: 0.99` compositing hack | No effect |
+| Backing `<rect>` behind fill for chrome-on-chrome blending | No effect — anti-aliased pixels still visible |
+
+### What Actually Works
+
+1. **Extended diagonal fill** — eliminate vertices at y=24 so the fill has no
+   edge there. The diagonals pass through y=24 continuously.
+
+2. **CSS seam cover at z-index 6** — a 1px CSS div (NOT SVG) covering the
+   remaining artifact at y=24. CSS elements at higher z-index reliably cover
+   SVG rendering artifacts. This was confirmed by testing with a white div that
+   completely hid the gray line.
+
+3. **CSS clip-path highlight band at z-index 7** — bevel highlights drawn as a
+   CSS div with `clip-path: path()` following the tab curve, NOT as SVG strokes.
+   CSS clip-path rendering does not produce the gray seam artifact.
+
+4. **Opacity mask fade at edges** — CSS `mask-image` on the SVG element creates
+   a gradual opacity falloff at the tab edges (6px left, 3px right), hiding
+   the hard junction between the tab layers and the LCD border treatments.
+
+### Key Lesson
+
+**SVG rendering (both fills AND strokes) produces anti-aliased edge artifacts
+that cannot be covered by other SVG elements in the same compositing layer.**
+The only reliable cover is a CSS element at a higher z-index. For curved bevel
+treatments, use CSS `clip-path: path()` on a div — not SVG strokes.

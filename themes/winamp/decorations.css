@@ -1,0 +1,4097 @@
+/* ── DSEG7Modern (digital LCD display font, used for tabular numerics) ── */
+@font-face {
+  font-family: 'DSEG7Modern';
+  src: url('/fonts/winamp/DSEG7Classic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html[data-theme="winamp"] {
+  --sf-base: 116 121 135;
+  --sf-primary: 179 184 195;
+  --sf-raised: 205 208 216;
+  --sf-border: 74 79 88;
+  --sf-border-secondary: 144 147 155;
+  --tx-primary: 26 28 34;
+  --tx-secondary: 58 62 72;
+  --tx-muted: 90 94 104;
+  --tx-faint: 122 126 136;
+  --ac-300: 156 180 216;
+  --ac-400: 120 148 192;
+  --ac-500: 84 116 160;
+  --ac-600: 62 90 132;
+  --border-radius: 2px;
+  --panel-shadow: 1px 1px 0 rgba(255,255,255,.45) inset, -1px -1px 0 rgba(0,0,0,.55) inset, 2px 2px 0 rgba(255,255,255,.2) inset, -2px -2px 0 rgba(0,0,0,.3) inset, 0 2px 10px rgba(0,0,0,.5);
+  --glow: transparent;
+  --font-ui: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'DSEG7Modern', 'Courier New', monospace;
+  --scroll-thumb: 138 142 152;
+  --scroll-thumb-hover: 122 126 136;
+}
+
+/* ============================================================
+   WINAMP — Brushed silver chassis, chrome controls, navy displays
+   ============================================================ */
+
+/* ── Base: brushed-metal body with horizontal grain texture ── */
+[data-theme="winamp"] {
+  background-image:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 2px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.06) 15%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.08) 70%,
+      rgba(0, 0, 0, 0.20) 100%
+    );
+}
+
+/* ── Panels: aggressive metallic gradient + thick 3D bevel + brushed grain ── */
+[data-theme="winamp"] [class*="rounded-theme"],
+[data-theme="winamp"] .layout-timeline,
+[data-theme="winamp"] .win95-panel-section {
+  background-image:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 2px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.06) 4%,
+      transparent 12%,
+      transparent 88%,
+      rgba(0, 0, 0, 0.06) 96%,
+      rgba(0, 0, 0, 0.14) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.50) 0%,
+      rgba(255, 255, 255, 0.40) 4%,
+      rgba(255, 255, 255, 0.25) 12%,
+      rgba(255, 255, 255, 0.10) 25%,
+      transparent 42%,
+      rgba(0, 0, 0, 0.06) 55%,
+      rgba(0, 0, 0, 0.16) 70%,
+      rgba(0, 0, 0, 0.30) 88%,
+      rgba(0, 0, 0, 0.40) 100%
+    );
+}
+
+
+[data-theme="winamp"] [class*="rounded-theme"] {
+  border: 1px solid #0a0e18 !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.5) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.15) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.6) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.3) inset,
+    0 3px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+[data-theme="winamp"] .win95-window {
+  border: 1px solid #0a0e18 !important;
+}
+
+[data-theme="winamp"] .winamp-floating-content .win95-window {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+[data-theme="winamp"] .layout-timeline {
+  background-color: rgb(var(--sf-primary)) !important;
+}
+
+[data-theme="winamp"] .win95-panel-section {
+  border: 1px solid #0a0e18 !important;
+}
+
+[data-theme="winamp"] .winamp-no-border-b {
+  border-bottom: none !important;
+}
+
+[data-theme="winamp"] .winamp-panel-content {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+/* ── Winamp spacing: increase vertical gaps so bevels don't overlap ── */
+[data-theme="winamp"] .winamp-panel-content > .flex.flex-col.gap-2 {
+  gap: 10px;
+}
+[data-theme="winamp"] .winamp-panel-content .flex.flex-col.gap-1 {
+  gap: 10px;
+}
+
+/* Ensure scrub fields wrapped in mt-1 divs also get adequate spacing */
+[data-theme="winamp"] .winamp-panel-content .mt-1:has(> .winamp-scrub-field),
+[data-theme="winamp"] .winamp-panel-content .mt-1:has(> .flex > .winamp-scrub-field) {
+  margin-top: 8px;
+}
+
+/* Sliders wrapped in mt-2 also need increased spacing */
+[data-theme="winamp"] .winamp-panel-content .mt-2:has(.slider-track-wrapper) {
+  margin-top: 12px;
+}
+
+/* Camera panel side-by-side sliders: tighter label-to-slider gap */
+[data-theme="winamp"] .winamp-camera-sliders .flex-col {
+  gap: 5px !important;
+}
+
+[data-theme="winamp"] .winamp-camera-sliders .slider-track-wrapper {
+  margin-bottom: 10px;
+  margin-left: 9px;
+  margin-right: 9px;
+}
+
+[data-theme="winamp"] .winamp-camera-sliders input[type="range"] {
+  width: calc(100% + 7px) !important;
+  margin-left: -3.5px;
+}
+
+[data-theme="winamp"] .winamp-camera-sliders input[type="range"]::-webkit-slider-thumb {
+  width: 14px;
+  height: 9px;
+  margin-top: 0px;
+}
+
+[data-theme="winamp"] .winamp-camera-sliders input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 9px;
+}
+
+[data-theme="winamp"] .winamp-camera-sliders .slider-track-wrapper::after {
+  top: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 99px;
+  height: 7px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='99' height='7' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='2' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='4' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='6' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='8' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='10' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='12' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='14' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='16' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='18' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='20' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='22' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='24' y='0' width='2' height='5' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='26' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='28' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='30' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='32' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='34' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='36' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='38' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='40' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='42' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='44' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='46' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='48' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='50' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='52' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='54' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='56' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='58' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='60' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='62' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='64' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='66' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='68' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='70' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='72' y='0' width='2' height='5' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='74' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='76' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='78' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='80' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='82' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='84' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='86' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='88' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='90' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='92' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='94' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='96' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='98' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3C/svg%3E");
+  background-size: 99px 7px;
+  background-repeat: no-repeat;
+}
+
+[data-theme="winamp"] .winamp-panel-content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow:
+    /* Left highlight */
+    3px 0 0 rgba(255, 255, 255, 0.35) inset,
+    6px 0 3px rgba(255, 255, 255, 0.18) inset,
+    10px 0 8px rgba(255, 255, 255, 0.06) inset,
+    /* Right shadow */
+    -3px 0 0 rgba(0, 0, 0, 0.25) inset,
+    -6px 0 3px rgba(0, 0, 0, 0.12) inset,
+    -10px 0 8px rgba(0, 0, 0, 0.04) inset,
+    /* Top highlight */
+    0 2px 0 rgba(255, 255, 255, 0.25) inset,
+    0 5px 3px rgba(255, 255, 255, 0.12) inset,
+    /* Bottom highlight */
+    0 -2px 0 rgba(255, 255, 255, 0.30) inset,
+    0 -5px 3px rgba(255, 255, 255, 0.15) inset,
+    0 -9px 8px rgba(255, 255, 255, 0.06) inset;
+}
+
+[data-theme="winamp"] .winamp-btn-tray {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  padding: 2px 6px;
+  /* raised lip turned off for testing */
+  box-shadow: none;
+}
+
+[data-theme="winamp"] [class*="shadow-panel"] {
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.5) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.15) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.65) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.35) inset,
+    0 4px 14px rgba(0, 0, 0, 0.55);
+}
+
+/* ── Recessed track areas: deep sunken inset ── */
+[data-theme="winamp"] [class*="bg-surface-raised"] {
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.5) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.25) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+/* ── Graph / timeline track: recessed panel matching playlist/minimap blue ── */
+[data-theme="winamp"] .winamp-graph-inset {
+  background-color: #243c79;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+  border-radius: 0 !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.4) inset,
+    3px 3px 0 rgba(0, 0, 0, 0.15) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.1) inset,
+    -2px -2px 0 rgba(255, 255, 255, 0.04) inset;
+}
+
+/* Theme preview cards: override global button pill shape */
+[data-theme="winamp"] .scenit-theme-editor button[title] {
+  border-radius: 2px !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Landing scene cards are buttons; keep them rectangular, not pill-styled. */
+[data-theme="winamp"] .landing-scene-card,
+[data-theme="winamp"] .landing-scene-card:hover,
+[data-theme="winamp"] .landing-scene-card:active {
+  border-radius: 1rem !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="winamp"] .landing-scene-card-thumb,
+[data-theme="winamp"] .landing-scene-card-thumb img {
+  border-radius: 0 !important;
+  clip-path: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+/* ── Buttons: aggressive chrome bevel + strong metallic gradient ── */
+[data-theme="winamp"] button {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.50) 0%,
+    rgba(255, 255, 255, 0.25) 15%,
+    rgba(255, 255, 255, 0.06) 35%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.10) 65%,
+    rgba(0, 0, 0, 0.22) 85%,
+    rgba(0, 0, 0, 0.32) 100%
+  );
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.6) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.15) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.55) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.2) inset;
+  border-radius: 9999px;
+}
+
+[data-theme="winamp"] button:hover:not(:disabled):not(.winamp-eq-pl-btn) {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.60) 0%,
+    rgba(255, 255, 255, 0.32) 15%,
+    rgba(255, 255, 255, 0.10) 35%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.06) 65%,
+    rgba(0, 0, 0, 0.16) 85%,
+    rgba(0, 0, 0, 0.24) 100%
+  );
+}
+
+[data-theme="winamp"] button:not(:disabled):not(.winamp-eq-pl-btn):active {
+  background-image: none;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.55) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.25) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+/* Reset global button styles on playlist empty state */
+[data-theme="winamp"] .winamp-playlist-empty {
+  background-image: none !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
+}
+
+/* ── Tier A: wide text buttons — aggressive chrome bevel, pill-rounded, compact ── */
+[data-theme="winamp"] .winamp-btn-label {
+  background-color: rgb(var(--sf-raised)) !important;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.70) 10%,
+    rgba(255, 255, 255, 0.35) 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 60%,
+    rgba(0, 0, 0, 0.15) 80%,
+    rgba(0, 0, 0, 0.26) 100%
+  ) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  box-shadow:
+    /* Button bevel */
+    1px 1px 0 rgba(255, 255, 255, 0.70) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.20) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.55) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.22) inset,
+    /* Dark outline ring — flush against button edge */
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    /* Outer recess — dark top/left shadow zone */
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    /* Gray transition — between shadow and highlight */
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    /* Bright rim catch above the dark shadow */
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    /* Outer recess — bright bottom/right rim */
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    /* Shadow under bottom rim highlight */
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06) !important;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5),
+    0 -1px 0 rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1px 7px !important;
+  color: rgb(var(--tx-primary));
+  line-height: 1.4;
+}
+
+[data-theme="winamp"] .winamp-btn-label:hover:not(:disabled) {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.75) 15%,
+    rgba(255, 255, 255, 0.35) 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(0, 0, 0, 0.02) 65%,
+    rgba(0, 0, 0, 0.10) 85%,
+    rgba(0, 0, 0, 0.20) 100%
+  ) !important;
+}
+
+[data-theme="winamp"] .winamp-btn-label:active:not(:disabled) {
+  background-image: none !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.5) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.2) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ── Tier A-blue: same embossed pill as winamp-btn-label, blue palette ── */
+[data-theme="winamp"] .winamp-btn-label-blue {
+  background-color: #4a6a9e !important;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(180, 210, 255, 0.30) 10%,
+    rgba(120, 160, 220, 0.12) 30%,
+    transparent 50%,
+    rgba(0, 0, 30, 0.14) 60%,
+    rgba(0, 0, 40, 0.30) 80%,
+    rgba(0, 0, 50, 0.44) 100%
+  ) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  box-shadow:
+    /* Inner bevel (blue — on button face) */
+    1px 1px 0 rgba(160, 200, 255, 0.60) inset,
+    2px 2px 0 rgba(140, 180, 240, 0.18) inset,
+    -1px -1px 0 rgba(0, 0, 40, 0.55) inset,
+    -2px -2px 0 rgba(0, 0, 40, 0.22) inset,
+    /* Outer recess (neutral — on surrounding chrome panel) */
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06) !important;
+  text-shadow:
+    0 1px 0 rgba(160, 200, 255, 0.40),
+    0 -1px 0 rgba(0, 0, 40, 0.30);
+  font-weight: bold;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1px 7px !important;
+  color: #e0e8f4;
+  line-height: 1.4;
+}
+
+[data-theme="winamp"] .winamp-btn-label-blue:hover:not(:disabled) {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(180, 210, 255, 0.25) 15%,
+    rgba(120, 160, 220, 0.08) 35%,
+    transparent 50%,
+    rgba(0, 0, 30, 0.08) 65%,
+    rgba(0, 0, 40, 0.20) 85%,
+    rgba(0, 0, 50, 0.30) 100%
+  ) !important;
+}
+
+[data-theme="winamp"] .winamp-btn-label-blue:active:not(:disabled) {
+  background-image: none !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 40, 0.50) inset,
+    2px 2px 0 rgba(0, 0, 40, 0.20) inset,
+    -1px -1px 0 rgba(160, 200, 255, 0.10) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ── Tier C: ON/AUTO toggle-style — compact, moderate bevel, embossed text ── */
+[data-theme="winamp"] .winamp-btn-toggle {
+  background-color: rgb(var(--sf-raised)) !important;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.70) 10%,
+    rgba(255, 255, 255, 0.35) 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 60%,
+    rgba(0, 0, 0, 0.15) 80%,
+    rgba(0, 0, 0, 0.26) 100%
+  ) !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.70) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.20) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.55) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.22) inset,
+    0 1px 3px rgba(0, 0, 0, 0.35) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 1px 7px !important;
+  font-weight: bold;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.4),
+    0 -1px 0 rgba(0, 0, 0, 0.2);
+  color: rgb(var(--tx-primary)) !important;
+  min-height: auto !important;
+}
+
+[data-theme="winamp"] .winamp-btn-toggle:hover:not(:disabled) {
+  background-color: rgb(var(--sf-border-secondary)) !important;
+}
+
+[data-theme="winamp"] .winamp-btn-toggle:active:not(:disabled) {
+  background-image: none !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.45) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 1px 3px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-theme="winamp"] .winamp-btn-toggle.active {
+  background-image: none !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.40) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 1px 3px rgba(0, 0, 0, 0.35) !important;
+  color: rgb(var(--ac-400)) !important;
+  text-shadow:
+    0 0 4px rgba(120, 148, 192, 0.4),
+    0 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ── Section headers: steel-blue title bars with embossed text ── */
+[data-theme="winamp"] [class*="tracking-wider"] {
+  background: linear-gradient(
+    180deg,
+    #7a84a0 0%,
+    #6a7490 6%,
+    #566080 16%,
+    #465474 28%,
+    #3a4460 50%,
+    #2e3850 75%,
+    #242e44 100%
+  );
+  color: #c0c8d8 !important;
+  text-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7),
+    -1px -1px 0 rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  border: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 2px 0 rgba(255, 255, 255, 0.35) inset,
+    0 3px 0 rgba(255, 255, 255, 0.22) inset,
+    0 4px 1px rgba(255, 255, 255, 0.14) inset,
+    0 5px 2px rgba(255, 255, 255, 0.08) inset,
+    0 7px 4px rgba(255, 255, 255, 0.03) inset;
+}
+
+[data-theme="winamp"] [class*="tracking-wider"] span {
+  color: #c0c8d8 !important;
+}
+
+/* ── Recessed container that holds the folder tab + panel body ── */
+[data-theme="winamp"] .winamp-tab-inset {
+  position: relative;
+  margin: 0;
+  padding: 2px 8px 6px;
+  border-radius: 0;
+  background-color: #c8cdd6;
+  background-image: linear-gradient(
+    180deg,
+    #d4d8e0 0%,
+    #cdd2db 15%,
+    #c4c9d2 40%,
+    #c0c5ce 60%,
+    #c8cdd6 80%,
+    #d0d5dd 100%
+  );
+  box-shadow:
+    0 2px 0 0 rgba(255, 255, 255, 0.40) inset,
+    0 4px 4px 0 rgba(255, 255, 255, 0.15) inset,
+    2px 2px 3px 0 rgba(255, 255, 255, 0.12) inset,
+    -2px 2px 3px 0 rgba(255, 255, 255, 0.12) inset,
+    0 -2px 0 0 rgba(0, 0, 0, 0.18) inset,
+    0 -4px 4px 0 rgba(0, 0, 0, 0.08) inset,
+    -2px -2px 3px 0 rgba(0, 0, 0, 0.06) inset,
+    2px -2px 3px 0 rgba(0, 0, 0, 0.06) inset;
+}
+
+/* ── Folder tab header: SVG-based curved chrome tab ── */
+[data-theme="winamp"] .winamp-folder-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 14px 2px;
+  margin-left: 28px;
+  background: transparent;
+  border: none;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgb(var(--tx-primary));
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6),
+    0 -1px 0 rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 2;
+  margin-bottom: -3px;
+}
+
+/* SVG tab shape positioned behind text */
+[data-theme="winamp"] .winamp-tab-svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -6px;
+  right: -6px;
+  width: calc(100% + 12px);
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── Bright chrome panel body below the folder tab ── */
+[data-theme="winamp"] .winamp-tab-panel {
+  position: relative;
+  background-color: #DBDCE5;
+  background-image: linear-gradient(
+    180deg,
+    #EFF0F5 0%,
+    #EAEBF1 4%,
+    #E8E8EF 7%,
+    #F6F6F8 14%,
+    #F5F5F7 24%,
+    #DBDCE5 50%,
+    #BEC4D0 70%,
+    #BCC3CF 82%,
+    #D3D5DE 90%,
+    #DFE0E8 95%,
+    #E8E8EC 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-top: none;
+  border-radius: 0 11px 11px 11px;
+  padding: 8px 12px 10px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.12) inset,
+    1px 0 0 rgba(255, 255, 255, 0.30) inset,
+    -1px 0 0 rgba(0, 0, 0, 0.15) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.12) inset,
+    0 1px 0 0 rgba(0, 0, 0, 0.30),
+    0 2px 1px 0 rgba(0, 0, 0, 0.10),
+    1px 0 0 0 rgba(0, 0, 0, 0.25),
+    2px 0 1px 0 rgba(0, 0, 0, 0.08),
+    -1px 0 0 0 rgba(0, 0, 0, 0.25),
+    -2px 0 1px 0 rgba(0, 0, 0, 0.08),
+    0 -1px 0 0 rgba(255, 255, 255, 0.50),
+    0 -2px 1px 0 rgba(255, 255, 255, 0.12),
+    -1px -1px 0 0 rgba(255, 255, 255, 0.25),
+    1px -1px 0 0 rgba(255, 255, 255, 0.20);
+}
+
+/* Seam cover: gradient at panel top blends with tab bottom */
+[data-theme="winamp"] .winamp-tab-panel::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(180deg, #eaecf0 0%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 0 11px 0 0;
+}
+
+/* Panel edge highlights for tab panels */
+[data-theme="winamp"] .winamp-tab-panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 9px;
+  box-shadow:
+    2px 0 2px rgba(255, 255, 255, 0.20) inset,
+    4px 0 4px rgba(255, 255, 255, 0.08) inset,
+    -2px 0 2px rgba(0, 0, 0, 0.14) inset,
+    -4px 0 4px rgba(0, 0, 0, 0.05) inset,
+    0 -2px 0 rgba(255, 255, 255, 0.22) inset,
+    0 -5px 3px rgba(255, 255, 255, 0.08) inset;
+}
+
+/* ── Paths tab: 2-layer construction ── */
+/* Layer 1: Outer backing panel (full column width, dark chrome frame) */
+[data-theme="winamp"] .winamp-tab-module {
+  position: relative;
+  padding: 21px 10px 6px;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg,
+      #BFC6D2 0%,
+      #C5CAD5 14%,
+      #CFD1DB 75%,
+      #D0D2DB 88%,
+      #D0D2DB 94%,
+      #CED0DA 100%
+    );
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.20) inset,
+    0 2px 0 rgba(255, 255, 255, 0.82) inset,
+    0 3px 0 rgba(255, 255, 255, 0.50) inset,
+    0 4px 0 rgba(255, 255, 255, 0.22) inset,
+    0 5px 1px rgba(255, 255, 255, 0.08) inset,
+    1px 0 0 rgba(0, 0, 0, 0.18) inset,
+    2px 0 0 rgba(255, 255, 255, 0.65) inset,
+    3px 0 0 rgba(255, 255, 255, 0.22) inset,
+    -1px 0 0 rgba(0, 0, 0, 0.18) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.55) inset,
+    -3px 0 0 rgba(255, 255, 255, 0.18) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.48) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.15) inset;
+}
+
+/* Bare floating windows: round the wrapper border, clear rectangular background,
+   hide SVG shadow groups, and strip the tab-panel's own border/shadow. */
+[data-theme="winamp"] .winamp-floating-bare .win95-panel-section {
+  border: none !important;
+  border-radius: 10px !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+/* SVG shadow groups are kept visible in floating-bare so they cast
+   the "curving inward" shadow on the backing panel around the tab chrome outline. */
+
+[data-theme="winamp"] .winamp-floating-bare .winamp-tab-module {
+  overflow: hidden;
+  border-radius: 9px;
+  box-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.48) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.15) inset;
+}
+
+[data-theme="winamp"] .winamp-floating-bare .winamp-tab-module::before {
+  display: none;
+}
+
+[data-theme="winamp"] .winamp-floating-bare .winamp-tab-module::after {
+  border-radius: 9px;
+}
+
+[data-theme="winamp"] .winamp-floating-bare .winamp-tab-panel {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+[data-theme="winamp"] .winamp-floating-bare .winamp-tab-panel::before,
+[data-theme="winamp"] .winamp-floating-bare .winamp-tab-panel::after {
+  display: none !important;
+}
+
+/* Shadow cast on upper region of backing panel (above the chrome panel body).
+   Inset from edges so it doesn't paint over the outer rim box-shadows. */
+[data-theme="winamp"] .winamp-tab-module::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  height: 17px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.04) 60%, transparent 100%);
+  border-radius: 6px 6px 0 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Rim highlights on top/left/right edges of the backing panel.
+   Rendered as ::after at z-index 6 so it paints above the SVG layers. */
+[data-theme="winamp"] .winamp-tab-module::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 6;
+  border-radius: 10px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.92) inset,
+    0 2px 0 rgba(255, 255, 255, 0.82) inset,
+    0 3px 0 rgba(255, 255, 255, 0.55) inset,
+    0 4px 1px rgba(255, 255, 255, 0.25) inset,
+    0 5px 2px rgba(255, 255, 255, 0.10) inset,
+    1px 0 0 rgba(255, 255, 255, 0.70) inset,
+    2px 0 0 rgba(255, 255, 255, 0.30) inset,
+    3px 0 1px rgba(255, 255, 255, 0.10) inset,
+    -1px 0 0 rgba(255, 255, 255, 0.60) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.25) inset,
+    -3px 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.35) inset,
+    0 -2px 1px rgba(0, 0, 0, 0.12) inset;
+  -webkit-mask-image: linear-gradient(180deg, black 0%, black 75%, transparent 100%);
+  mask-image: linear-gradient(180deg, black 0%, black 75%, transparent 100%);
+}
+
+/* Backplate: invisible positioning wrapper for header elements */
+[data-theme="winamp"] .winamp-tab-backplate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Header lip: transparent layout container only (no visual styling) */
+[data-theme="winamp"] .winamp-tab-header-lip {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 0;
+  height: 26px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+[data-theme="winamp"] .winamp-tab-header-lip::before,
+[data-theme="winamp"] .winamp-tab-header-lip::after {
+  display: none;
+}
+
+/* Folder tab: short, left-aligned, overlaps panel top border */
+[data-theme="winamp"] .winamp-tab-module .winamp-folder-tab {
+  min-width: 72px;
+  justify-content: center;
+  margin-left: 16px;
+  padding: 3px 8px 4px;
+  margin-bottom: 0;
+  top: 0px;
+  z-index: 6;
+  pointer-events: auto;
+}
+
+[data-theme="winamp"] [data-window-id="post-proc"] .winamp-folder-tab {
+  margin-left: -8px;
+  padding: 3px 48px 4px;
+}
+
+[data-theme="winamp"] .winamp-tab-module .winamp-folder-tab::before,
+[data-theme="winamp"] .winamp-tab-module .winamp-folder-tab::after {
+  display: none;
+}
+
+[data-theme="winamp"] .winamp-folder-tab-label {
+  display: inline-block;
+  min-width: 0;
+  position: relative;
+  top: 0px;
+  color: #2d3240;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.72),
+    0 -1px 0 rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="winamp"] .winamp-tab-actions {
+  position: absolute;
+  right: 20px;
+  top: 4px;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+}
+
+[data-theme="winamp"] .winamp-tab-actions .winamp-playlist-import-btn {
+  color: rgba(0, 0, 0, 0.30);
+  width: 14px;
+  height: 14px;
+}
+
+[data-theme="winamp"] .winamp-tab-actions .winamp-playlist-import-btn:hover {
+  color: rgba(0, 0, 0, 0.55);
+  background: none;
+}
+
+[data-theme="winamp"] .winamp-tab-actions .winamp-playlist-import-btn svg {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="winamp"] .winamp-tab-module .winamp-tab-corner-btns {
+  top: 5px;
+  right: 6px;
+}
+
+/* Layer 2: Inner chrome panel (tab-panel) — border drawn by unified SVG frame */
+[data-theme="winamp"] .winamp-tab-module .winamp-tab-panel {
+  position: relative;
+  margin-top: 0;
+  padding-top: 13px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  z-index: 2;
+}
+
+[data-theme="winamp"] [data-window-id="post-proc"] .winamp-tab-panel {
+  padding-top: 4px;
+}
+
+[data-theme="winamp"] .winamp-tab-module .winamp-tab-panel::before {
+  display: none;
+}
+
+[data-theme="winamp"] .winamp-tab-module .winamp-tab-panel::after {
+  box-shadow: none;
+}
+
+[data-theme="winamp"] .winamp-paths-panel {
+  gap: 8px;
+}
+
+/* Deep recessed channel around slider inside tab chrome panels */
+[data-theme="winamp"] .winamp-tab-panel .slider-track-wrapper::before {
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  border-radius: 2px;
+  box-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 -1px 1px rgba(0, 0, 0, 0.10),
+    0 1px 1px rgba(0, 0, 0, 0.45) inset,
+    0 1px 3px rgba(0, 0, 0, 0.20) inset,
+    0 -1px 1px rgba(255, 255, 255, 0.15) inset,
+    0 1px 0 0.5px rgba(255, 255, 255, 0.50),
+    0 1.5px 1px rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="winamp"] .winamp-tab-panel .slider-track-wrapper::after {
+  top: calc(100% + 1px);
+  left: 10px;
+  right: 10px;
+  height: 9px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='9' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.15'/%3E%3Crect x='0' y='1' width='2' height='6' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='2' y='1' width='1' height='6' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='0' y='7' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='4' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='4' y='1' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='6' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='4' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='8' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='8' y='1' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='10' y='1' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='8' y='5' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='12' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='12' y='1' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='14' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='12' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='16' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='16' y='1' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='18' y='1' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='16' y='5' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='20' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='20' y='1' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='22' y='1' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='20' y='6' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='24' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='24' y='1' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='26' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='24' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='28' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='28' y='1' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='30' y='1' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='28' y='5' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='32' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='32' y='1' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='34' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='32' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='36' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3Crect x='36' y='1' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='38' y='1' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='36' y='5' width='3' height='1' fill='%23fff' fill-opacity='0.10'/%3E%3C/svg%3E");
+  background-size: 40px 9px;
+}
+
+[data-theme="winamp"] .winamp-tab-panel .slider-track-wrapper {
+  padding: 1px 10px;
+  margin-bottom: 10px;
+  border-radius: 9999px;
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.18) 50%, transparent 100%) no-repeat center top / 100% 3px,
+    linear-gradient(
+      180deg,
+      #535A68 0%,
+      #6E7787 12%,
+      #979EAC 50%,
+      #C1C7D3 75%,
+      #CFD3DD 87%,
+      #E9E9F0 100%
+    );
+  box-shadow:
+    0 -1px 1px rgba(255, 255, 255, 0.06) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.12),
+    0 1px 0 0.5px rgba(255, 255, 255, 0.70);
+}
+
+[data-theme="winamp"] .winamp-paths-panel > .winamp-playlist {
+  min-height: 60px !important;
+  border-radius: 3px;
+}
+
+[data-theme="winamp"] .winamp-playlist-import-btn {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  color: rgba(180, 200, 255, 0.50);
+  transition: color 0.15s;
+}
+
+[data-theme="winamp"] .winamp-playlist-import-btn:hover {
+  color: rgba(238, 242, 255, 0.85);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="winamp"] .winamp-playlist-import-btn svg {
+  width: 9px;
+  height: 9px;
+}
+
+/* (removed: winamp-tonemapping-btn — replaced by inline AX grid) */
+
+/* ── FOV mask: brighter shell + readable control hierarchy ── */
+[data-theme="winamp"] .winamp-fov-mask-shell {
+  border: none !important;
+  border-radius: 2px !important;
+  padding: 6px !important;
+  background:
+    linear-gradient(180deg, #c5cbd5 0%, #afb6c2 40%, #959daa 41%, #c0c6d0 100%) !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.62) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.52) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.22) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.16) inset,
+    0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="winamp"] .winamp-fov-mask-shell,
+[data-theme="winamp"] .winamp-fov-mask-shell * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+[data-theme="winamp"] .winamp-fov-mask-header {
+  gap: 8px;
+}
+
+[data-theme="winamp"] .winamp-fov-mask-title-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 5px 8px 4px;
+  border-radius: 2px;
+  background-color: #243c79;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px),
+    linear-gradient(
+      180deg,
+      rgba(160, 200, 255, 0.25) 0%,
+      rgba(100, 150, 230, 0.08) 18%,
+      transparent 42%,
+      rgba(0, 0, 0, 0.12) 100%
+    );
+  background-size: 3px 3px, 100% 100%;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.72) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.36) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+[data-theme="winamp"] .winamp-fov-mask-title {
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #edf3dc;
+}
+
+[data-theme="winamp"] .winamp-fov-mask-kicker {
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #95b58a;
+}
+
+[data-theme="winamp"] .winamp-fov-mask-copy {
+  margin-top: 6px !important;
+  padding: 0 3px;
+  color: #2f3440 !important;
+  font-size: 10px !important;
+  line-height: 1.35;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="winamp"] .winamp-fov-mask-controls {
+  margin-top: 8px !important;
+  padding: 8px 9px 9px;
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, #e0e5ec 0%, #d1d8e2 38%, #bec6d1 100%);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.55) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.35) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.12) inset;
+}
+
+[data-theme="winamp"] .winamp-fov-mask-row {
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(55, 61, 74, 0.16);
+}
+
+[data-theme="winamp"] .winamp-fov-mask-slider {
+  margin-top: 2px;
+}
+
+/* ── AR Overlay: darker gradient zone for FOV controls ── */
+[data-theme="winamp"] .winamp-ar-fov-zone {
+  position: relative;
+  margin: 0 -12px -6px;
+  padding: 12px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background:
+    linear-gradient(180deg,
+      #9EA5B1 0%,
+      #9CA3AF 40%,
+      #969DAA 60%,
+      #9097A4 78%,
+      #8A919E 90%,
+      #858E9C 100%
+    );
+  box-shadow:
+    2px 0 0 rgba(255, 255, 255, 0.18) inset,
+    3px 0 2px rgba(255, 255, 255, 0.08) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.12) inset,
+    -3px 0 2px rgba(255, 255, 255, 0.06) inset,
+    0 -2px 0 rgba(255, 255, 255, 0.12) inset,
+    0 -3px 2px rgba(255, 255, 255, 0.06) inset;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+[data-theme="winamp"] .winamp-ar-fov-toggles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+[data-theme="winamp"] .winamp-ar-fov-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+[data-theme="winamp"] .winamp-ar-fov-zone::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.40);
+  z-index: 5;
+}
+
+/* ── AR Overlay: inline label + slider layout ── */
+[data-theme="winamp"] [data-window-id="ar-overlay"] .winamp-floating-content > div {
+  gap: 6px;
+}
+
+[data-theme="winamp"] [data-window-id="ar-overlay"] .winamp-floating-content > div > div.flex.flex-col:has(> .slider-track-wrapper):last-of-type {
+  margin-bottom: 2px;
+}
+
+[data-theme="winamp"] [data-window-id="ar-overlay"] div.flex.flex-col:has(> .slider-track-wrapper) {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+[data-theme="winamp"] [data-window-id="ar-overlay"] div.flex.flex-col:has(> .slider-track-wrapper) > .slider-track-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+[data-theme="winamp"] [data-window-id="ar-overlay"] div.flex.flex-col:has(> .slider-track-wrapper) > .flex.items-center {
+  flex-shrink: 0;
+  width: 52px;
+  margin-top: 1px;
+}
+
+[data-theme="winamp"] [data-window-id="ar-overlay"] div.flex.flex-col:has(> .slider-track-wrapper) > .flex.items-center .winamp-label {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+[data-theme="winamp"] [data-window-id="ar-overlay"] .winamp-ar-fov-zone div.flex.flex-col:has(> .slider-track-wrapper) > .flex.items-center {
+  width: 52px;
+}
+
+/* ── AR Overlay: recessed capsule slider tracks ── */
+[data-theme="winamp"] [data-window-id="ar-overlay"] .slider-track-wrapper {
+  padding: 1px 10px;
+  margin-bottom: 10px;
+  border-radius: 9999px;
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.18) 50%, transparent 100%) no-repeat center top / 100% 3px,
+    linear-gradient(
+      180deg,
+      #535A68 0%,
+      #6E7787 12%,
+      #979EAC 50%,
+      #C1C7D3 75%,
+      #CFD3DD 87%,
+      #E9E9F0 100%
+    );
+  box-shadow:
+    0 -1px 1px rgba(255, 255, 255, 0.06) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.12),
+    0 1px 0 0.5px rgba(255, 255, 255, 0.70);
+}
+
+[data-theme="winamp"] [data-window-id="ar-overlay"] .slider-track-wrapper::before {
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  border-radius: 2px;
+  box-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 -1px 1px rgba(0, 0, 0, 0.10),
+    0 1px 1px rgba(0, 0, 0, 0.45) inset,
+    0 1px 3px rgba(0, 0, 0, 0.20) inset,
+    0 -1px 1px rgba(255, 255, 255, 0.15) inset,
+    0 1px 0 0.5px rgba(255, 255, 255, 0.50),
+    0 1.5px 1px rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="winamp"] [data-window-id="ar-overlay"] .slider-track-wrapper::after {
+  top: calc(100% + 3px);
+  left: 10px;
+  right: 10px;
+  height: 9px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='173' height='9' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='2' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='5' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='7' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='10' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='12' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='15' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='17' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='20' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='22' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='25' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='27' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='30' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='32' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='35' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='37' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='40' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='42' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='45' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='47' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='50' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='52' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='55' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='57' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='60' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='62' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='65' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='67' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='70' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='72' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='75' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='77' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='80' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='82' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='85' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='87' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='90' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='92' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='95' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='97' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='100' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='102' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='105' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='107' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='110' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='112' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='115' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='117' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='120' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='122' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='125' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='127' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='130' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='132' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='135' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='137' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='140' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='142' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='145' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='147' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='150' y='0' width='2' height='5' fill='%23000' fill-opacity='0.42'/%3E%3Crect x='152' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.32'/%3E%3Crect x='155' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='157' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='160' y='0' width='2' height='4' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='162' y='0' width='1' height='4' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='165' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='167' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='170' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='172' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3C/svg%3E");
+  background-size: 173px 9px;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+/* ── EQ/PL style button pair: compact chrome pills in raised lip tray ── */
+[data-theme="winamp"] .winamp-eq-pl-tray {
+  display: flex;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 9999px;
+  background: transparent;
+  border: none;
+  box-shadow:
+    /* Outer raised rim — horizontal highlight/shadow */
+    0 -1px 0 1px rgba(238, 242, 255, 0.25),
+    0 -1px 2px 2px rgba(238, 242, 255, 0.50),
+    0 -2px 6px 3px rgba(238, 242, 255, 0.18),
+    0 -3px 11px 3px rgba(238, 242, 255, 0.08),
+    0 1px 2px 2px rgba(5, 8, 18, 0.45),
+    0 2px 6px 3px rgba(5, 8, 18, 0.22),
+    0 3px 11px 3px rgba(5, 8, 18, 0.10),
+    /* Inner rim continuation — wide bright band at border to bridge outer/inner */
+    0 0 4px 2px rgba(238, 242, 255, 0.30) inset,
+    0 -1px 6px 1px rgba(238, 242, 255, 0.20) inset,
+    0 -2px 8px 0 rgba(238, 242, 255, 0.10) inset,
+    /* Inner shadow — builds up further inside */
+    0 3px 6px 0 rgba(5, 8, 18, 0.30) inset,
+    0 4px 10px 0 rgba(5, 8, 18, 0.25) inset,
+    0 5px 16px 1px rgba(5, 8, 18, 0.18) inset,
+    0 7px 22px 2px rgba(5, 8, 18, 0.10) inset,
+    /* Bottom highlight — diffuse glow */
+    0 -1px 4px 0 rgba(238, 242, 255, 0.40) inset,
+    0 -2px 8px 0 rgba(238, 242, 255, 0.42) inset,
+    0 -4px 14px 1px rgba(238, 242, 255, 0.30) inset,
+    0 -6px 20px 2px rgba(238, 242, 255, 0.18) inset;
+}
+
+[data-theme="winamp"] .winamp-eq-pl-btn {
+  position: relative;
+  background-color: rgb(var(--sf-raised));
+  background-image: linear-gradient(
+    180deg,
+    rgba(238, 242, 255, 0.65) 0%,
+    rgba(238, 242, 255, 0.40) 10%,
+    rgba(238, 242, 255, 0.15) 30%,
+    transparent 50%,
+    rgba(5, 8, 18, 0.12) 60%,
+    rgba(5, 8, 18, 0.30) 80%,
+    rgba(5, 8, 18, 0.42) 100%
+  );
+  border: none;
+  border-radius: 9999px;
+  padding: 1px 7px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  color: rgba(140, 145, 160, 0.65);
+  cursor: pointer;
+  text-shadow:
+    0 1px 0 rgba(238, 242, 255, 0.3),
+    0 -1px 0 rgba(5, 8, 18, 0.20);
+  box-shadow:
+    /* Button bevel — top-left highlight, bottom-right shadow */
+    1px 1px 0 rgba(255, 255, 255, 0.85) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.20) inset,
+    -1px -1px 0 rgba(0, 0, 20, 0.50) inset,
+    -2px -2px 0 rgba(0, 0, 20, 0.12) inset,
+    /* Outer recessed well — top highlight, bottom shadow */
+    0 0 0 1.5px rgba(0, 0, 20, 0.45),
+    0 -1.5px 1.5px 1.5px rgba(0, 0, 20, 0.35),
+    0 1.5px 0.5px 1.5px rgba(255, 255, 255, 0.65);
+  transition: color 0.12s;
+}
+
+[data-theme="winamp"] .winamp-eq-pl-btn.active {
+  color: #3366cc;
+  text-shadow:
+    0 1px 0 rgba(238, 242, 255, 0.5),
+    0 -1px 0 rgba(5, 8, 18, 0.1);
+}
+
+[data-theme="winamp"] .winamp-eq-pl-btn:hover:not(.active) {
+  color: rgba(var(--tx-primary), 0.70);
+}
+
+[data-theme="winamp"] .winamp-eq-pl-btn:active {
+  background-image: none;
+  box-shadow:
+    1px 1px 2px rgba(5, 8, 18, 0.45) inset,
+    -1px -1px 0 rgba(238, 242, 255, 0.25) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.50),
+    0 0 0 2px rgba(0, 0, 20, 0.15);
+}
+
+[data-theme="winamp"] button.winamp-toggle {
+  border-radius: 9999px !important;
+  border: none !important;
+  background:
+    linear-gradient(180deg, #d7dce4 0%, #c3cad5 42%, #aab1bc 43%, #d0d5dd 100%) !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.65) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.45) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.14);
+}
+
+[data-theme="winamp"] button.winamp-toggle[aria-checked="true"] {
+  background:
+    linear-gradient(180deg, #cfd8e7 0%, #9fb2d3 36%, #6f8dbe 55%, #c0cbdf 100%) !important;
+}
+
+[data-theme="winamp"] .winamp-toggle-knob {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #e6ebf2 50%, #c1c8d4 100%) !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.72) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.28) inset,
+    0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Corner buttons for tab-style sections ── */
+[data-theme="winamp"] .winamp-tab-corner-btns {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  display: flex;
+  gap: 3px;
+  z-index: 11;
+  pointer-events: auto;
+}
+
+[data-theme="winamp"] .winamp-tab-btn {
+  background: none !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: 10px !important;
+  height: 10px !important;
+  min-width: 10px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.30);
+  cursor: pointer;
+}
+
+[data-theme="winamp"] .winamp-tab-btn:hover {
+  color: rgba(0, 0, 0, 0.55) !important;
+  background: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="winamp"] .winamp-tab-btn svg {
+  filter: none !important;
+  width: 7px;
+  height: 7px;
+}
+
+/* ── Header grooved lines flanking title text ── */
+[data-theme="winamp"] .winamp-header-groove {
+  height: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  background-color: #c8cdd6;
+  border-radius: 1px;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.5) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.4) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.55);
+}
+
+/* ── Winamp min/max/close titlebar buttons ── */
+[data-theme="winamp"] [class*="tracking-wider"] .winamp-titlebar-btn {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  background-color: #c8cdd6 !important;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 70%,
+    rgba(0, 0, 0, 0.25) 100%
+  ) !important;
+  border: none !important;
+  border-radius: 3px !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.4) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.35) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 0 2px 1px rgba(15, 20, 35, 0.5) !important;
+  color: #000;
+}
+
+[data-theme="winamp"] [class*="tracking-wider"] .winamp-titlebar-btn:hover {
+  background-color: #d4d8e0 !important;
+}
+
+[data-theme="winamp"] [class*="tracking-wider"] .winamp-titlebar-btn:active {
+  background-image: none !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.5) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 0 2px 1px rgba(15, 20, 35, 0.5) !important;
+}
+
+[data-theme="winamp"] [class*="tracking-wider"] .winamp-titlebar-btn svg {
+  width: 8px !important;
+  height: 8px !important;
+  min-width: 8px !important;
+  min-height: 8px !important;
+  color: #000 !important;
+  filter: none !important;
+}
+
+/* Titlebar button with text label instead of icon */
+[data-theme="winamp"] [class*="tracking-wider"] .winamp-titlebar-text-btn {
+  width: auto !important;
+  min-width: 12px !important;
+  padding: 0 4px !important;
+}
+
+[data-theme="winamp"] [class*="tracking-wider"] .winamp-titlebar-text-btn .winamp-titlebar-text-label {
+  font-size: 7px !important;
+  font-weight: 700 !important;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif !important;
+  letter-spacing: 0.05em;
+  color: #000 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+[data-theme="winamp"] .winamp-tool-btn svg {
+  fill: #000 !important;
+  stroke: #000 !important;
+  stroke-width: 1.5px !important;
+}
+
+[data-theme="winamp"] .winamp-tool-btn:first-child svg {
+  stroke-width: 3px !important;
+}
+
+[data-theme="winamp"] .winamp-titlebar-btns {
+  gap: 4px;
+  margin-right: -2px;
+}
+
+/* Active state for tool buttons styled as titlebar buttons */
+[data-theme="winamp"] .winamp-tool-active.winamp-titlebar-btn {
+  background-image: none !important;
+  background-color: #a8b0be !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.5) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 0 2px 1px rgba(15, 20, 35, 0.5) !important;
+}
+
+/* ── Inputs: deeply recessed dark display fields ── */
+[data-theme="winamp"] input[type="number"],
+[data-theme="winamp"] input[type="text"],
+[data-theme="winamp"] select {
+  background-color: #141824 !important;
+  color: #c0c8d8 !important;
+  border: none;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.4) inset,
+    3px 3px 0 rgba(0, 0, 0, 0.15) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.1) inset,
+    -2px -2px 0 rgba(255, 255, 255, 0.04) inset;
+  font-family: var(--font-ui);
+}
+
+/* ── Checkboxes: circular LED indicator ── */
+[data-theme="winamp"] input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 7px;
+  height: 7px;
+  min-width: 7px;
+  margin-right: 3px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  background:
+    radial-gradient(circle at 30% 25%, #ffffff 0%, rgba(255,255,255,0.80) 8%, transparent 20%),
+    radial-gradient(circle at 30% 39%, rgba(255,255,255,0.70) 0%, rgba(180,210,248,0.50) 10%, transparent 28%),
+    radial-gradient(circle at 44% 25%, rgba(255,255,255,0.70) 0%, rgba(180,210,248,0.50) 10%, transparent 28%),
+    radial-gradient(circle at 58% 64%, rgba(150, 200, 255, 0.95) 0%, rgba(110, 170, 242, 0.60) 18%, transparent 40%),
+    radial-gradient(circle at 30% 25%, #70a5f0 0%, #4e80e4 30%, #2958cc 60%, #163870 100%);
+  box-shadow:
+    0 1px 2px rgba(40, 80, 210, 0.55),
+    0 -0.5px 0 rgba(255, 255, 255, 0.25) inset,
+    0 0.5px 0 rgba(255, 255, 255, 0.40),
+    0 1.5px 1px rgba(255, 255, 255, 0.18),
+    0 0 4px 1px rgba(98, 162, 255, 0.80);
+}
+
+[data-theme="winamp"] input[type="checkbox"]:checked {
+  background:
+    radial-gradient(circle at 30% 25%, #ffffff 0%, rgba(255,255,255,0.80) 8%, transparent 20%),
+    radial-gradient(circle at 30% 39%, rgba(255,255,255,0.70) 0%, rgba(255,220,160,0.50) 10%, transparent 28%),
+    radial-gradient(circle at 44% 25%, rgba(255,255,255,0.70) 0%, rgba(255,220,160,0.50) 10%, transparent 28%),
+    radial-gradient(circle at 58% 64%, rgba(255, 235, 190, 0.95) 0%, rgba(242, 200, 120, 0.60) 18%, transparent 40%),
+    radial-gradient(circle at 30% 25%, #ffc850 0%, #e88a20 30%, #b05000 60%, #6a2800 100%);
+  box-shadow:
+    0 1px 2px rgba(210, 100, 15, 0.50),
+    0 -0.5px 0 rgba(255, 255, 255, 0.35) inset,
+    0 0.5px 0 rgba(255, 255, 255, 0.45),
+    0 1.5px 1px rgba(255, 255, 255, 0.20),
+    0 0 4px 1px rgba(255, 150, 30, 0.80);
+}
+
+/* ── Native <select>: LCD field with metallic chevron button ── */
+[data-theme="winamp"] select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 3px;
+  padding-right: 22px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='24' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23cdd1d9'/%3E%3Cstop offset='1' stop-color='%23a0a8b4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' width='1' height='24' fill='%23000' fill-opacity='0.3'/%3E%3Crect x='1' y='0' width='1' height='24' fill='%23fff' fill-opacity='0.1'/%3E%3Crect x='2' y='0' width='16' height='24' fill='url(%23g)'/%3E%3Crect x='2' y='0' width='16' height='1' fill='%23fff' fill-opacity='0.5'/%3E%3Crect x='17' y='0' width='1' height='24' fill='%23000' fill-opacity='0.15'/%3E%3Crect x='2' y='23' width='16' height='1' fill='%23000' fill-opacity='0.25'/%3E%3Cpolygon points='6,10 12,10 9,14' fill='%231a1e2e'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0 top 0 !important;
+  background-size: 18px 100% !important;
+}
+
+/* ── Dropdown/popover menus: dark LCD panel ── */
+[data-theme="winamp"] [class*="z-\[9999\]"],
+[data-theme="winamp"] [class*="z-\[999\]"][class*="rounded-md"] {
+  background-color: #161b2c !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 4px !important;
+  padding: 3px !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.6) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ── Dropdown menu items ── */
+[data-theme="winamp"] [class*="z-\[9999\]"] button,
+[data-theme="winamp"] [class*="z-\[999\]"][class*="rounded-md"] button {
+  color: #c0c8d8 !important;
+  font-family: var(--font-ui);
+  font-size: 11px !important;
+  border-radius: 2px;
+  padding: 3px 8px !important;
+}
+[data-theme="winamp"] [class*="z-\[9999\]"] button:hover,
+[data-theme="winamp"] [class*="z-\[999\]"][class*="rounded-md"] button:hover {
+  background-color: rgba(70, 110, 190, 0.4) !important;
+  color: #e8ecf4 !important;
+}
+
+/* ── Dropdown menu divider ── */
+[data-theme="winamp"] [class*="z-\[9999\]"] [class*="border-t"],
+[data-theme="winamp"] [class*="z-\[999\]"][class*="rounded-md"] [class*="border-t"] {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme="winamp"] [class*="cursor-ew-resize"] {
+  background-color: #141824 !important;
+  color: #c0c8d8 !important;
+  border: none !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.4) inset,
+    3px 3px 0 rgba(0, 0, 0, 0.15) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.1) inset,
+    -2px -2px 0 rgba(255, 255, 255, 0.04) inset;
+}
+
+/* ── Playlist panels: Winamp-style recessed list ── */
+[data-theme="winamp"] .winamp-playlist {
+  background-color: #243c79;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+  border-radius: 2px;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.4) inset,
+    3px 3px 0 rgba(0, 0, 0, 0.15) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.1) inset,
+    -2px -2px 0 rgba(255, 255, 255, 0.04) inset;
+  overflow-y: auto;
+  padding: 2px 4px;
+}
+
+[data-theme="winamp"] .winamp-minimap-container {
+  background-color: #243c79;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+}
+
+[data-theme="winamp"] [data-window-id="minimap"] .winamp-floating-content {
+  overflow: hidden;
+}
+
+[data-theme="winamp"] .winamp-minimap-footer {
+  flex-shrink: 0;
+  height: 10px;
+}
+
+[data-theme="winamp"] .winamp-minimap-tools {
+  gap: 2px;
+  margin-right: 3px;
+}
+
+[data-theme="winamp"] .winamp-playlist-row {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  font-family: 'VT323', monospace;
+  font-size: 13px;
+  color: #c6d0c6;
+  cursor: pointer;
+  user-select: none;
+  gap: 6px;
+}
+
+[data-theme="winamp"] .winamp-playlist-row .playlist-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent 0px, #000 4px, #000 calc(100% - 4px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0px, #000 4px, #000 calc(100% - 4px), transparent 100%);
+}
+
+[data-theme="winamp"] .winamp-playlist-row .playlist-name-inner {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+[data-theme="winamp"] .winamp-playlist-row .playlist-name.is-overflowing .playlist-name-inner {
+  animation: winamp-marquee var(--marquee-duration, 12s) steps(50, end) infinite;
+}
+
+@keyframes winamp-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+[data-theme="winamp"] .winamp-playlist-row.unassigned {
+  color: #7a9a7a;
+}
+
+[data-theme="winamp"] .winamp-playlist-row:hover {
+  background-color: #6e87c4;
+  color: #fff;
+}
+
+[data-theme="winamp"] .winamp-playlist-row.selected {
+  background-color: #6e87c4;
+  color: #fff;
+}
+
+[data-theme="winamp"] .winamp-playlist-row .playlist-num {
+  color: #7a9a7a;
+  min-width: 18px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+[data-theme="winamp"] .winamp-playlist-row:hover .playlist-num,
+[data-theme="winamp"] .winamp-playlist-row.selected .playlist-num {
+  color: #b0d0b0;
+}
+
+[data-theme="winamp"] .winamp-playlist-row .playlist-info {
+  color: #7a9a7a;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+[data-theme="winamp"] .winamp-playlist-row:hover .playlist-info,
+[data-theme="winamp"] .winamp-playlist-row.selected .playlist-info {
+  color: #b0d0b0;
+}
+
+[data-theme="winamp"] .winamp-playlist-row .playlist-actions {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+[data-theme="winamp"] .winamp-playlist-row:hover .playlist-actions {
+  opacity: 1;
+}
+
+[data-theme="winamp"] .winamp-playlist-row .playlist-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  color: #7a9a7a;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+[data-theme="winamp"] .winamp-playlist-row .playlist-actions button:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+
+[data-theme="winamp"] .winamp-playlist-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 8px;
+  color: #7a9a7a;
+  font-size: 13px;
+  font-family: 'VT323', monospace;
+  text-align: center;
+  gap: 4px;
+}
+
+[data-theme="winamp"] .winamp-playlist-empty .empty-sub {
+  font-size: 12px;
+  color: #4a6a4a;
+}
+
+[data-theme="winamp"] .winamp-playlist-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 6px;
+}
+
+/* ── Media Library: header + columns split view ── */
+[data-theme="winamp"] .winamp-media-library {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+[data-theme="winamp"] .winamp-media-library-columns {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  margin: 5px 6px 3px;
+  overflow: hidden;
+}
+
+[data-theme="winamp"] .winamp-media-library-rim {
+  height: 1px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.35);
+  margin-top: 1px;
+}
+
+
+[data-theme="winamp"] .winamp-media-library-footer {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme="winamp"] .winamp-media-library-footer .winamp-btn-label {
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.49) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.14) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.55) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.22) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    0 -4px 0 1px rgba(255, 255, 255, 0.10),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.10),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.10),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.10),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.10),
+    0 1px 0 1px rgba(255, 255, 255, 0.19),
+    0 2px 0 1px rgba(255, 255, 255, 0.10),
+    0 3px 1px 1px rgba(255, 255, 255, 0.05),
+    1px 0 0 1px rgba(255, 255, 255, 0.10),
+    2px 0 1px 1px rgba(255, 255, 255, 0.04),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.07),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.04),
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/*
+ * Media Library chrome zones: the detail zone and footer each own their own
+ * backgrounds. The floating-content side/bottom padding is zeroed out so
+ * chrome zones extend edge-to-edge. The columns get their own side margins.
+ */
+[data-theme="winamp"] [data-window-id="media-library"] .winamp-floating-content {
+  position: relative;
+  padding: 2px 0 0;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+/* Lighter chrome: anchor detail zone */
+[data-theme="winamp"] .winamp-anchor-detail {
+  position: relative;
+  flex-shrink: 0;
+  padding: 8px 12px 6px;
+  background:
+    linear-gradient(180deg,
+      #BFC6D2 0%,
+      #C5CAD5 30%,
+      #CFD1DB 75%,
+      #D0D2DB 100%
+    );
+  box-shadow:
+    2.5px 0 1px rgba(255, 255, 255, 0.28) inset,
+    3.5px 0 3px rgba(255, 255, 255, 0.14) inset,
+    -2.5px 0 1px rgba(255, 255, 255, 0.20) inset,
+    -3.5px 0 3px rgba(255, 255, 255, 0.10) inset;
+}
+
+[data-theme="winamp"] .winamp-anchor-detail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.40);
+  z-index: 5;
+}
+
+/* Darker chrome: footer owns its own background + groove separator */
+[data-theme="winamp"] .winamp-media-library-footer {
+  position: relative;
+  padding: 10px 14px 10px;
+  background:
+    linear-gradient(180deg,
+      #9EA5B1 0%,
+      #9CA3AF 40%,
+      #969DAA 60%,
+      #9097A4 78%,
+      #8A919E 90%,
+      #858E9C 100%
+    );
+  box-shadow:
+    2px 0 0 rgba(255, 255, 255, 0.18) inset,
+    3px 0 2px rgba(255, 255, 255, 0.08) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.12) inset,
+    -3px 0 2px rgba(255, 255, 255, 0.06) inset,
+    0 -2px 0 rgba(255, 255, 255, 0.12) inset,
+    0 -3px 2px rgba(255, 255, 255, 0.06) inset;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+[data-theme="winamp"] .winamp-media-library-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.40);
+  z-index: 5;
+}
+
+
+/* Anchor detail sliders (Opacity + Scale side-by-side) */
+[data-theme="winamp"] .winamp-anchor-sliders {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+[data-theme="winamp"] .winamp-anchor-sliders .flex-col {
+  gap: 5px !important;
+}
+
+[data-theme="winamp"] .winamp-anchor-sliders .slider-track-wrapper {
+  margin-bottom: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+[data-theme="winamp"] .winamp-anchor-sliders input[type="range"] {
+  width: calc(100% + 7px) !important;
+  margin-left: -3.5px;
+}
+
+[data-theme="winamp"] .winamp-anchor-sliders input[type="range"]::-webkit-slider-thumb {
+  width: 14px;
+  height: 9px;
+  margin-top: 0px;
+}
+
+[data-theme="winamp"] .winamp-anchor-sliders input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 9px;
+}
+
+
+/* Leash + Visible option row */
+[data-theme="winamp"] .winamp-anchor-option-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+[data-theme="winamp"] .winamp-anchor-option-row .winamp-label {
+  padding-right: 12px;
+}
+
+[data-theme="winamp"] .winamp-media-library-sidebar {
+  width: 90px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background-color: #243c79;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.4) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.1) inset;
+  overflow-y: auto;
+}
+
+[data-theme="winamp"] .winamp-media-library-category {
+  padding: 1px 0 0 8px;
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  color: rgba(200, 210, 230, 0.55);
+  cursor: default;
+  user-select: none;
+}
+
+[data-theme="winamp"] .winamp-media-library-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 8px;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #a0b0d0;
+  font-family: 'VT323', monospace;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  text-align: left;
+  width: 100%;
+}
+
+[data-theme="winamp"] .winamp-media-library-tree {
+  position: relative;
+  padding-left: 10px;
+  padding-bottom: 18px;
+}
+
+[data-theme="winamp"] .winamp-media-library-tree::before {
+  content: none;
+}
+
+[data-theme="winamp"] .winamp-media-library-nav-item.indented {
+  position: relative;
+  padding-left: 18px;
+}
+
+[data-theme="winamp"] .winamp-media-library-nav-item.indented::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(160, 176, 210, 0.30);
+}
+
+[data-theme="winamp"] .winamp-media-library-nav-item.indented::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  background: rgba(160, 176, 210, 0.30);
+}
+
+[data-theme="winamp"] .winamp-media-library-nav-item.indented.last::before {
+  bottom: 50%;
+}
+
+[data-theme="winamp"] .winamp-media-library-nav-item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  background-image: none !important;
+  color: #dce4f0;
+}
+
+[data-theme="winamp"] .winamp-media-library-nav-item.active {
+  background: rgba(100, 160, 255, 0.22) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #ffffff;
+}
+
+[data-theme="winamp"] .winamp-media-library-divider {
+  width: 4px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    #6a7080 0%,
+    #9aa0ac 40%,
+    #c0c4cc 50%,
+    #9aa0ac 60%,
+    #6a7080 100%
+  );
+  box-shadow:
+    -1px 0 0 rgba(0, 0, 0, 0.3),
+    1px 0 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="winamp"] .winamp-media-library-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 0;
+}
+
+[data-theme="winamp"] .winamp-media-library-content > .flex-col {
+  flex: 1;
+  min-height: 0;
+}
+
+[data-theme="winamp"] .winamp-media-library-content .winamp-playlist {
+  flex: 1;
+}
+
+/* ── Player chrome: LCD display, transport, seek, volume ── */
+
+[data-theme="winamp"] .winamp-player-chrome {
+  padding: 6px 0 6px;
+  position: relative;
+}
+
+/*
+ * Player chrome notch shapes
+ * ──────────────────────────
+ * Two decorative SVG overlays that reproduce the classic Winamp player's
+ * characteristic panel cutouts. Each SVG contains:
+ *   1. Filled path — chrome gradient matching the window frame at its position
+ *   2. Inner highlight stroke — bevel catch 1px inside the outline
+ *   3. Outline stroke — dark border on exposed edges only (not edges flush
+ *      with the window frame or LCD border)
+ *
+ * Middle notch: complete trapezoid cutting into the LCD's lower half.
+ * Bottom aligns with the LCD bottom border; outline on left/top/right edges
+ * flows seamlessly from the LCD border. Both sides taper inward at ~23°.
+ *
+ * Bottom-right notch: half-trapezoid in the lower-right corner, rising from
+ * the window bottom to the transport controls' upper edge. Extends to the
+ * right window edge. Outline on left angled edge + top edge only.
+ */
+
+[data-theme="winamp"] .winamp-player-notch-mid,
+[data-theme="winamp"] .winamp-player-notch-btm {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+}
+
+[data-theme="winamp"] .winamp-player-notch-mid {
+  left: 98px;
+  top: 47px;
+  width: 175px;
+  height: 27px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 7px, black 13px, black 159px, transparent 162px);
+  mask-image: linear-gradient(90deg, transparent 7px, black 13px, black 159px, transparent 162px);
+}
+
+
+[data-theme="winamp"] .winamp-player-notch-highlight {
+  position: absolute;
+  z-index: 7;
+  pointer-events: none;
+  left: 98px;
+  top: 47px;
+  width: 175px;
+  height: 27px;
+  background: #FFFFFF;
+  filter: blur(1px);
+  clip-path: path('M 7 26 L 13 26 Q 18 26 19 22 C 22 10 27 2 35 2 L 140 2 C 148 2 153 10 156 22 Q 157 26 162 26 L 162 28 Q 157 28 156 24 C 153 12 148 4 140 4 L 35 4 C 27 4 22 12 19 24 Q 18 28 13 28 L 7 28 Z');
+}
+
+[data-theme="winamp"] .winamp-player-notch-seam {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+  left: 105px;
+  top: 74px;
+  width: 156px;
+  height: 1px;
+  background: #BAC0CB;
+}
+
+[data-theme="winamp"] .winamp-player-notch-btm {
+  right: -6px;
+  bottom: -4px;
+  width: 118px;
+  height: 39px;
+}
+
+[data-theme="winamp"] .winamp-player-notch-btm-buttons {
+  position: absolute;
+  z-index: 10;
+  right: 8px;
+  bottom: 5px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+[data-theme="winamp"] .winamp-notch-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-theme="winamp"] .winamp-notch-indicator {
+  box-shadow:
+    0 1px 2px rgba(40, 80, 210, 0.55),
+    0 -0.5px 0 rgba(255, 255, 255, 0.25) inset,
+    0 0.5px 0 rgba(255, 255, 255, 0.40),
+    0 1.5px 1px rgba(255, 255, 255, 0.18),
+    0 0 4px 1px rgba(98, 162, 255, 0.80),
+    0 0 0 3px rgba(0, 0, 0, 0.08),
+    0 0 0 4px rgba(0, 0, 0, 0.04),
+    0 -1px 0 3px rgba(0, 0, 0, 0.12),
+    0 -2px 1px 3px rgba(0, 0, 0, 0.06),
+    0 1px 0 3px rgba(255, 255, 255, 0.35),
+    0 2px 1px 3px rgba(255, 255, 255, 0.15),
+    1px 1px 0 3px rgba(255, 255, 255, 0.18),
+    -1px 1px 0 3px rgba(255, 255, 255, 0.18) !important;
+}
+
+[data-theme="winamp"] .winamp-notch-indicator:checked {
+  box-shadow:
+    0 1px 2px rgba(210, 100, 15, 0.50),
+    0 -0.5px 0 rgba(255, 255, 255, 0.35) inset,
+    0 0.5px 0 rgba(255, 255, 255, 0.45),
+    0 1.5px 1px rgba(255, 255, 255, 0.20),
+    0 0 4px 1px rgba(255, 150, 30, 0.80),
+    0 0 0 3px rgba(0, 0, 0, 0.08),
+    0 0 0 4px rgba(0, 0, 0, 0.04),
+    0 -1px 0 3px rgba(0, 0, 0, 0.12),
+    0 -2px 1px 3px rgba(0, 0, 0, 0.06),
+    0 1px 0 3px rgba(255, 255, 255, 0.35),
+    0 2px 1px 3px rgba(255, 255, 255, 0.15),
+    1px 1px 0 3px rgba(255, 255, 255, 0.18),
+    -1px 1px 0 3px rgba(255, 255, 255, 0.18) !important;
+}
+
+[data-theme="winamp"] .winamp-player-lcd {
+  position: relative;
+  border: 1px solid rgba(0, 0, 20, 0.65);
+  background-color: #243c79;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px),
+    linear-gradient(
+      180deg,
+      rgba(160, 200, 255, 0.25) 0%,
+      rgba(100, 150, 230, 0.08) 15%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.06) 65%,
+      rgba(0, 0, 0, 0.14) 100%
+    );
+  background-size: 3px 3px, 100% 100%;
+  border-radius: 6px;
+  padding: 6px 10px 8px;
+  height: 66px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 20, 0.12),
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    0 4px 1px 1px rgba(0, 0, 0, 0.0),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.0),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.0);
+  margin-bottom: 6px;
+}
+
+
+[data-theme="winamp"] .winamp-player-lcd::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  border-radius: 5px;
+  border: none;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(190, 220, 255, 0.72) 0px,
+      rgba(155, 200, 250, 0.40) 2px,
+      rgba(120, 175, 245, 0.14) 4px,
+      transparent 6px
+    ),
+    linear-gradient(
+      270deg,
+      rgba(190, 220, 255, 0.36) 0px,
+      rgba(155, 200, 250, 0.20) 2px,
+      rgba(120, 175, 245, 0.07) 4px,
+      transparent 6px
+    );
+  box-shadow:
+    0 -1px 1px 0 rgba(210, 230, 255, 0.70),
+    0 -2px 2px 0 rgba(180, 210, 255, 0.25),
+    1px 0 1px 0 rgba(160, 200, 255, 0.12),
+    0 1px 1px 0 rgba(140, 180, 240, 0.28),
+    0 2px 2px 0 rgba(120, 160, 230, 0.10);
+}
+
+[data-theme="winamp"] .winamp-player-lcd-upper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: calc(100% - 17px);
+}
+
+[data-theme="winamp"] .winamp-player-lcd-time {
+  font-family: 'DSEG7Modern', 'Courier New', monospace;
+  font-size: 21px;
+  color: #a0b8d8;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 8px rgba(140, 180, 240, 0.4);
+  line-height: 0.85;
+  flex-shrink: 0;
+}
+
+[data-theme="winamp"] .winamp-player-lcd-spectrum {
+  flex: 1;
+  min-width: 0;
+  overflow: visible;
+  padding-bottom: 1px;
+}
+
+[data-theme="winamp"] .winamp-player-lcd .winamp-spectrum {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  height: 20px;
+  border-radius: 0;
+}
+
+[data-theme="winamp"] .winamp-player-lcd .winamp-spectrum-bar {
+  background-image:
+    repeating-linear-gradient(
+      to top,
+      rgba(160, 190, 230, 0.7) 0px, rgba(160, 190, 230, 0.7) 2px,
+      transparent 2px, transparent 3px
+    );
+}
+
+[data-theme="winamp"] .winamp-player-lcd-track {
+  font-family: 'VT323', monospace;
+  font-size: 15px;
+  color: #8a9fc0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 17px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  align-items: center;
+  background: rgba(11, 31, 80, 0.55);
+  border-radius: 0 0 5px 5px;
+}
+
+[data-theme="winamp"] .winamp-player-lcd-num {
+  flex-shrink: 0;
+  color: #6a80a0;
+}
+
+[data-theme="winamp"] .winamp-player-lcd-idle {
+  color: #506888;
+}
+
+[data-theme="winamp"] .winamp-lcd-marquee {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0px, #000 6px, #000 calc(100% - 6px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0px, #000 6px, #000 calc(100% - 6px), transparent 100%);
+}
+
+[data-theme="winamp"] .winamp-lcd-marquee-inner {
+  display: inline-block;
+  white-space: nowrap;
+  animation: lcd-scroll 12s linear infinite;
+}
+
+@keyframes lcd-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+[data-theme="winamp"] .winamp-player-seek {
+  padding: 2px 10px 8px;
+}
+
+[data-theme="winamp"] .winamp-player-seek .slider-track-wrapper {
+  margin-bottom: 0;
+}
+
+[data-theme="winamp"] .winamp-player-seek input[type="range"]::-webkit-slider-thumb {
+  width: 17px;
+  height: 7px;
+  margin-top: 1px;
+}
+
+[data-theme="winamp"] .winamp-player-seek input[type="range"]::-moz-range-thumb {
+  width: 17px;
+  height: 7px;
+}
+
+[data-theme="winamp"] .winamp-player-vol-notch input[type="range"]::-webkit-slider-thumb {
+  width: 14px;
+  height: 7px;
+  margin-top: 1px;
+}
+
+[data-theme="winamp"] .winamp-player-vol-notch input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 7px;
+}
+
+[data-theme="winamp"] .winamp-fov-mask-slider input[type="range"]::-webkit-slider-thumb {
+  width: 14px;
+  height: 9px;
+  margin-top: 0px;
+}
+
+[data-theme="winamp"] .winamp-fov-mask-slider input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 9px;
+}
+
+[data-theme="winamp"] .winamp-player-vol-notch .slider-track-wrapper::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: var(--fill, 80%);
+  height: 5px;
+  transform: translateY(-50%);
+  border-radius: 3px 0 0 3px;
+  background: linear-gradient(180deg, #4A6A96 0%, #C6D6F0 38%, #4470B2 69%, #4780D7 100%);
+  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.35) inset;
+  pointer-events: none;
+}
+
+[data-theme="winamp"] .winamp-player-seek .slider-track-wrapper::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: calc(50% + 4px);
+  left: 3%;
+  right: 3%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.18) 12%, rgba(0,0,0,0.18) 88%, transparent 100%);
+  filter: blur(2px);
+  pointer-events: none;
+  background-image: none;
+}
+
+[data-theme="winamp"] .winamp-player-transport {
+  display: flex;
+  align-items: center;
+  padding: 0 4px 2px;
+  gap: 8px;
+  position: relative;
+}
+
+[data-theme="winamp"] .winamp-player-transport::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 56% 80% at 35% 30%, #D6D8E1 0%, transparent 70%);
+}
+
+[data-theme="winamp"] .winamp-player-vol-notch {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  left: 128px;
+  top: 56px;
+  width: 112px;
+}
+
+[data-theme="winamp"] .winamp-vol-mute-btn {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: rgb(var(--sf-raised));
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.50) 0%,
+    rgba(255, 255, 255, 0.25) 20%,
+    rgba(255, 255, 255, 0.08) 40%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.08) 60%,
+    rgba(0, 0, 0, 0.20) 80%,
+    rgba(0, 0, 0, 0.30) 100%
+  ) !important;
+  border: none !important;
+  color: #6a7080;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.55) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.40) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.75),
+    0 -1px 0 1px rgba(0, 0, 0, 0.45),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.20),
+    0 1px 0 1px rgba(255, 255, 255, 0.40),
+    0 2px 1px 1px rgba(255, 255, 255, 0.18) !important;
+}
+
+[data-theme="winamp"] .winamp-vol-mute-btn.active {
+  color: #3366cc;
+}
+
+[data-theme="winamp"] .winamp-vol-mute-btn:active {
+  background-image: none !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.55) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.25) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.75),
+    0 -1px 0 1px rgba(0, 0, 0, 0.45),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.20),
+    0 1px 0 1px rgba(255, 255, 255, 0.40),
+    0 2px 1px 1px rgba(255, 255, 255, 0.18) !important;
+}
+
+[data-theme="winamp"] .winamp-player-vol-notch .winamp-vol-mute-btn svg {
+  fill: currentColor !important;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.55))
+    drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.35)) !important;
+}
+
+[data-theme="winamp"] .winamp-notch-btn-group .winamp-vol-mute-btn {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+}
+
+[data-theme="winamp"] .winamp-notch-btn-group .winamp-vol-mute-btn svg {
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.55))
+    drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.35)) !important;
+}
+
+[data-theme="winamp"] .winamp-player-vol-notch .slider-track-wrapper {
+  margin-bottom: 0;
+}
+
+[data-theme="winamp"] .winamp-player-vol-notch input[type="range"] {
+  width: 100% !important;
+  margin-left: 0 !important;
+}
+
+[data-theme="winamp"] .winamp-player-chrome .winamp-player-vol-notch .slider-track-wrapper::before {
+  box-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 1px 1px rgba(0, 0, 0, 0.45) inset,
+    0 -1px 1px rgba(255, 255, 255, 0.15) inset,
+    0 1px 0 0px rgba(255, 255, 255, 0.45) !important;
+}
+
+[data-theme="winamp"] .winamp-player-transport .transport-group button {
+  min-width: 26px;
+  min-height: 22px;
+}
+
+/* ── Playlist: now-playing (legacy), transport, seek, volume ── */
+[data-theme="winamp"] .winamp-playlist-now-playing {
+  padding: 6px 8px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+[data-theme="winamp"] .winamp-playlist-now-playing-info {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: #c0c8d8;
+  padding: 0 2px;
+}
+
+[data-theme="winamp"] .winamp-playlist-transport {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 8px 4px;
+  gap: 8px;
+}
+
+[data-theme="winamp"] .winamp-playlist-time {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+[data-theme="winamp"] .winamp-time-display {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #8aa0c0;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 6px rgba(100, 140, 200, 0.3);
+}
+
+[data-theme="winamp"] .winamp-time-separator {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #5a6a80;
+}
+
+[data-theme="winamp"] .winamp-playlist-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+[data-theme="winamp"] .winamp-transport-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 20px;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: #8a90a0;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+[data-theme="winamp"] .winamp-transport-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #c0c8d8;
+}
+
+[data-theme="winamp"] .winamp-transport-btn:active {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="winamp"] .winamp-transport-btn.play {
+  width: 28px;
+  height: 22px;
+  background-color: rgb(var(--sf-raised));
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.70) 0%,
+    rgba(255, 255, 255, 0.30) 30%,
+    rgba(0, 0, 0, 0.04) 60%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.50) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.35) inset,
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+  color: rgb(var(--tx-primary));
+}
+
+[data-theme="winamp"] .winamp-transport-btn.play:hover {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.80) 0%,
+    rgba(255, 255, 255, 0.35) 30%,
+    rgba(0, 0, 0, 0.02) 60%,
+    rgba(0, 0, 0, 0.10) 100%
+  );
+}
+
+[data-theme="winamp"] .winamp-transport-btn.play:active {
+  background-image: none;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.35) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+[data-theme="winamp"] .winamp-playlist-seek {
+  padding: 0 8px 2px;
+}
+
+[data-theme="winamp"] .winamp-playlist-seek .slider-track-wrapper {
+  margin-bottom: 0;
+}
+
+[data-theme="winamp"] .winamp-playlist-volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px 4px;
+}
+
+[data-theme="winamp"] .winamp-playlist-volume .slider-track-wrapper {
+  margin-bottom: 0;
+}
+
+[data-theme="winamp"] .winamp-spectrum.paused .winamp-spectrum-bar {
+  animation-play-state: paused;
+}
+
+/* ── Spectrum analyzer: ambient animated bars ── */
+[data-theme="winamp"] .winamp-spectrum {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 18px;
+  padding: 2px 4px;
+  margin-top: 2px;
+  background: #141824;
+  border-radius: 2px;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.6) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.05) inset;
+}
+
+[data-theme="winamp"] .winamp-spectrum-bar {
+  flex: 1;
+  min-width: 3px;
+  background-image:
+    repeating-linear-gradient(
+      to top,
+      #b8bec8 0px, #b8bec8 2px,
+      transparent 2px, transparent 3px
+    );
+  animation: winamp-bar 2s steps(8, end) infinite alternate;
+  height: 15%;
+}
+
+@keyframes winamp-bar {
+  0%   { height: 12%; }
+  14%  { height: 65%; }
+  28%  { height: 20%; }
+  42%  { height: 80%; }
+  57%  { height: 30%; }
+  71%  { height: 50%; }
+  85%  { height: 70%; }
+  100% { height: 18%; }
+}
+
+/* ── Playlist scrollbar: black track, ridged thumb ── */
+[data-theme="winamp"] .winamp-panel-scroll::-webkit-scrollbar {
+  width: 14px;
+}
+
+[data-theme="winamp"] .winamp-panel-scroll::-webkit-scrollbar-track {
+  background: #0e0e1a;
+}
+
+[data-theme="winamp"] .winamp-panel-scroll::-webkit-scrollbar-thumb {
+  background-color: #9ea2aa;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 1px,
+      rgba(255, 255, 255, 0.25) 1px,
+      rgba(255, 255, 255, 0.25) 2px,
+      transparent 2px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.2) 3px,
+      rgba(0, 0, 0, 0.2) 4px
+    );
+  border-radius: 1px;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.4) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.4) inset;
+  border: 1px solid #0e0e1a;
+}
+
+[data-theme="winamp"] .winamp-panel-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #b0b4bc;
+}
+
+[data-theme="winamp"] .winamp-panel-scroll::-webkit-scrollbar-corner {
+  background: #0e0e1a;
+}
+
+/* ── Scrollbars: chrome beveled ── */
+[data-theme="winamp"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="winamp"] ::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+[data-theme="winamp"] ::-webkit-scrollbar-thumb {
+  background-color: #9ea2aa;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(255, 255, 255, 0.35) 0.5px,
+      rgba(255, 255, 255, 0.35) 1px,
+      transparent 1px,
+      transparent 1.5px,
+      rgba(0, 0, 0, 0.3) 1.5px,
+      rgba(0, 0, 0, 0.3) 2px,
+      transparent 2px,
+      transparent 3px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.08) 15%,
+      rgba(255, 255, 255, 0.35) 40%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0.35) 60%,
+      rgba(0, 0, 0, 0.08) 85%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  border-radius: 2px;
+  box-shadow:
+    -1px 0 0 rgba(0, 0, 0, 0.5) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.4) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.3) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    -1px 0 2px 0 rgba(0, 0, 0, 0.5),
+    1px 0 2px 0 rgba(0, 0, 0, 0.5),
+    0 -1px 2px 0 rgba(0, 0, 0, 0.4),
+    0 1px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="winamp"] ::-webkit-scrollbar-thumb:hover {
+  background-color: #b0b4bc;
+}
+
+[data-theme="winamp"] .scrollbar-thin::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="winamp"] .scrollbar-thin::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+[data-theme="winamp"] .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #9ea2aa;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(255, 255, 255, 0.35) 0.5px,
+      rgba(255, 255, 255, 0.35) 1px,
+      transparent 1px,
+      transparent 1.5px,
+      rgba(0, 0, 0, 0.3) 1.5px,
+      rgba(0, 0, 0, 0.3) 2px,
+      transparent 2px,
+      transparent 3px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.08) 15%,
+      rgba(255, 255, 255, 0.35) 40%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0.35) 60%,
+      rgba(0, 0, 0, 0.08) 85%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  border-radius: 2px;
+  box-shadow:
+    -1px 0 0 rgba(0, 0, 0, 0.5) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.4) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.3) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    -1px 0 2px 0 rgba(0, 0, 0, 0.5),
+    1px 0 2px 0 rgba(0, 0, 0, 0.5),
+    0 -1px 2px 0 rgba(0, 0, 0, 0.4),
+    0 1px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="winamp"] .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: #b0b4bc;
+}
+
+/* ── Dividers/borders: groove effect ── */
+[data-theme="winamp"] [class*="border-surface-border"] {
+  border-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* ── Sliders: narrow recessed groove + rectangular bar thumb ── */
+[data-theme="winamp"] input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  border-radius: 2px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  width: calc(100% + 20px) !important;
+  margin-left: -10px;
+  flex-shrink: 0;
+}
+
+[data-theme="winamp"] .slider-track-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 5px;
+  transform: translateY(-50%);
+  border-radius: 3px;
+  background:
+    linear-gradient(
+      180deg,
+      #3e434c 0%,
+      #4e535e 25%,
+      #5e636e 50%,
+      #6e7480 75%,
+      #7e8490 100%
+    );
+  box-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 1px 1px rgba(0, 0, 0, 0.45) inset,
+    0 -1px 1px rgba(255, 255, 255, 0.15) inset,
+    0 1px 0 0px rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+}
+
+[data-theme="winamp"] .winamp-player-chrome .slider-track-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme="winamp"] .winamp-player-chrome .slider-track-wrapper::before {
+  box-shadow:
+    0 -2px 2px 2px rgba(0, 0, 0, 0.22),
+    0 -0.5px 1px 0.5px rgba(255, 255, 255, 0.33),
+    0 1px 1px rgba(0, 0, 0, 0.45) inset,
+    0 -1px 1px rgba(255, 255, 255, 0.15) inset,
+    0 2px 1px 0px rgba(255, 255, 255, 0.45),
+    0 5px 4px 0px rgba(40, 50, 65, 0.30);
+}
+
+[data-theme="winamp"] .slider-track-wrapper {
+  margin-bottom: 14px;
+  overflow: visible;
+}
+
+[data-theme="winamp"] .slider-track-wrapper::after {
+  content: "";
+  position: absolute;
+  top: calc(50% + 8px);
+  left: 2px;
+  right: 2px;
+  height: 12px;
+  overflow: hidden;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='12' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.20'/%3E%3Crect x='0' y='1' width='2' height='7' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='2' y='1' width='1' height='1' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='2' y='2' width='1' height='5' fill='%23fff' fill-opacity='0.50'/%3E%3Crect x='2' y='7' width='1' height='1' fill='%23fff' fill-opacity='0.50'/%3E%3Crect x='0' y='8' width='3' height='1' fill='%23fff' fill-opacity='0.20'/%3E%3Crect x='8' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='8' y='1' width='2' height='3' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='10' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='8' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='16' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='16' y='1' width='2' height='3' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='18' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='16' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='24' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='24' y='1' width='2' height='3' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='26' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='24' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='32' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='32' y='1' width='2' height='3' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='34' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='32' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='40' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.15'/%3E%3Crect x='40' y='1' width='2' height='5' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='42' y='1' width='1' height='1' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='42' y='2' width='1' height='3' fill='%23fff' fill-opacity='0.40'/%3E%3Crect x='42' y='5' width='1' height='1' fill='%23fff' fill-opacity='0.40'/%3E%3Crect x='40' y='6' width='3' height='1' fill='%23fff' fill-opacity='0.15'/%3E%3Crect x='48' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='48' y='1' width='2' height='3' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='50' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='48' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='56' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='56' y='1' width='2' height='3' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='58' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='56' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='64' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='64' y='1' width='2' height='3' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='66' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='64' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='72' y='0' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3Crect x='72' y='1' width='2' height='3' fill='%23000' fill-opacity='0.50'/%3E%3Crect x='74' y='1' width='1' height='3' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='72' y='4' width='3' height='1' fill='%23fff' fill-opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 80px 12px;
+  background-repeat: repeat-x;
+  background-position: left top;
+  image-rendering: pixelated;
+  -webkit-image-rendering: pixelated;
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="winamp"] input[type="range"]::-webkit-slider-runnable-track {
+  height: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+[data-theme="winamp"] input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 12px;
+  margin-top: -1px;
+  border-radius: 9999px;
+  border: none;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f0f1f4 20%,
+    #e0e2e8 45%,
+    #d0d3d9 65%,
+    #c0c4ca 85%,
+    #b4b8be 100%
+  );
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.65) inset,
+    -1px -1px 1px rgba(0, 0, 0, 0.30) inset,
+    0 0 0 1.5px rgba(0, 0, 0, 0.55),
+    0 2px 3px rgba(0, 0, 0, 0.22),
+    0 3px 5px rgba(0, 0, 0, 0.10),
+    0 1px 4px 1px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+[data-theme="winamp"] input[type="range"]::-webkit-slider-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f6f7f9 20%,
+    #e8eaee 45%,
+    #dadce2 65%,
+    #caced4 85%,
+    #bec2c8 100%
+  );
+}
+
+[data-theme="winamp"] input[type="range"]::-webkit-slider-thumb:active {
+  background: linear-gradient(
+    180deg,
+    #eceef2 0%,
+    #dcdee4 20%,
+    #caced4 45%,
+    #bec2c8 65%,
+    #b0b4ba 85%,
+    #a4a8ae 100%
+  );
+}
+
+/* Firefox track/thumb */
+[data-theme="winamp"] input[type="range"]::-moz-range-track {
+  height: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+[data-theme="winamp"] input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 12px;
+  border-radius: 9999px;
+  border: none;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f0f1f4 20%,
+    #e0e2e8 45%,
+    #d0d3d9 65%,
+    #c0c4ca 85%,
+    #b4b8be 100%
+  );
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.65) inset,
+    -1px -1px 1px rgba(0, 0, 0, 0.30) inset,
+    0 0 0 1.5px rgba(0, 0, 0, 0.55),
+    0 2px 3px rgba(0, 0, 0, 0.22),
+    0 3px 5px rgba(0, 0, 0, 0.10),
+    0 1px 4px 1px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+/* ── Vertical sliders (EQ-style) ── */
+
+[data-theme="winamp"] .winamp-postproc-layout {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+[data-theme="winamp"] .winamp-postproc-eq {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+[data-theme="winamp"] .slider-vertical-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+[data-theme="winamp"] .slider-vertical-label {
+  text-align: center;
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+[data-theme="winamp"] .slider-vertical {
+  position: relative;
+  width: 28px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="winamp"] .slider-vertical .slider-track-wrapper {
+  transform: rotate(-90deg);
+  width: 99px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+[data-theme="winamp"] .slider-vertical .slider-track-wrapper::after {
+  top: calc(100% + 1px);
+  left: 10px;
+  right: auto;
+  width: 79px;
+  height: 7px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='79' height='7' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='2' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='4' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='6' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='8' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='10' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='12' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='14' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='16' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='18' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='20' y='0' width='2' height='5' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='22' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='24' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='26' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='28' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='30' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='32' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='34' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='36' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='38' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='40' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='42' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3Crect x='44' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='46' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='48' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='50' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='52' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='54' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='56' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='58' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='60' y='0' width='2' height='5' fill='%23000' fill-opacity='0.40'/%3E%3Crect x='62' y='0' width='1' height='5' fill='%23fff' fill-opacity='0.30'/%3E%3Crect x='64' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='66' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='68' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='70' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='72' y='0' width='2' height='3' fill='%23000' fill-opacity='0.35'/%3E%3Crect x='74' y='0' width='1' height='3' fill='%23fff' fill-opacity='0.25'/%3E%3Crect x='76' y='0' width='2' height='7' fill='%23000' fill-opacity='0.45'/%3E%3Crect x='78' y='0' width='1' height='7' fill='%23fff' fill-opacity='0.35'/%3E%3C/svg%3E");
+  background-size: 79px 7px;
+  background-repeat: no-repeat;
+}
+
+/* ── Accessibility filter button stack ── */
+
+[data-theme="winamp"] .winamp-ax-stack {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 6px 0 6px;
+}
+
+[data-theme="winamp"] .winamp-ax-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 99px;
+  align-content: space-between;
+}
+
+[data-theme="winamp"] .winamp-ax-grid .winamp-eq-pl-btn {
+  min-width: 50px;
+  text-align: center;
+}
+
+[data-theme="winamp"] .winamp-ax-label {
+  position: relative;
+  margin-top: auto;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: transparent;
+  background-image: linear-gradient(180deg, #ffffff 0%, #d8dce4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-color: transparent;
+  padding: 1px 4px;
+  border-radius: 2px;
+  text-align: center;
+  text-shadow: none;
+  line-height: 1.4;
+}
+
+[data-theme="winamp"] .winamp-ax-label::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #848D9C;
+  border-radius: 2px;
+  z-index: -1;
+}
+
+/* ── SVG icons: chrome drop shadow ── */
+[data-theme="winamp"] svg {
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.35));
+}
+
+[data-theme="winamp"] .winamp-btn-label svg {
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.45))
+    drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.15));
+}
+
+/* ── Transport playback icons: filled black, inset/engraved bevel ── */
+[data-theme="winamp"] .transport-group button svg {
+  color: #1a1c22 !important;
+  fill: #1a1c22;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.70))
+    drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.40))
+    drop-shadow(1px 0 0 rgba(255, 255, 255, 0.15))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.15)) !important;
+}
+
+[data-theme="winamp"] .winamp-transport-loop button svg {
+  fill: none;
+}
+
+/* ── Playback button shapes: asymmetric oblong corners ── */
+/* First transport group tray: match asymmetric button corners */
+[data-theme="winamp"] .transport-group:first-child {
+  border-radius: 10px 10px 14px 14px !important;
+}
+
+/* Left 2 buttons (Skip Back, Step Back): flipped oblong */
+[data-theme="winamp"] .transport-group:first-child button:nth-child(1),
+[data-theme="winamp"] .transport-group:first-child button:nth-child(2) {
+  border-radius: 8px 12px 8px 12px !important;
+}
+
+/* Center button (Play/Pause): symmetrical pill */
+[data-theme="winamp"] .transport-group:first-child button:nth-child(3) {
+  border-radius: 9999px !important;
+}
+
+/* Right 2 buttons (Step Forward, Skip Forward): oblong */
+[data-theme="winamp"] .transport-group:first-child button:nth-child(4),
+[data-theme="winamp"] .transport-group:first-child button:nth-child(5) {
+  border-radius: 12px 8px 12px 8px !important;
+}
+
+/* ── Large recessed fields: deeply carved dark display areas ── */
+[data-theme="winamp"] [class*="border-dashed"] {
+  background-color: #141824 !important;
+  color: #c0c8d8 !important;
+  border-style: solid !important;
+  border-color: rgba(0, 0, 0, 0.5) !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.4) inset,
+    3px 3px 0 rgba(0, 0, 0, 0.2) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.08) inset,
+    -2px -2px 0 rgba(255, 255, 255, 0.03) inset;
+}
+
+[data-theme="winamp"] .win95-group-box {
+  background-color: #141824 !important;
+  color: #c0c8d8 !important;
+  border-color: rgba(0, 0, 0, 0.5) !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.7) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.4) inset,
+    3px 3px 0 rgba(0, 0, 0, 0.2) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.08) inset,
+    -2px -2px 0 rgba(255, 255, 255, 0.03) inset;
+}
+
+/* ── Transport controls: flex container ── */
+[data-theme="winamp"] .transport-controls {
+  gap: 8px !important;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* ── Transport groups: shared recess tray ── */
+[data-theme="winamp"] .transport-group {
+  gap: 6px !important;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  padding: 2px 6px;
+  /* raised lip turned off for testing */
+  box-shadow: none;
+}
+
+/* ── Transport buttons: individual pill-shaped chrome buttons ── */
+[data-theme="winamp"] .transport-controls button {
+  border-radius: 9999px !important;
+  padding: 4px 6px !important;
+  border: none !important;
+  position: relative;
+  z-index: 1;
+  background-color: rgb(var(--sf-raised));
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.70) 10%,
+    rgba(255, 255, 255, 0.35) 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 60%,
+    rgba(0, 0, 0, 0.15) 80%,
+    rgba(0, 0, 0, 0.26) 100%
+  );
+  box-shadow:
+    /* Button bevel */
+    1px 1px 0 rgba(255, 255, 255, 0.70) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.20) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.55) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.22) inset,
+    /* Dark outline ring — flush against button edge */
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    /* Outer recess — dark top/left shadow zone */
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    /* Gray transition — between shadow and highlight */
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    /* Bright rim catch above the dark shadow */
+    0 -4px 0 1px rgba(255, 255, 255, 0.10),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.04),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.05),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.04),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.04),
+    /* Outer recess — bright bottom/right rim */
+    0 1px 0 1px rgba(255, 255, 255, 0.30),
+    0 2px 0 1px rgba(255, 255, 255, 0.16),
+    0 3px 1px 1px rgba(255, 255, 255, 0.08),
+    1px 0 0 1px rgba(255, 255, 255, 0.15),
+    2px 0 1px 1px rgba(255, 255, 255, 0.07),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.11),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.07),
+    /* Shadow under bottom rim highlight */
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="winamp"] .transport-controls button:last-child {
+  border-right: none !important;
+}
+
+[data-theme="winamp"] .transport-controls button:hover:not(:disabled) {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.75) 10%,
+    rgba(255, 255, 255, 0.35) 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(0, 0, 0, 0.02) 60%,
+    rgba(0, 0, 0, 0.10) 80%,
+    rgba(0, 0, 0, 0.20) 100%
+  );
+}
+
+[data-theme="winamp"] .transport-controls button:active:not(:disabled) {
+  background-image: none;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.55) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.25) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 20, 0.15),
+    0 -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -2px 1px 1px rgba(0, 0, 0, 0.40),
+    -1px 0 0 1px rgba(0, 0, 0, 0.45),
+    -1px -1px 1px 1px rgba(0, 0, 0, 0.30),
+    0 -3px 1px 1px rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 1px rgba(80, 80, 90, 0.18),
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ── Time display tray: no padding, recess bevel lives on .time-display ── */
+[data-theme="winamp"] .winamp-time-tray {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ── Winamp panel labels: gray highlight, white text, Tahoma font ── */
+[data-theme="winamp"] .winamp-label {
+  display: inline-block;
+  background-color: rgba(0, 0, 20, 0.25);
+  color: #dde0e8;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+/* Labels inside tab chrome panels: darker highlight, gradient text */
+[data-theme="winamp"] .winamp-tab-panel .winamp-label {
+  position: relative;
+  color: transparent;
+  background-image: linear-gradient(180deg, #ffffff 0%, #d8dce4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-color: transparent;
+  padding: 0px 3px;
+  line-height: 1.4;
+  text-shadow: none;
+  margin-bottom: 2px;
+}
+
+[data-theme="winamp"] .winamp-tab-panel .winamp-label::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #848D9C;
+  border-radius: 2px;
+  z-index: -1;
+}
+
+/* Dark variant of tab panel labels: black text, no highlight */
+[data-theme="winamp"] .winamp-tab-panel .winamp-label.winamp-label-dark {
+  background-image: linear-gradient(180deg, #1a1e28 0%, #2a2e38 100%);
+}
+
+[data-theme="winamp"] .winamp-tab-panel .winamp-label.winamp-label-dark::before {
+  display: none;
+}
+
+/* Debossed text directly on chrome — no highlight background */
+[data-theme="winamp"] .winamp-chrome-text {
+  display: inline-block;
+  background: none;
+  color: rgba(30, 34, 44, 0.7);
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+  line-height: 1.3;
+  margin-top: -7px;
+  margin-bottom: -4px;
+}
+
+/* ── Scrub input fields: blue convex readout (compact) ── */
+[data-theme="winamp"] .winamp-scrub-field {
+  position: relative;
+  border: 1px solid rgba(0, 0, 20, 0.65) !important;
+  background-color: #243c79 !important;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px),
+    linear-gradient(
+      180deg,
+      rgba(160, 200, 255, 0.25) 0%,
+      rgba(100, 150, 230, 0.08) 15%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.06) 65%,
+      rgba(0, 0, 0, 0.14) 100%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 88%,
+      rgba(0, 0, 0, 0.05) 100%
+    ) !important;
+  background-size: 3px 3px, 100% 100%, 100% 100%;
+  color: #c0c8d8 !important;
+  border-radius: 4px;
+  box-shadow:
+    /* Dark outline ring */
+    0 0 0 1px rgba(0, 0, 20, 0.12),
+    /* Outer recess — dark top/left shadow zone */
+    0 -1px 0 0 rgba(0, 0, 0, 0.40),
+    0 -2px 1px 0 rgba(0, 0, 0, 0.25),
+    -1px 0 0 0 rgba(0, 0, 0, 0.30),
+    -1px -1px 1px 0 rgba(0, 0, 0, 0.18),
+    /* Gray transition — between shadow and highlight */
+    0 -3px 1px 0 rgba(80, 80, 90, 0.20),
+    -2px -1px 2px 0 rgba(80, 80, 90, 0.14),
+    /* Bright rim catch above the dark shadow */
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    /* Outer recess — bright bottom/right rim */
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    /* Shadow under bottom rim highlight */
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-mono);
+}
+
+[data-theme="winamp"] .winamp-rotation-fields .winamp-scrub-field {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 20, 0.19),
+    0 -1px 0 0 rgba(0, 0, 0, 0.50),
+    0 -2px 1px 0 rgba(0, 0, 0, 0.33),
+    -1px 0 0 0 rgba(0, 0, 0, 0.38),
+    -1px -1px 1px 0 rgba(0, 0, 0, 0.23),
+    0 -3px 1px 0 rgba(80, 80, 90, 0.25),
+    -2px -1px 2px 0 rgba(80, 80, 90, 0.19),
+    0 -4px 0 1px rgba(255, 255, 255, 0.25),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.11),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.13),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.10),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.08),
+    0 1px 0 1px rgba(255, 255, 255, 0.42),
+    0 2px 0 1px rgba(255, 255, 255, 0.23),
+    0 3px 1px 1px rgba(255, 255, 255, 0.11),
+    1px 0 0 1px rgba(255, 255, 255, 0.21),
+    2px 0 1px 1px rgba(255, 255, 255, 0.08),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.15),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.08),
+    0 4px 1px 1px rgba(0, 0, 0, 0.10),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.08),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="winamp"] .winamp-scrub-field::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  border-radius: 3px;
+  border: none;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(190, 220, 255, 0.72) 0px,
+      rgba(155, 200, 250, 0.40) 2px,
+      rgba(120, 175, 245, 0.14) 4px,
+      transparent 6px
+    ),
+    linear-gradient(
+      270deg,
+      rgba(190, 220, 255, 0.36) 0px,
+      rgba(155, 200, 250, 0.20) 2px,
+      rgba(120, 175, 245, 0.07) 4px,
+      transparent 6px
+    );
+  box-shadow:
+    0 -1px 1px 0 rgba(210, 230, 255, 0.70),
+    0 -2px 2px 0 rgba(180, 210, 255, 0.25),
+    1px 0 1px 0 rgba(160, 200, 255, 0.12),
+    0 1px 1px 0 rgba(140, 180, 240, 0.28),
+    0 2px 2px 0 rgba(120, 160, 230, 0.10);
+}
+
+/* ── Time display: blue convex readout with dot pattern ── */
+[data-theme="winamp"] .time-display {
+  position: relative;
+  border: 1px solid rgba(0, 0, 20, 0.65) !important;
+  background-color: #243c79 !important;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px),
+    linear-gradient(
+      180deg,
+      rgba(160, 200, 255, 0.25) 0%,
+      rgba(100, 150, 230, 0.08) 15%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.06) 65%,
+      rgba(0, 0, 0, 0.14) 100%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 88%,
+      rgba(0, 0, 0, 0.05) 100%
+    ) !important;
+  background-size: 3px 3px, 100% 100%, 100% 100%;
+  color: #c0c8d8 !important;
+  padding: 3px 10px;
+  border-radius: 5px;
+  box-shadow:
+    /* Dark outline ring */
+    0 0 0 1px rgba(0, 0, 20, 0.12),
+    /* Outer recess — dark top/left shadow zone */
+    0 -1px 0 0 rgba(0, 0, 0, 0.40),
+    0 -2px 1px 0 rgba(0, 0, 0, 0.25),
+    -1px 0 0 0 rgba(0, 0, 0, 0.30),
+    -1px -1px 1px 0 rgba(0, 0, 0, 0.18),
+    /* Gray transition — between shadow and highlight */
+    0 -3px 1px 0 rgba(80, 80, 90, 0.20),
+    -2px -1px 2px 0 rgba(80, 80, 90, 0.14),
+    /* Bright rim catch above the dark shadow */
+    0 -4px 0 1px rgba(255, 255, 255, 0.32),
+    0 -5px 1px 1px rgba(255, 255, 255, 0.15),
+    -3px -3px 1px 1px rgba(255, 255, 255, 0.18),
+    3px -3px 1px 1px rgba(255, 255, 255, 0.14),
+    -2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    /* Outer recess — bright bottom/right rim */
+    0 1px 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 0 1px rgba(255, 255, 255, 0.30),
+    0 3px 1px 1px rgba(255, 255, 255, 0.15),
+    1px 0 0 1px rgba(255, 255, 255, 0.28),
+    2px 0 1px 1px rgba(255, 255, 255, 0.12),
+    -1px 1px 0 1px rgba(255, 255, 255, 0.20),
+    1px 1px 1px 1px rgba(255, 255, 255, 0.12),
+    /* Shadow under bottom rim highlight */
+    0 4px 1px 1px rgba(0, 0, 0, 0.08),
+    3px 3px 1px 1px rgba(0, 0, 0, 0.06),
+    -3px 3px 1px 1px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-mono);
+}
+
+/* ── Time display highlight stroke: crisp inset border via pseudo-element ── */
+[data-theme="winamp"] .time-display::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 3px;
+  border: none;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(190, 220, 255, 0.72) 0px,
+      rgba(155, 200, 250, 0.40) 2px,
+      rgba(120, 175, 245, 0.14) 4px,
+      transparent 6px
+    ),
+    linear-gradient(
+      270deg,
+      rgba(190, 220, 255, 0.36) 0px,
+      rgba(155, 200, 250, 0.20) 2px,
+      rgba(120, 175, 245, 0.07) 4px,
+      transparent 6px
+    );
+  box-shadow:
+    0 -1px 1px 0 rgba(210, 230, 255, 0.70),
+    0 -2px 2px 0 rgba(180, 210, 255, 0.25),
+    1px 0 1px 0 rgba(160, 200, 255, 0.12),
+    0 1px 1px 0 rgba(140, 180, 240, 0.28),
+    0 2px 2px 0 rgba(120, 160, 230, 0.10);
+}
+
+[data-theme="winamp"] .time-display span,
+[data-theme="winamp"] .time-display button {
+  color: #c0c8d8 !important;
+  box-shadow: none !important;
+  background: none !important;
+  background-image: none !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  border: none !important;
+  text-shadow: 0 0 3px rgba(160, 200, 255, 0.3);
+}
+
+[data-theme="winamp"] .time-display button:hover {
+  color: #9cb4d8 !important;
+}
+
+/* ── Loaded-scene toolbar: main-player-inspired chrome ── */
+[data-theme="winamp"] .winamp-toolbar-shell {
+  min-height: 52px;
+  border: none !important;
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, #bdc2cc 0%, #a0a7b4 42%, #828997 43%, #b4bac5 100%) !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.62) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.58) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.24) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.22) inset,
+    0 4px 14px rgba(0, 0, 0, 0.16);
+}
+
+[data-theme="winamp"] .winamp-toolbar-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 5px 8px;
+  border-radius: 2px;
+  background-color: #243c79;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px),
+    linear-gradient(
+      180deg,
+      rgba(150, 190, 255, 0.24) 0%,
+      rgba(100, 140, 220, 0.08) 18%,
+      transparent 45%,
+      rgba(0, 0, 0, 0.10) 100%
+    );
+  background-size: 3px 3px, 100% 100%;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.72) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.38) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+[data-theme="winamp"] .winamp-toolbar-display-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, #cbd1db 0%, #aab3c0 44%, #808998 45%, #c0c6d0 100%);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.64) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.5) inset;
+}
+
+[data-theme="winamp"] .winamp-toolbar-display-line {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+
+[data-theme="winamp"] .winamp-toolbar-display-label {
+  flex-shrink: 0;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d7dde8;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="winamp"] .winamp-toolbar-display-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #eef4dd;
+  text-shadow: 0 0 4px rgba(150, 190, 255, 0.22);
+}
+
+[data-theme="winamp"] .winamp-toolbar-display-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 1px;
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: #98b78d;
+}
+
+[data-theme="winamp"] .winamp-toolbar-display-sep {
+  color: #c6d0c6;
+  opacity: 0.75;
+}
+
+[data-theme="winamp"] .winamp-toolbar-center {
+  flex-shrink: 0;
+}
+
+[data-theme="winamp"] .winamp-toolbar-utils {
+  flex-shrink: 0;
+  gap: 5px !important;
+  margin-left: 4px;
+  padding-left: 10px;
+  position: relative;
+}
+
+[data-theme="winamp"] .winamp-toolbar-utils::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(0, 0, 0, 0.45) 100%);
+  opacity: 0.9;
+}
+
+/* ── Timeline shell: playlist / EQ module framing ── */
+[data-theme="winamp"] .winamp-timeline-shell {
+  gap: 0;
+  padding: 0 10px 0;
+  margin: 0;
+  flex: none;
+  background: none;
+  box-shadow: none;
+}
+
+[data-theme="winamp"] .winamp-transport-shell {
+  padding: 8px 16px;
+  margin: 0 -10px;
+  border-radius: 0;
+  background: none;
+  box-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.30) inset,
+    0 -2px 2px rgba(0, 0, 0, 0.18) inset;
+  border-bottom: 1.5px solid #000000;
+}
+
+[data-theme="winamp"] .winamp-transport-rate {
+  position: relative;
+  margin-left: 4px;
+  padding-left: 10px;
+}
+
+[data-theme="winamp"] .winamp-transport-rate::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+[data-theme="winamp"] .winamp-time-tray {
+  gap: 7px;
+  margin-left: auto;
+  padding-left: 10px;
+  position: relative;
+}
+
+[data-theme="winamp"] .winamp-time-tray::before {
+  display: none;
+}
+
+[data-theme="winamp"] .winamp-time-caption {
+  flex-shrink: 0;
+  font-family: Tahoma, 'Segoe UI', system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #313541;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+[data-theme="winamp"] .winamp-time-display {
+  min-height: 26px;
+}
+
+[data-theme="winamp"] .winamp-track-shell {
+  margin: 0 -10px;
+  padding: 4px 32px 8px 16px;
+  border-radius: 0;
+  background: none;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 2px 0 rgba(255, 255, 255, 0.35) inset,
+    0 3px 2px rgba(255, 255, 255, 0.15) inset;
+  flex: 1;
+  min-height: 0;
+}
+
+[data-theme="winamp"] .winamp-track-ruler {
+  margin-bottom: 4px;
+}
+
+[data-theme="winamp"] .winamp-bottom-panel-shell {
+  background:
+    linear-gradient(180deg, #bac0c9 0%, #a2aab6 42%, #878e9b 43%, #b2b8c2 100%) !important;
+}
+
+[data-theme="winamp"] .winamp-bottom-panel-inner {
+  background: #C9CAD4;
+  overflow: hidden;
+  padding-bottom: 16px;
+  box-shadow:
+    2px 0 0 rgba(255, 255, 255, 0.55) inset,
+    -2px 0 0 rgba(255, 255, 255, 0.40) inset,
+    4px 0 3px rgba(255, 255, 255, 0.25) inset,
+    -4px 0 3px rgba(255, 255, 255, 0.20) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.35) inset,
+    0 -2px 1px rgba(0, 0, 0, 0.25) inset,
+    0 -3px 2px rgba(0, 0, 0, 0.15) inset,
+    0 -4px 3px rgba(0, 0, 0, 0.06) inset;
+}
+
+[data-theme="winamp"] .winamp-bottom-panel-graph {
+  border: none !important;
+  background: none;
+  padding: 0 32px 0 16px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+[data-theme="winamp"] .winamp-graph-editor-row {
+  height: 100%;
+}
+
+[data-theme="winamp"] .winamp-graph-editor-row .graph-editor-channels {
+  flex-shrink: 0;
+  width: 96px !important;
+}
+
+[data-theme="winamp"] .winamp-graph-editor-row .winamp-graph-inset {
+  height: 100% !important;
+  min-height: 0;
+}
+
+[data-theme="winamp"] .winamp-settings-scroll {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.04) 100%);
+}
+
+[data-theme="winamp"] .winamp-empty-panel {
+  background-color: #243c79;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.72) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+[data-theme="winamp"] .winamp-empty-panel-copy {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d8e2a4 !important;
+}
+
+/* ── Toolbar & header buttons: chrome window-control style ── */
+[data-theme="winamp"] [class*="rounded-md"][class*="p-2"]:not(.transport-group *),
+[data-theme="winamp"] [class*="rounded-md"][class*="p-1"]:not(.transport-group *),
+[data-theme="winamp"] [class*="rounded-md"][class*="p-1\\.5"]:not(.transport-group *) {
+  border-radius: 1px !important;
+  background-color: rgb(var(--sf-raised));
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.1) 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 75%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.55) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.12) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.55) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.2) inset,
+    0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="winamp"] [class*="rounded-md"][class*="p-2"]:not(.transport-group *):hover,
+[data-theme="winamp"] [class*="rounded-md"][class*="p-1"]:not(.transport-group *):hover,
+[data-theme="winamp"] [class*="rounded-md"][class*="p-1\\.5"]:not(.transport-group *):hover {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.06) 75%,
+    rgba(0, 0, 0, 0.16) 100%
+  );
+}
+
+[data-theme="winamp"] [class*="rounded-md"][class*="p-2"]:not(.transport-group *):not(.winamp-fov-mask-shell):active,
+[data-theme="winamp"] [class*="rounded-md"][class*="p-1"]:not(.transport-group *):not(.winamp-fov-mask-shell):active,
+[data-theme="winamp"] [class*="rounded-md"][class*="p-1\\.5"]:not(.transport-group *):not(.winamp-fov-mask-shell):active {
+  background-image: none;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.55) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.25) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+/* Floorplan header tool buttons: compact chrome */
+[data-theme="winamp"] [class*="tracking-wider"] button:not([class*="tracking-wider"]):not(.winamp-titlebar-btn) {
+  border-radius: 1px !important;
+  padding: 3px 4px !important;
+  min-height: auto !important;
+  background-color: rgb(var(--sf-raised)) !important;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.06) 40%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 80%,
+    rgba(0, 0, 0, 0.18) 100%
+  ) !important;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.5) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.5) inset,
+    2px 2px 0 rgba(255, 255, 255, 0.1) inset,
+    -2px -2px 0 rgba(0, 0, 0, 0.15) inset !important;
+}
+
+[data-theme="winamp"] [class*="tracking-wider"] button:not([class*="tracking-wider"]):not(.winamp-titlebar-btn):active {
+  background-image: none !important;
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.5) inset,
+    2px 2px 0 rgba(0, 0, 0, 0.2) inset,
+    -1px -1px 0 rgba(255, 255, 255, 0.12) inset !important;
+}
+
